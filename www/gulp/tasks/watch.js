@@ -3,15 +3,18 @@
 var gulp = require('gulp');
 var watch = require('gulp-watch');
 var livereload = require('gulp-livereload');
-var livereloadServer = livereload(config.ports.livereloadServer);
 
 module.exports = gulp.task('watch', function () {
-  gulp.watch(config.paths.src.livereload).on('change', function (file) {
-    livereloadServer.changed(file.path);
-  });
+    livereload.listen({
+        port: config.ports.livereloadServer
+    });
+    gulp.watch(config.paths.src.livereload).on('change', function (file) {
+        livereload.changed(file.path);
+    });
 
-  watch({ glob: [config.paths.src.scripts]}, ['lint']);
-  watch({ glob: [config.paths.src.index]}, ['index']);
-  watch({ glob: [config.paths.src.templates, config.paths.src.templatesHTML]}, ['templates']);
-  watch({ glob: [config.paths.src.stylesGlob]}, ['styles']);
+
+    watch(config.paths.src.scripts, ['lint']);
+    watch(config.paths.src.index, ['index']);
+    watch([config.paths.src.templates, config.paths.src.templatesHTML], ['templates']);
+    watch(config.paths.src.stylesGlob, ['styles']);
 });

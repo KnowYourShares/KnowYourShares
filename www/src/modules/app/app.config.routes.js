@@ -6,10 +6,9 @@ function routesConfig($stateProvider, $urlRouterProvider) {
 
     $stateProvider
       .state('app', {
-        url: '',
-        abstract: true,
+        url: '/',
         templateUrl: 'app/layout.html',
         controller: 'appController',
         controllerAs: 'app'
-      })
+      });
   };

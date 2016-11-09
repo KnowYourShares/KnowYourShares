@@ -1,5 +1,5 @@
 'use strict';
 
 module.exports =
-  angular.module('app.component.directives', [])
+  angular.module('app.component.directives', []);
 

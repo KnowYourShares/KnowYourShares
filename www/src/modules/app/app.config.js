@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $authProvider, $httpProvider, userMeProvider, createUserProvider, $mdThemingProvider) {
+  function config($locationProvider, $httpProvider, $mdThemingProvider) {
     $locationProvider.html5Mode(true);
 
     $mdThemingProvider

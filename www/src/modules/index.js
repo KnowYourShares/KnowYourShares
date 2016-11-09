@@ -7,7 +7,6 @@ require('angular-animate');
 require('angular-aria');
 require('angular-messages');
 require('angular-material');
-require('satellizer');
 require('ngResource');
 window._ = require('underscore');
 
@@ -17,7 +16,5 @@ require('./app');
 //exporting services
 module.exports =
     angular.module('app.components', [
-        require('./directives').name,
-        require('./services').name,
-        require('./resources').name
+
     ]);
