@@ -23,8 +23,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+app.get("/",function(req,res){
+	res.render("index.html");
+});
 
+app.get("/selects",function(req,res){
+	res.render("selects.html");
+});
 
+app.get("/filters",function(req,res){
+	res.render("filters.html");
+})
 
 module.exports = app;
 
