@@ -27,7 +27,6 @@ app.all('/rest/*', function (req, res) {
 });
 
 app.get('/*', function (req, res) {
-    console.log(req);
     res.sendFile(__dirname + '/www/build/index.html');
 });
 
