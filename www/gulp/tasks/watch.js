@@ -16,5 +16,5 @@ module.exports = gulp.task('watch', function () {
     watch(config.paths.src.scripts, ['lint']);
     watch(config.paths.src.index, ['index']);
     watch([config.paths.src.templates, config.paths.src.templatesHTML], ['templates']);
-    watch(config.paths.src.stylesGlob, ['styles']);
+    watch(config.paths.src.styles, ['styles']);
 });

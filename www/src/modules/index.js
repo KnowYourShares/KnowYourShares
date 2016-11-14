@@ -3,10 +3,6 @@
 //browserify-shim dependencies (can be edited in package.json)
 require('angular');
 require('angular-ui-router');
-require('angular-animate');
-require('angular-aria');
-require('angular-messages');
-require('angular-material');
 require('ngResource');
 window._ = require('underscore');
 

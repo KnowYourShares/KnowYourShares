@@ -10,8 +10,7 @@ global.config = {
       assets: [SRC_FOLDER + '/assets/**/*', '!' + SRC_FOLDER + '/assets/images/**/*'],
       images: SRC_FOLDER + '/assets/images/**/*',
       scripts: SRC_FOLDER + '/modules/**/*.js',
-      styles: [SRC_FOLDER + '/../bower_components/angular-material/angular-material.css',SRC_FOLDER + '/styles/app.css'],
-      stylesGlob: SRC_FOLDER + '/styles/**/*.css',
+      styles: SRC_FOLDER + 'assets/styles/**/*',
       templates: SRC_FOLDER + '/modules/**/*.html',
       templatesHTML: SRC_FOLDER + '/modules/**/*.html',
       templatesCompiled: TMP_FOLDER,
@@ -20,7 +19,7 @@ global.config = {
     },
     dest: {
       build: {
-        styles: BUILD_FOLDER,
+        styles: BUILD_FOLDER + '/assets/styles',
         scripts: BUILD_FOLDER,
         images: BUILD_FOLDER + '/assets/images',
         assets: BUILD_FOLDER + '/assets',

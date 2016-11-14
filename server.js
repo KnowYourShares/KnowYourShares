@@ -19,15 +19,19 @@ if (process.env.OPENSHIFT_MONGODB_DB_URL) {
 /* SERVER ROUTES */
 app.use('/rest', routes.restRoute);
 
-app.use('/site', express.static(__dirname + '/www/release/'));
-app.get('/site/*', function (req, res) {
-    res.sendFile(__dirname + '/www/release/index.html');
-});
+app.use('/', express.static(__dirname + '/www/build/'));
 
 // Error 404 resource not found
-app.all('*', function (req, res) {
+app.all(/^\/([^r][^e][^s][^t]|.{1,2}|.{4,})\/.*$/, function (req, res) {
     res.status(404).send("Recurso no encontrado");
 });
+
+app.get('/*', function (req, res) {
+    console.log(req);
+    res.sendFile(__dirname + '/www/build/index.html');
+});
+
+
 
 /* SERVE */
 var port = applicationConstants.SERVER_PORT;
