@@ -1,20 +1,44 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-    function routesConfig($stateProvider, $urlRouterProvider) {
+    function routesConfig($stateProvider, $urlRouterProvider, stateHelperProvider) {
         $urlRouterProvider.otherwise('/home');
 
-        $stateProvider
-            .state('app', {
+        stateHelperProvider
+            .state({
+                name: 'app',
                 abstract: true,
                 templateUrl: 'app/layout.html',
                 controller: 'appController',
-                controllerAs: 'app'
-            })
-            .state('app.home', {
-                url: '/home',
-                templateUrl: 'app/home/home.html',
-                controller: 'homeController',
-                controllerAs: 'home'
-            })
+                controllerAs: 'app',
+                children: [
+                    {
+                        name: 'home',
+                        url: '/home',
+                        templateUrl: 'app/home/home.html',
+                        controller: 'homeController',
+                        controllerAs: 'home'
+                    },
+                    {
+                        name: 'filters',
+                        url: '/filters',
+                        abstract: true,
+                        templateUrl: 'app/filters/filters.html',
+                        controller: 'filtersController',
+                        controllerAs: 'filters',
+                        children: [
+                            {
+                                name:'location',
+                                url:'/location',
+                                template: '<filter-location></filter-location>'
+                            },
+                            {
+                                name:'industries',
+                                url:'/industries',
+                                template: '<filter-industries></filter-industries>'
+                            }
+                        ]
+                    }
+                ]
+            });
     };
