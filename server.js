@@ -11,7 +11,7 @@ configServer.config(app);
 /* MONGODB */
 // if OPENSHIFT env variables are present, use the available connection info:
 if (process.env.OPENSHIFT_MONGODB_DB_URL) {
-    mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL + 'pae');
+    mongoose.connect(process.env.OPENSHIFT_MONGODB_DB_URL + 'pae?authSource=admin');
 } else {
     mongoose.connect(applicationConstants.MONGO_IP + 'pae');
 }

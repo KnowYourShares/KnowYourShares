@@ -5,5 +5,7 @@ module.exports =
     .directive('filterLocation', require('./filters-location/location.component'))
     .directive('filterIndustries', require('./filters-industries/industries.component'))
     .directive('filterFunctions', require('./filters-functions/functions.component'))
-    .directive('filterAge', require('./filters-age/age.component'));
+    .directive('filterAge', require('./filters-age/age.component'))
+    .directive('filterSize', require('./filters-size/size.component'))
+    .directive('filterResults', require('./filters-results/results.component'));
 
