@@ -36,6 +36,16 @@ module.exports = /*@ngInject*/
                                 name:'industries',
                                 url:'/industries',
                                 template: '<filter-industries></filter-industries>'
+                            },
+                            {
+                                name:'functions',
+                                url:'/functions',
+                                template: '<filter-functions></filter-functions>'
+                            },
+                            {
+                                name:'age',
+                                url:'/age',
+                                template: '<filter-age></filter-age>'
                             }
                         ]
                     }
