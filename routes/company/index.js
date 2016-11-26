@@ -1,12 +1,13 @@
 var router = require('express').Router();
+var companyImpl = require('./../../implementation');
 
 router.route('/rest/company')
     .get(function (req, res) {
-        res.json({status: 200, message: 'GET COMPANY'});
+        return companyImpl.getCompany(req, res);
     })
 
     .post(function (req, res) {
-        res.json({status: 200, message: 'POST COMPANY'});
+        return companyImpl.postCompany(req, res);
     });
 
 module.exports = router;
