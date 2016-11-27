@@ -10,7 +10,13 @@
     "type": "git",
     "url": "git+https://killianperea@bitbucket.org/killianperea/pae-project.git"
   },
-  "authors": ["Killian Perea", "Cristian Vitales", "Daniel Domínguez", "Marcos Pérez", "Sufian Ben Bouker"],
+  "authors": [
+    "Killian Perea",
+    "Cristian Vitales",
+    "Daniel Domínguez",
+    "Marcos Pérez",
+    "Sufian Ben Bouker"
+  ],
   "license": "MIT",
   "homepage": "https://bitbucket.org/killianperea/pae-project#readme",
   "dependencies": {
