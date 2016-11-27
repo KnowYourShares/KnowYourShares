@@ -2,6 +2,7 @@ global.SRC_FOLDER = 'src';
 global.BUILD_FOLDER = 'build';
 global.RELEASE_FOLDER = 'release';
 global.TMP_FOLDER = 'tmp';
+global.BOWER = 'bower_components';
 
 global.config = {
   paths: {
@@ -11,6 +12,7 @@ global.config = {
       images: SRC_FOLDER + '/assets/images/**/*',
       scripts: SRC_FOLDER + '/modules/**/*.js',
       styles: SRC_FOLDER + 'assets/styles/**/*',
+      depStyles: BOWER + '/**/*.css',
       templates: SRC_FOLDER + '/modules/**/*.html',
       templatesHTML: SRC_FOLDER + '/modules/**/*.html',
       templatesCompiled: TMP_FOLDER,
