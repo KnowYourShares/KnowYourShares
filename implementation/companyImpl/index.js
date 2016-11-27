@@ -1,11 +1,21 @@
 var Company = require('./../../schemas/companySchema');
 var Action = require('./../../schemas/actionSchema');
 var Contributor = require('./../../schemas/contributorSchema');
-var Deferred  = require("promised-io/promise").Deferred;
+var Deferred = require("promised-io/promise").Deferred;
 var Promise = require("promised-io/promise");
 
 function _getCompany(req, res) {
-    return res.json({status: 200, message: 'GET COMPANY'});
+    var companyId = req.params.companyId;
+    Company.findById(companyId)
+        .populate('contributors')
+        .populate('actions')
+        .exec(function (error, found) {
+            if(found) {
+                return res.json({status: 200, message: found});
+            } else {
+                return res.json({status: 400, message: 'company not found'});
+            }
+        })
 }
 
 function _postCompany(req, res) {
@@ -15,10 +25,10 @@ function _postCompany(req, res) {
     campanya.postmoney = req.body.postmoney;
     _saveActions(req.body.actions).then(function (actions) {
         campanya.actions = actions;
-        _saveContributors(req.body.contributors).then(function(contributors) {
+        _saveContributors(req.body.contributors).then(function (contributors) {
             campanya.contributors = contributors;
-            campanya.save(function() {
-                return res.json({status: 200, message: 'CAMPAÑA GUARDADA'});
+            campanya.save(function (err, comp) {
+                return res.json({status: 200, message: comp._id});
             });
         });
     });
@@ -27,14 +37,14 @@ function _postCompany(req, res) {
 function _saveContributors(contributors) {
     var deferredSave = new Deferred();
     var contributorsPromises = [];
-    contributors.forEach(function(item) {
+    contributors.forEach(function (item) {
         var deferred = new Deferred();
         var contributor = new Contributor();
         contributor.type = item.type;
         contributor.name = item.name;
         contributor.shares = item.shares;
         contributor.save(function (error, contributor) {
-            if(error) {
+            if (error) {
                 deferred.reject();
             } else {
                 deferred.resolve(contributor)
@@ -42,7 +52,7 @@ function _saveContributors(contributors) {
         });
         contributorsPromises.push(deferred);
     });
-    Promise.all(contributorsPromises).then(function(contributors) {
+    Promise.all(contributorsPromises).then(function (contributors) {
         deferredSave.resolve(contributors)
     }, function () {
         deferredSave.reject({status: 400, message: 'ERROR ON ACTIONS'});
@@ -53,7 +63,7 @@ function _saveContributors(contributors) {
 function _saveActions(actions) {
     var deferredSave = new Deferred();
     var actionsPromises = [];
-    actions.forEach(function(item) {
+    actions.forEach(function (item) {
         var deferred = new Deferred();
         var action = new Action();
         action.type = item.type;
@@ -68,7 +78,7 @@ function _saveActions(actions) {
         });
         actionsPromises.push(deferred);
     });
-    Promise.all(actionsPromises).then(function(actions) {
+    Promise.all(actionsPromises).then(function (actions) {
         deferredSave.resolve(actions)
     }, function () {
         deferredSave.reject({status: 400, message: 'ERROR ON ACTIONS'});
