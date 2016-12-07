@@ -5,7 +5,6 @@ require('angular');
 require('angular-ui-router');
 require('ngResource');
 require('angular-ui-router.stateHelper');
-require('rzModule');
 
 window._ = require('underscore');
 
