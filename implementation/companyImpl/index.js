@@ -1,7 +1,6 @@
 var Company = require('./../../schemas/companySchema');
 var Action = require('./../../schemas/actionSchema');
 var Contributor = require('./../../schemas/contributorSchema');
-<<<<<<< HEAD
 var Deferred = require("promised-io/promise").Deferred;
 var Promise = require("promised-io/promise");
 
