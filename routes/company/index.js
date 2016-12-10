@@ -4,7 +4,11 @@ var companyImpl = require('./../../implementation');
 router.route('/rest/company/:companyId')
     .get(function (req, res) {
         return companyImpl.getCompany(req, res);
+<<<<<<< HEAD
     });
+=======
+    })
+>>>>>>> origin/feature/genericCRUD
 
 router.route('/rest/company')
     .post(function (req, res) {
