@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function homeController() {
+  function homeController($scope) {
     console.log('home controller!');
+    $scope.data = {};
   };

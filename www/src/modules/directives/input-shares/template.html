@@ -1,0 +1,24 @@
+<h3>{{$ctrl.label}}</h3>
+
+<div layout layout-align="center center" layout-sm="column">
+    <md-input-container flex="33" class="text-center">
+      <label>NAME </label>
+      <input type="text" ng-model="$ctrl.newItem.name">
+    </md-input-container>
+    <md-input-container flex="33" class="text-center">
+      <label>SHARES </label>
+      <input type="number" ng-model="$ctrl.newItem.value">
+   </md-input-container>
+  <md-input-container flex="33" class="text-center">
+     <md-button class="md-raised md-primary" ng-click="$ctrl.addItem()">ADD</md-button>
+  </md-input-container>
+
+</div>
+
+<md-list-item layout ng-repeat="item in $ctrl.entity[$ctrl.field] track by $index">
+    <input flex="33" class="" type="text" ng-model="item.name">
+    <input flex="33" class="" type="number" ng-model="item.value">
+    <md-button flex="33" ng-click="$ctrl.removeItem($index)">DELETE</md-button>
+
+</md-list-item>
+
