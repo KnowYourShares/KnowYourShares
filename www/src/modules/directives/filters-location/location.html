@@ -2,18 +2,22 @@
   <h3 class="head text-center">First of all start with some shares data</h3>
 
   <div layout="row" layout-align="center center">
-    <h3 >Company value</h3>
+    <h3>Company value</h3>
     <md-slider-container>
-      <md-slider flex="50" ng-model="data.companyValue" min="0" max="1000000" step="1000" aria-label="regular-slider"></md-slider>
-      <md-input-container  flex="50">
+      <md-slider flex="50" ng-model="data.companyValue" min="0" max="1000000" step="1000"
+                 aria-label="regular-slider"></md-slider>
+      <md-input-container flex="50">
         <input type="number" ng-model="data.companyValue" aria-label="regular-slider">
       </md-input-container>
     </md-slider-container>
   </div>
 
   <div layout="row" md-content layout-padding>
-      <input-shares entity="data" field="founders" label="Founders" flex="33"></input-shares>
-      <input-shares entity="data" field="investors" label="Investors" flex="33"></input-shares>
-      <input-shares entity="data" field="employees" label="Employees" flex="33"></input-shares>
+    <input-shares entity="data" field="founders" label="Founders" flex="33"></input-shares>
+    <input-shares entity="data" field="investors" label="Investors" flex="33"></input-shares>
+    <input-shares entity="data" field="employees" label="Employees" flex="33"></input-shares>
+  </div>
+  <div layout="row" md-content layout-padding>
+    <input-shares entity="data" field="founders" label="Founders"></input-shares>
   </div>
 </div>

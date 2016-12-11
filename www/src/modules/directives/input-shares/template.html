@@ -1,24 +1,35 @@
 <h3>{{$ctrl.label}}</h3>
+<style>
+    th, td {
+      padding-left:10px;
+      padding-right:10px;
+    }
 
-<div layout layout-align="center center" layout-sm="column">
-    <md-input-container flex="33" class="text-center">
-      <label>NAME </label>
-      <input type="text" ng-model="$ctrl.newItem.name">
-    </md-input-container>
-    <md-input-container flex="33" class="text-center">
-      <label>SHARES </label>
-      <input type="number" ng-model="$ctrl.newItem.value">
-   </md-input-container>
-  <md-input-container flex="33" class="text-center">
-     <md-button class="md-raised md-primary" ng-click="$ctrl.addItem()">ADD</md-button>
-  </md-input-container>
+</style>
+<div class="">
+  <table class="" style="table-layout:auto;" >
+    <thead>
+    <tr>
+      <th>
+          <input type="text"class="form-control input-sm" ng-model="$ctrl.newItem.name">
+      </th>
+      <th>
+          <input type="number"class="form-control input-sm" ng-model="$ctrl.newItem.value">
+      </th>
+      <th>
+          <md-button class="md-raised md-primary" ng-click="$ctrl.addItem()">ADD</md-button>
+
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in $ctrl.entity[$ctrl.field] track by $index">
+      <td><input  class="form-control input-sm" type="text" ng-model="item.name"></td>
+      <td><input class="form-control input-sm" type="number" ng-model="item.value"></td>
+      <td class="text-center">
+        <md-button class="md-icon-button md-primary" ng-click="$ctrl.removeItem($index)"><span class="fa fa-remove"></span></md-button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
-
-
-<md-list-item layout ng-repeat="item in $ctrl.entity[$ctrl.field] track by $index">
-    <input flex="33" class="" type="text" ng-model="item.name">
-    <input flex="33" class="" type="number" ng-model="item.value">
-    <md-button flex="33" ng-click="$ctrl.removeItem($index)">DELETE</md-button>
-
-</md-list-item>
-
