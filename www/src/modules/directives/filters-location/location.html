@@ -1,18 +1,24 @@
 <div class="tab-pane fade in active">
-    <h3 class="head text-center">First of all start with some founders data</h3>
-    <p class="narrow text-center"> Lorem ipsum dolor sit amet, his ea mollis fabellas
-        principes.. </p>
-    <form>
-    </form>
+  <h3 class="head text-center">First of all start with some founders data</h3>
+  <p class="narrow text-center"> Lorem ipsum dolor sit amet, his ea mollis fabellas
+    principes.. </p>
+  <form>
+  </form>
 
 
-  <div class="col-md-4">
-    <input-shares entity="data" field="founders" label="Founders"></input-shares>
+  <div layout="row" flex md-content layout-padding>
+    <md-slider-container>
+      <span>Company value</span>
+      <md-slider ng-model="data.companyValue" min="0" max="1000000" step="1000" aria-label="regular slider"></md-slider>
+      <md-input-container>
+        <input type="number" ng-model="data.companyValue" aria-label="regular-slider">
+      </md-input-container>
+    </md-slider-container>
   </div>
-  <div class="col-md-4">
-    <input-shares entity="data" field="investors" label="Investors"></input-shares>
-  </div>
-  <div class="col-md-4">
-    <input-shares entity="data" field="employees" label="Employees"></input-shares>
+
+  <div layout="row" md-content layout-padding>
+      <input-shares entity="data" field="founders" label="Founders" flex="33"></input-shares>
+      <input-shares entity="data" field="investors" label="Investors" flex="33"></input-shares>
+      <input-shares entity="data" field="employees" label="Employees" flex="33"></input-shares>
   </div>
 </div>

@@ -12,8 +12,8 @@
   <md-input-container flex="33" class="text-center">
      <md-button class="md-raised md-primary" ng-click="$ctrl.addItem()">ADD</md-button>
   </md-input-container>
-
 </div>
+
 
 <md-list-item layout ng-repeat="item in $ctrl.entity[$ctrl.field] track by $index">
     <input flex="33" class="" type="text" ng-model="item.name">

@@ -1,7 +1,7 @@
 'use strict';
 
 
-function InputSharesCtrl(_) {
+function InputSharesCtrl() {
   var ctrl = this;
 
   ctrl.entity[ctrl.field] = ctrl[ctrl.field] ||[];
@@ -18,8 +18,6 @@ function InputSharesCtrl(_) {
     data.splice(index,1);
   }
 }
-
-
 InputSharesCtrl.$inject = [];
 
 module.exports = {
