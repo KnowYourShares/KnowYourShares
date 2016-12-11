@@ -33,7 +33,15 @@ module.exports = /*@ngInject*/
         {
           name: "marcos",
           value: 20
-        }]
+        }],
+      rounds : [
+        {
+          name: "Round 1",
+          preMoney: 123123123,
+          moneyRaised: 1234567,
+          postMoney: 123123123
+        }
+      ]
     };
 
     $scope.data = data;
