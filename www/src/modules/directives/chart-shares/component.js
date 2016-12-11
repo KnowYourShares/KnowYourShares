@@ -3,28 +3,30 @@ function ChartSharesCtrl($scope) {
 
 
   function add (a,b) {
-    return (a.value || 0) + (b.value || 0);
+    console.log('a + b ', a , b);
+
+    var y = a.value || 0;
+    var z = b.value || 0;
+    console.log('y + z ', y , z );
+    return {value : (a.value || 0) + (b.value || 0)};
   }
 
   var ctrl = this;
 
   $scope.$watch("$ctrl.entity.founders", function () {
-    console.log("ControllerAs founders"); // Triggers once on init
     mapValues(ctrl);
   },true);
   $scope.$watch("$ctrl.entity.employees", function () {
-    console.log("ControllerAs employees"); // Triggers once on init
     mapValues(ctrl);
   },true);
   $scope.$watch("$ctrl.entity.investors", function () {
-    console.log("ControllerAs investors"); // Triggers once on init
     mapValues(ctrl);
   },true);
 
   function mapValues(context){
-    context.mappedData[0] = context.entity.founders.reduce(add,{value:0}) || 0;
-    context.mappedData[1] = context.entity.investors.reduce(add,{value:0}) || 0;
-    context.mappedData[2] = context.entity.employees.reduce(add,{value:0}) || 0;
+    context.mappedData[0] = context.entity.founders.reduce(add,{value:0}).value || 0;
+    context.mappedData[1] = context.entity.investors.reduce(add,{value:0}).value || 0;
+    context.mappedData[2] = context.entity.employees.reduce(add,{value:0}).value || 0;
   }
 
   ctrl.labels = ["Founders", "Investors", "Employees" ];
