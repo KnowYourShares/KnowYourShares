@@ -22,9 +22,9 @@ function ChartSharesCtrl($scope) {
   },true);
 
   function mapValues(context){
-    context.mappedData[0] = context.entity.founders.reduce(add,0) || 0;
-    context.mappedData[1] = context.entity.investors.reduce(add,0) || 0;
-    context.mappedData[2] = context.entity.employees.reduce(add,0) || 0;
+    context.mappedData[0] = context.entity.founders.reduce(add,{value:0}) || 0;
+    context.mappedData[1] = context.entity.investors.reduce(add,{value:0}) || 0;
+    context.mappedData[2] = context.entity.employees.reduce(add,{value:0}) || 0;
   }
 
   ctrl.labels = ["Founders", "Investors", "Employees" ];
