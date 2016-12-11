@@ -3,11 +3,6 @@ function ChartSharesCtrl($scope) {
 
 
   function add (a,b) {
-    console.log('a + b ', a , b);
-
-    var y = a.value || 0;
-    var z = b.value || 0;
-    console.log('y + z ', y , z );
     return {value : (a.value || 0) + (b.value || 0)};
   }
 
