@@ -36,4 +36,13 @@ Dentro del archivo `package.json` tenemos que incluir la dependencia que hayamos
 en el apartado de "browser".
 
 
+#######
+Para añadir un modulo de bower:
+
+1 - bower install --save modulo
+2 - En src/modules/index.js : añadir require('....')
+3 - En src/modules/app/index.js: añadir el nombre del módulo en el array
+
+
+
 

@@ -45,7 +45,8 @@
     "angular-animate": "./bower_components/angular-animate/angular-animate.js",
     "angular-aria": "./bower_components/angular-aria/angular-aria.js",
     "angular-messages": "./bower_components/angular-messages/angular-messages.js",
-    "angular-material": "./bower_components/angular-material/angular-material.js"
+    "angular-material": "./bower_components/angular-material/angular-material.js",
+    "chart.js": "./bower_components/chart.js/dist/Chart.min.js"
   },
   "browserify-shim": {},
   "name": "www",
