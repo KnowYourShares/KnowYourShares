@@ -13,6 +13,8 @@ function locationDirective() {
 locationController.$inject = [];
 function locationController() {
 
+
+
 }
 
 module.exports = locationDirective;

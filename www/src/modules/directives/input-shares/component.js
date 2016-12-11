@@ -3,8 +3,7 @@
 
 function InputSharesCtrl() {
   var ctrl = this;
-  // var myChart = new Chart();
-  // console.log('my chart is ' , myChart);
+
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
   ctrl.entity[ctrl.field] = ctrl.entity[ctrl.field] || [];
 
