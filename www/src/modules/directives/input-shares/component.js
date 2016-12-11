@@ -9,7 +9,7 @@ function InputSharesCtrl() {
 
   ctrl.newItem = {};
 
-    ctrl.addItem = function(){
+  ctrl.addItem = function(){
     ctrl.entity[ctrl.field][ctrl.entity[ctrl.field].length] = angular.extend({},ctrl.newItem);
     ctrl.newItem = {};
   };
