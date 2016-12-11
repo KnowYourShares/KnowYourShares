@@ -6,17 +6,17 @@ function InputSharesCtrl() {
   // var myChart = new Chart();
   // console.log('my chart is ' , myChart);
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
-  ctrl.entity[ctrl.field] = ctrl.entity[ctrl.field] || [];
+  ctrl.entity = ctrl.entity || [];
 
   ctrl.newItem = {};
 
   ctrl.addItem = function(){
-    ctrl.entity[ctrl.field][ctrl.entity[ctrl.field].length] = angular.extend({},ctrl.newItem);
+    ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
     ctrl.newItem = {};
   };
 
   ctrl.removeItem = function(index){
-    ctrl.entity[ctrl.field].splice(index,1);
+    ctrl.entity.splice(index,1);
   };
 
 }
@@ -28,7 +28,6 @@ module.exports = {
   bindings: {
     entity : "=",
     label : "@",
-    field: "@"
   },
   templateUrl: 'directives/input-shares/template.html'
 };

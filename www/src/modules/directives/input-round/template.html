@@ -4,7 +4,7 @@
     <h3>Pre money</h3>
     <md-slider-container>
       <md-slider flex="50" ng-model="$ctrl.round.preMoney" ng-init="$ctrl.round.preMoney = $ctrl.round.preMoney || 15000" ng-change="$ctrl.updateTotal()"
-                min="0" max="10000000" step="1000" aria-label="regular-slider"></md-slider>
+                min="0" max="20000000" step="1000" aria-label="regular-slider"></md-slider>
       <md-input-container flex="50">
         <input type="number" ng-model="$ctrl.round.preMoney" aria-label="regular-slider">
       </md-input-container>
@@ -15,7 +15,7 @@
     <h3>Money raised</h3>
     <md-slider-container>
       <md-slider flex="50" ng-model="$ctrl.round.moneyRaised" ng-init="$ctrl.round.moneyRaised = $ctrl.round.moneyRaised || 15000" ng-change="$ctrl.updateTotal()"
-                min="0" max="10000000" step="1000" aria-label="regular-slider"></md-slider>
+                min="0" max="20000000" step="1000" aria-label="regular-slider"></md-slider>
       <md-input-container flex="50">
         <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
       </md-input-container>
@@ -26,9 +26,16 @@
     <h3>Post money</h3>
     <md-slider-container>
       <md-slider flex="50" ng-model="$ctrl.round.postMoney" ng-init="$ctrl.round.postMoney = $ctrl.round.postMoney || 15000" ng-change="$ctrl.modifyPostMoney()"
-                min="0" max="10000000" step="1000" aria-label="regular-slider" ></md-slider>
+                min="0" max="20000000" step="1000" aria-label="regular-slider" ></md-slider>
       <md-input-container flex="50">
         <input type="number" ng-model="$ctrl.round.postMoney" aria-label="regular-slider">
       </md-input-container>
     </md-slider-container>
   </div>
+</div>
+
+<div layout="row" md-content layout-padding>
+  <input-shares entity="$ctrl.round.founders" label="Founders" flex="33"></input-shares>
+  <input-shares entity="$ctrl.round.investors" label="Investors" flex="33"></input-shares>
+  <input-shares entity="$ctrl.round.employees" label="Employees" flex="33"></input-shares>
+</div>

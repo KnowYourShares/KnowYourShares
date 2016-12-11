@@ -7,7 +7,7 @@ module.exports = /*@ngInject*/
     // de esta forma todos los filtros pueden acceder a ellos.
 
     var data = {
-      companyValue: 1231231234,
+      companyValue: 2000000,
       founders: [{
         name: "dani",
         value: 20
@@ -33,6 +33,38 @@ module.exports = /*@ngInject*/
         {
           name: "marcos",
           value: 20
+      }],
+      rounds: [{
+        name: "Round 1",
+        preMoney: 2000000,
+        moneyRaised: 1000000,
+        postMoney: 3000000,
+        founders: [{
+          name: "dani",
+          value: 30
+        },
+          {
+            name: "marcos",
+            value: 30
+          }],
+        investors: [
+          {
+            name: "dani",
+            value: 30
+          },
+          {
+            name: "marcos",
+            value: 30
+          }
+        ],
+        employees: [{
+          name: "dani",
+          value: 30
+        },
+          {
+            name: "marcos",
+            value: 30
+        }]
       }]
     };
 
