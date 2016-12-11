@@ -10,22 +10,22 @@
   <table class="" style="table-layout:auto;" >
     <thead>
     <tr>
-      <th>
+      <th width="50%">
           <input type="text" class="form-control input-sm" ng-model="$ctrl.newItem.name" placeholder="Name">
       </th>
-      <th>
+      <th width="30%">
           <input type="number" class="form-control input-sm" ng-model="$ctrl.newItem.value" placeholder="Share">
       </th>
-      <th>
+      <th width="20%">
           <md-button class="md-raised md-primary" ng-click="$ctrl.addItem()">ADD</md-button>
       </th>
     </tr>
     </thead>
     <tbody>
     <tr ng-repeat="item in $ctrl.entity track by $index">
-      <td><input class="form-control input-sm" type="text" ng-model="item.name"></td>
-      <td><input class="form-control input-sm" type="number" min=0 max=100 ng-model="item.value"></td>
-      <td class="text-center">
+      <td width="50%"><input class="form-control input-sm" type="text" ng-model="item.name"></td>
+      <td width="30%"><input class="form-control input-sm" type="number" min=0 max=100 ng-model="item.value"></td>
+      <td width="20%" class="text-center">
         <md-button class="md-icon-button md-primary" ng-click="$ctrl.removeItem($index)" aria-label="regular-button"><span class="fa fa-remove"></span></md-button>
       </td>
     </tr>

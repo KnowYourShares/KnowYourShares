@@ -43,7 +43,7 @@ function ChartSharesCtrl($scope) {
       });
 
     }
-  }
+  };
 
 
   ctrl.mappedData = [];
