@@ -5,7 +5,7 @@ function InputSharesCtrl() {
   var ctrl = this;
 
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
-  ctrl.entity[ctrl.field] = ctrl[ctrl.field] ||[];
+  ctrl.entity[ctrl.field] = ctrl.entity[ctrl.field] || [];
 
   var data = ctrl.entity[ctrl.field];
 
