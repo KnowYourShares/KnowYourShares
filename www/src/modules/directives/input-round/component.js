@@ -5,6 +5,9 @@ function InputRoundCtrl() {
   console.log("InputRoundCtrl");
 
   ctrl.round = ctrl.round ? ctrl.round : {};
+  ctrl.round.founders = ctrl.round.founders || [];
+  ctrl.round.investors = ctrl.round.investors || [];
+  ctrl.round.employees = ctrl.round.employees || [];
 
   ctrl.updateTotal = function(){
     console.log("updateTotal");
