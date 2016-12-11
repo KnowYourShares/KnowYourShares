@@ -35,7 +35,7 @@ module.exports = /*@ngInject*/
           value: 20
       }],
       rounds: [{
-        name: "Round 1",
+        name: "Round 0",
         preMoney: 2000000,
         moneyRaised: 1000000,
         postMoney: 3000000,
@@ -71,4 +71,29 @@ module.exports = /*@ngInject*/
     $scope.data = data;
 
     console.log('filter controller : ', data);
+
+    $scope.createRound = function(){
+      console.log("createRound");
+      var newRound = {};
+      if (!data.rounds || !data.rounds.length) {
+          newRound.name = "Round 0";
+          newRound.preMoney = data.companyValue;
+          newRound.moneyRaised = 1000000;
+          newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
+          newRound.founders = data.founders;
+          newRound.investors = data.investors;
+          newRound.employees = data.employees;
+          data.rounds = [];
+      } else {
+          var lastRound = data.rounds[data.rounds.length-1];
+          newRound.name = "Round " + data.rounds.length;
+          newRound.preMoney = lastRound.postMoney;
+          newRound.moneyRaised = 1000000;
+          newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
+          newRound.founders = lastRound.founders;
+          newRound.investors = lastRound.investors;
+          newRound.employees = lastRound.employees;
+      }
+      data.rounds[data.rounds.length] = angular.extend({},newRound);
+    };
   };
