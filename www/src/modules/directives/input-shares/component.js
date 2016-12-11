@@ -7,17 +7,15 @@ function InputSharesCtrl() {
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
   ctrl.entity[ctrl.field] = ctrl.entity[ctrl.field] || [];
 
-  var data = ctrl.entity[ctrl.field];
-
   ctrl.newItem = {};
 
-  ctrl.addItem = function(){
-    data[data.length] = angular.extend({},ctrl.newItem);
+    ctrl.addItem = function(){
+    ctrl.entity[ctrl.field][ctrl.entity[ctrl.field].length] = angular.extend({},ctrl.newItem);
     ctrl.newItem = {};
   };
 
   ctrl.removeItem = function(index){
-    data.splice(index,1);
+    ctrl.entity[ctrl.field].splice(index,1);
   };
 
 }
