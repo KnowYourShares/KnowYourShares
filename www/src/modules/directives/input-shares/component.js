@@ -4,7 +4,9 @@
 function InputSharesCtrl() {
   var ctrl = this;
 
+  ctrl.entity = ctrl.entity ? ctrl.entity : {};
   ctrl.entity[ctrl.field] = ctrl[ctrl.field] ||[];
+
   var data = ctrl.entity[ctrl.field];
 
   ctrl.newItem = {};
@@ -16,8 +18,10 @@ function InputSharesCtrl() {
 
   ctrl.removeItem = function(index){
     data.splice(index,1);
-  }
+  };
+
 }
+
 InputSharesCtrl.$inject = [];
 
 module.exports = {

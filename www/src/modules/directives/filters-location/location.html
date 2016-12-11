@@ -5,12 +5,11 @@
   <form>
   </form>
 
-
-  <div layout="row">
+  <div layout="row" layout-align="center center">
+    <h3 >Company value</h3>
     <md-slider-container>
-      <span>Company value</span>
-      <md-slider ng-model="data.companyValue" min="0" max="1000000" step="1000" aria-label="regular-slider"></md-slider>
-      <md-input-container>
+      <md-slider flex="50" ng-model="data.companyValue" min="0" max="1000000" step="1000" aria-label="regular-slider"></md-slider>
+      <md-input-container  flex="50">
         <input type="number" ng-model="data.companyValue" aria-label="regular-slider">
       </md-input-container>
     </md-slider-container>
