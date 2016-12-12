@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $httpProvider, $mdThemingProvider) {
+  function config($locationProvider, $httpProvider, $mdThemingProvider, createBusinessProvider, putBusinessProvider, deleteBusinessProvider, getBusinessProvider) {
     $locationProvider.html5Mode(true);
     //HTTP
     $httpProvider.defaults.headers.common.Accept = 'application/json';
@@ -10,11 +10,22 @@ module.exports = /*@ngInject*/
 
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
-      .accentPalette('indigo')
-      .warnPalette('light-blue');
+      .accentPalette('indigo');
 
+    //LOCAL
     var restConfig = {
       baseUrl: "http://localhost:8080" || ''
     };
+
+    //OPENSHIFT
+    /*var restConfig = {
+      baseUrl: "http://paeproject-unii.rhcloud.com" || ''
+    };*/
+
+    createBusinessProvider.config(restConfig);
+    putBusinessProvider.config(restConfig);
+    deleteBusinessProvider.config(restConfig);
+    getBusinessProvider.config(restConfig);
+
 
   };

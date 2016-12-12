@@ -4,7 +4,7 @@ var createBusiness = function() {
   // Configuration and default parameters
   var params = {};
   var baseUrl = '';
-  var serviceBaseUrl = '';
+  var serviceBaseUrl = '/rest/business/';
 
   this.config = function(config) {
     params = angular.copy(config);
@@ -25,11 +25,11 @@ var createBusiness = function() {
   };
 };
 
-var saveBusiness = function() {
+var putBusiness = function() {
   // Configuration and default parameters
   var params = {};
   var baseUrl = '';
-  var serviceBaseUrl = '';
+  var serviceBaseUrl = '/rest/business/';
 
   this.config = function(config){
     params = angular.copy(config);
@@ -53,12 +53,12 @@ var getBusiness = function() {
   // Configuration and default parameters
   var params = {};
   var baseUrl = '';
-  var serviceBaseUrl = '';
+  var serviceBaseUrl = '/rest/business/';
 
   this.config = function(config) {
     params = angular.copy(config);
     baseUrl = params.baseUrl || baseUrl;
-    delete params.baseUrl
+    delete params.baseUrl;
   };
 
   this.$get = function($resource) {
@@ -77,7 +77,7 @@ var deleteBusiness = function() {
   // Configuration and default parameters
   var params = {};
   var baseUrl = '';
-  var serviceBaseUrl = '';
+  var serviceBaseUrl = '/rest/business/';
 
   this.config = function(config) {
     params = angular.copy(config);
@@ -98,11 +98,8 @@ var deleteBusiness = function() {
 };
 
 module.exports = {
-  // TODO: ------- La siguiente linea es necesaria? -------
-  //angular.module('app.component.services', []),
-  //.factory('fooService', require('./fooService'));
   createBusiness: createBusiness,
   getBusiness: getBusiness,
-  saveBusiness: saveBusiness,
+  putBusiness: putBusiness,
   deleteBusiness: deleteBusiness
 };
