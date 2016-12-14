@@ -94,6 +94,15 @@ module.exports = /*@ngInject*/
           newRound.investors = lastRound.investors;
           newRound.employees = lastRound.employees;
       }
-      data.rounds[data.rounds.length] = angular.extend({},newRound);
+      data.rounds[data.rounds.length] = angular.copy(newRound);
     };
+
+    $scope.removeRound = function(index){
+      if(data.rounds.length > 1) {
+        data.rounds.splice(index, 1);
+      }
+    };
+
+    $scope.selectedIndex = 0;
+
   };

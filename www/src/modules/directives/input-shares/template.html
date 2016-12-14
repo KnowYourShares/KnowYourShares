@@ -24,7 +24,7 @@
     <tbody>
     <tr ng-repeat="item in $ctrl.entity track by $index">
       <td width="50%"><input class="form-control input-sm" type="text" ng-model="item.name"></td>
-      <td width="30%"><input class="form-control input-sm" type="number" min=0 max=100 ng-model="item.value"></td>
+      <td width="30%"><input class="form-control input-sm" type="number" ng-model="item.value"></td>
       <td width="20%" class="text-center">
         <md-button class="md-icon-button md-primary" ng-click="$ctrl.removeItem($index)" aria-label="regular-button"><span class="fa fa-remove"></span></md-button>
       </td>

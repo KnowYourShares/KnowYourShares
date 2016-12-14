@@ -26,7 +26,7 @@ module.exports = {
   controller: InputSharesCtrl,
   bindings: {
     entity : "=",
-    label : "@",
+    label : "@"
   },
   templateUrl: 'directives/input-shares/template.html'
 };

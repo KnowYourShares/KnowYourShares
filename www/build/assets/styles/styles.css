@@ -496,14 +496,9 @@ hr.filters {
 /* ==========================================================================
 ESTILOS GENERALES
 ========================================================================== */
-html {
-  height: 100%;
-}
-
 body {
   overflow-x: hidden !important;
   background-color: #eeeff5;
-  min-height: 100%;
 }
 
 .main-content {
