@@ -10,7 +10,7 @@ function InputSharesCtrl() {
   ctrl.newItem = {};
 
   ctrl.addItem = function(){
-    if(ctrl.entity) {
+    if(ctrl.entity && ctrl.validateItem()) {
       ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
       ctrl.newItem = {};
     }
@@ -20,6 +20,13 @@ function InputSharesCtrl() {
     ctrl.entity.splice(index,1);
   };
 
+  ctrl.validateItem = function() {
+    if (ctrl.newItem.name === null || ctrl.newItem.name.toString() === "" ||
+      ctrl.newItem.value === null || ctrl.newItem.value.undefined) {
+      return false;
+    }
+    return true;
+  };
 }
 
 InputSharesCtrl.$inject = [];
