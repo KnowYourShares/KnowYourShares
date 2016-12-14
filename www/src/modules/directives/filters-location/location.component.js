@@ -1,6 +1,6 @@
 'use strict';
 
-function locationDirective(/* inject dependencies here, i.e. : $rootScope */) {
+function locationDirective() {
     return {
         restrict: 'E',
         bindToController: {},
@@ -12,6 +12,9 @@ function locationDirective(/* inject dependencies here, i.e. : $rootScope */) {
 
 locationController.$inject = [];
 function locationController() {
+
+
+
 }
 
 module.exports = locationDirective;

@@ -1,0 +1,8 @@
+<div >
+<canvas height="250" id="pie" class="chart chart-pie"
+        chart-data="$ctrl.mappedData" chart-labels="$ctrl.labels" chart-options="$ctrl.options">
+</canvas>
+</div>
+<md-checkbox aria-label="Checkbox No Ink" ng-model="$ctrl.group" ng-change="$ctrl.mapValues()">
+  {{"Group"}}
+</md-checkbox>

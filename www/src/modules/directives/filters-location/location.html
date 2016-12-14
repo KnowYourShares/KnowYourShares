@@ -1,7 +1,32 @@
 <div class="tab-pane fade in active">
-    <h3 class="head text-center">First of all start with some founders data</h3>
-    <p class="narrow text-center"> Lorem ipsum dolor sit amet, his ea mollis fabellas
-        principes.. </p>
-    <form>
-    </form>
+  <h3 class="head text-center">First of all start with some shares data</h3>
+
+  <div layout="row" layout-align="center center">
+    <h3>Company value</h3>
+    <md-slider-container>
+      <md-slider flex="50" ng-model="data.companyValue" min="0" max="20000000" step="1000"
+                 aria-label="regular-slider"></md-slider>
+      <md-input-container flex="50">
+        <input type="number" ng-model="data.companyValue" aria-label="regular-slider">
+      </md-input-container>
+    </md-slider-container>
+  </div>
+
+  <div layout="row" md-content layout-padding>
+    <input-shares entity="data.founders" label="Founders" flex="33"></input-shares>
+    <input-shares entity="data.investors" label="Investors" flex="33"></input-shares>
+    <input-shares entity="data.employees" label="Employees" flex="33"></input-shares>
+  </div>
+
+  <div layout="row" style="padding-left:20px">
+    <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
+    </h3>
+  </div>
+
+
+  <div layout="row" layout-align="center center">
+    <div>
+      <chart-shares entity="data"></chart-shares>
+    </div>
+  </div>
 </div>

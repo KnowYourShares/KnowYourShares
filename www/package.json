@@ -45,13 +45,16 @@
     "angular-animate": "./bower_components/angular-animate/angular-animate.js",
     "angular-aria": "./bower_components/angular-aria/angular-aria.js",
     "angular-messages": "./bower_components/angular-messages/angular-messages.js",
-    "angular-material": "./bower_components/angular-material/angular-material.js"
+    "angular-material": "./bower_components/angular-material/angular-material.js",
+    "angular-chart.js": "./node_modules/angular-chart.js/dist/angular-chart.js",
+    "chart.js": "./node_modules/chart.js/dist/Chart.js"
   },
   "browserify-shim": {},
   "name": "www",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "dependencies": {
+    "angular-chart.js": "^1.1.1",
     "browserify": "^13.1.1",
     "gulp-header": "^1.8.8"
   },

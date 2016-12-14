@@ -27,13 +27,11 @@ app.all('/rest/*', function (req, res) {
     res.status(404).send("Recurso no encontrado");
 });
 
+
+
 app.get('/*', function (req, res) {
     res.sendFile(__dirname + '/www/build/index.html');
 });
-
-
-
-
 
 
 /* SERVE */

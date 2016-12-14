@@ -1,7 +1,8 @@
 'use strict';
 
 function sizeDirective(/* inject dependencies here, i.e. : $rootScope */) {
-    return {
+  console.log('requiring size component');
+  return {
         restrict: 'E',
         bindToController: {},
         controller: sizeController,

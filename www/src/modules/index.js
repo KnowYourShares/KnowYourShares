@@ -9,6 +9,9 @@ require('angular-animate');
 require('angular-aria');
 require('angular-messages');
 require('angular-material');
+require('angular-chart.js');
+
+
 window._ = require('underscore');
 
 //app entry point
@@ -16,6 +19,7 @@ require('./app');
 
 //exporting services
 module.exports =
-    angular.module('app.components', [
-        require('./directives').name
-    ]);
+  angular.module('app.components', [
+    require('./directives').name,
+    require('./resources').name
+  ]);
