@@ -25,9 +25,15 @@ function ChartSharesCtrl($scope) {
     ctrl.mappedData = [];
     if(ctrl.group){
       ctrl.labels = ["Founders", "Investors", "Employees" ];
-      ctrl.mappedData[0] = ctrl.entity.founders.reduce(add,{value:0}).value || 0;
-      ctrl.mappedData[1] = ctrl.entity.investors.reduce(add,{value:0}).value || 0;
-      ctrl.mappedData[2] = ctrl.entity.employees.reduce(add,{value:0}).value || 0;
+      if(ctrl.entity.founders) {
+        ctrl.mappedData[0] = ctrl.entity.founders.reduce(add,{value:0}).value || 0;
+      }
+      if (ctrl.entity.investors) {
+        ctrl.mappedData[1] = ctrl.entity.investors.reduce(add,{value:0}).value || 0;
+      }
+      if(ctrl.entity.employees) {
+        ctrl.mappedData[2] = ctrl.entity.employees.reduce(add,{value:0}).value || 0;
+      }
     }else{
       ctrl.entity.founders.forEach(function(o){
         ctrl.labels.push(o.name);

@@ -45,7 +45,7 @@ function _geter(req, res) {
         if (!entity) {
             return res.sendStatus(404);
         } else {
-            return res.json(entity);
+            return res.json({data:entity});
         }
     });
 }

@@ -6,7 +6,6 @@ module.exports = /*@ngInject*/
     //HTTP
     $httpProvider.defaults.headers.common.Accept = 'application/json';
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=UTF-8';
-    $httpProvider.defaults.withCredentials = true;
 
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')

@@ -2,12 +2,11 @@ var mongoose = require ('mongoose');
 var Schema = mongoose.Schema;
 
 var BusinessSchema = new Schema({
-    name: String,
-    value: Number,
-    premoney: Number,
-    postmoney: Number,
+    companyValue: Number,
     founders: [{}],
-    investors: [{}]
+    investors: [{}],
+    employees:[{}],
+    rounds:[{}]
 });
 
 module.exports = mongoose.model('Business', BusinessSchema);
