@@ -6,6 +6,7 @@ module.exports = /*@ngInject*/
       companyValue: 3000,
       founders: [],
       employees: [],
+      investors: [],
       rounds: []
     };
     //TODO Aquí estaría definido el objeto global con todos los datos,

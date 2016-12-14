@@ -10,8 +10,10 @@ function InputSharesCtrl() {
   ctrl.newItem = {};
 
   ctrl.addItem = function(){
-    ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
-    ctrl.newItem = {};
+    if(ctrl.entity) {
+      ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
+      ctrl.newItem = {};
+    }
   };
 
   ctrl.removeItem = function(index){
