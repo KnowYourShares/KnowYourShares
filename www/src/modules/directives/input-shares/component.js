@@ -1,7 +1,7 @@
 'use strict';
 
 
-function InputSharesCtrl() {
+function InputSharesCtrl($scope) {
   var ctrl = this;
 
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
@@ -9,10 +9,18 @@ function InputSharesCtrl() {
 
   ctrl.newItem = {};
 
-  ctrl.addItem = function(){
-    if(ctrl.entity && ctrl.validateItem()) {
+  ctrl.addItem = function(isValid){
+    if(ctrl.entity && isValid) {
+      ctrl.newItem.auxname = ctrl.newItem.name;
+      ctrl.newItem.auxvalue = ctrl.newItem.value;
       ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
       ctrl.newItem = {};
+      $scope.sharesInput.name.$setUntouched();
+      $scope.sharesInput.value.$setUntouched();
+    }
+    else if (!isValid) {
+      $scope.sharesInput.name.$setTouched();
+      $scope.sharesInput.value.$setTouched();
     }
   };
 
@@ -20,16 +28,27 @@ function InputSharesCtrl() {
     ctrl.entity.splice(index,1);
   };
 
-  ctrl.validateItem = function() {
-    if (ctrl.newItem.name === null || ctrl.newItem.name.toString() === "" ||
-      ctrl.newItem.value === null || ctrl.newItem.value.undefined) {
-      return false;
+  ctrl.updateName = function(index){
+    if (ctrl.entity[index].name != ctrl.entity[index].auxname) {
+      console.log("differente name " + index);
     }
-    return true;
+    else {
+      console.log("same name " + index);
+    }
   };
+
+  ctrl.updateValue = function(index){
+    if (ctrl.entity[index].value != ctrl.entity[index].auxvalue) {
+      console.log("different value " + index);
+    }
+    else {
+      console.log("same value " + index);
+    }
+  };
+
 }
 
-InputSharesCtrl.$inject = [];
+InputSharesCtrl.$inject = ["$scope"];
 
 module.exports = {
   controller: InputSharesCtrl,

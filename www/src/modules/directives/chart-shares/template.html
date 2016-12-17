@@ -3,6 +3,11 @@
         chart-data="$ctrl.mappedData" chart-labels="$ctrl.labels" chart-options="$ctrl.options">
 </canvas>
 </div>
+
+<md-switch ng-model="$ctrl.group" aria-label="Group Switch" ng-change="$ctrl.mapValues()">
+    Group
+</md-switch>
+
 <md-checkbox aria-label="Checkbox No Ink" ng-model="$ctrl.group" ng-change="$ctrl.mapValues()">
   {{"Group"}}
 </md-checkbox>
