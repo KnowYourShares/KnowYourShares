@@ -1,11 +1,35 @@
 # PAE PROJECT
 Este proyecto nace de la asignatura PAE enseñada en la FIB (Facultat d'informatica de Barcelona).
 
+
+# SETUP
+
+## Dev config
+First of all we must install all the dependencies that are needed.
+* npm install
+* cd www
+* npm install
+* bower install
+
+
+## Build for dev
+In progress. Ideal: livereload
+* cd www
+* gulp --build
+
+
+## Build for production
+* cd www
+* gulp --build
+* cd ..
+* pm2 start -i 0 server.js
+
+
 # Front-End:
 El proyecto se encuentra dentro de la capeta `www/src`, dentro de esta podemos encontrar 2 carpetas y el archivo `index.html`:
 
 * En la carpeta `assets` podremos encontrar todo lo relacionado con css, imagenes, fonts y librerias enbedidas dentro de la
-propia applicacion. 
+propia applicacion.
   * Si queremos cambiar algo sobre alguno de los anteriores ficheros mencionados, esta es nuestra carpeta.
 
 * En la carpeta `modules` se encuentra el codigo Angular .
@@ -16,19 +40,19 @@ Dentro de la carpeta `modules` se encuentran las partes de nuestra aplicacion di
 
 * La carpeta `app`
   * En esta carpeta se encuentran las diferentes vista de nuestra applicacion.
-  
+
 * La carpeta `directives`
   * En esta carpetas se encuentran las directivas de nuestra applicacion que seran utilizadas por las vistas
 
 * La carpeta `resources`
   * En esta carpeta se encuentran los servicos que realizaran peticiones REST a nuestro servidor node.
-  
+
 * La carpeta `services`
   *  En esta carpeta se encuentran los servicios que utilizara internamente la aplicacion como por ejemplo
   las funciones para calcular los diferentes calculos empresariales.
-  
+
 * El archivo `index.js`
-  * En este archivo se introducen los diferentes modulos browserify: 
+  * En este archivo se introducen los diferentes modulos browserify:
     * `require('dependencia')` para las "dependencias externas" (El nombre que le hayamos puesto dentro del archivo package.json).
     * Para dependencias internas tenemos que incluir el require dentro del `exports.module`.
 
@@ -36,13 +60,8 @@ Dentro del archivo `package.json` tenemos que incluir la dependencia que hayamos
 en el apartado de "browser".
 
 
-#######
-Para añadir un modulo de bower:
+##### Para añadir un modulo de bower:
 
-1 - bower install --save modulo
-2 - En src/modules/index.js : añadir require('....')
-3 - En src/modules/app/index.js: añadir el nombre del módulo en el array
-
-
-
-
+1. bower install --save modulo
+1. En src/modules/index.js : añadir require('...')
+1. En src/modules/app/index.js: añadir el nombre del módulo en el array
