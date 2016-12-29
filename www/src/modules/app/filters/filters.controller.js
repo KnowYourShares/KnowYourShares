@@ -1,7 +1,9 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function filtersController($scope, $rootScope) {
+  function filtersController($scope, $rootScope, createBusiness, putBusiness, Business) {
+    //TODO Killian
+
     var data = {
       companyValue: 3000,
       founders: [],
@@ -9,18 +11,20 @@ module.exports = /*@ngInject*/
       investors: [],
       rounds: []
     };
-    //TODO Aquí estaría definido el objeto global con todos los datos,
-    // de esta forma todos los filtros pueden acceder a ellos.
+
     initialize();
 
     function initialize() {
-      if ($rootScope.data) {
-        data = $rootScope.data;
+      if(Business){
+        Business.then(
+          function(data) {
+            data = data.data;
+          });
       }
 
-      $scope.data = data;
+      console.log('Business ' + Business);
 
-      console.log('filter controller : ', data);
+      $scope.data = data;
 
       $scope.createRound = function () {
         console.log("createRound");
@@ -54,5 +58,22 @@ module.exports = /*@ngInject*/
       };
 
       $scope.selectedIndex = 0;
+
+      $scope.save = function save() {
+          //Tener en cuenta si se está editando o bien es la primera vez que se crea.
+          if(!$scope.data._id){
+              // console.log('create');
+              createBusiness.startBusiness($scope.data).$promise.then(function (data) {
+                $scope.data = data;
+              });
+          }
+          else{
+            // console.log('update');
+            putBusiness.save($scope.data).$promise.then(function (data) {
+              // console.log('data is ', data);
+              $scope.data = data;
+            });
+          }
+      };
     }
   };
