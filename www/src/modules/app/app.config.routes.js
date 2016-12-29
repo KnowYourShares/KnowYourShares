@@ -14,51 +14,25 @@ module.exports = /*@ngInject*/
         children: [
           {
             name: 'home',
-            url: '/',
+            // url: '/',
             templateUrl: 'app/home/home.html',
             controller: 'homeController',
             controllerAs: 'home'
           },
           {
             name: 'filters',
-            url: '/filters',
+            url: '/business',
             abstract: true,
             templateUrl: 'app/filters/filters.html',
-            controller: 'filtersController',
-            controllerAs: 'filters',
             children: [
               {
                 name: 'location',
-                url: '/location',
-                template: '<filter-location></filter-location>'
-              },
-              {
-                name: 'industries',
-                url: '/industries',
-                template: '<filter-industries></filter-industries>'
-              },
-              {
-                name: 'functions',
-                url: '/functions',
-                template: '<filter-functions></filter-functions>'
-              },
-              {
-                name: 'age',
-                url: '/age',
-                template: '<filter-age></filter-age>'
-              },
-              {
-                name: 'size',
-                url: '/size',
-                template: '<filter-size></filter-size>'
-              },
-              {
-                name: 'results',
-                url: '/results',
-                template: '<filter-results></filter-results>'
+                url: '/:id',
+                template: '<filter-location></filter-location>',
+                controller: 'filtersController',
+                controllerAs: 'filters',
               }
-            ]
-          }
+            ]}
         ]
       });
   };
