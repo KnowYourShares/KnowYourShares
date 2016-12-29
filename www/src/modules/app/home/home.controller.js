@@ -6,7 +6,11 @@ module.exports = /*@ngInject*/
     $scope.getBusiness = getObject;
 
     function getObject() {
-      console.log('entro');
+
+      if(!$scope.code){
+        return $state.go('app.filters.location');
+      }
+
       getBusiness.get({businessId: $scope.code}).$promise.then(function (data) {
         $rootScope.data = data.data;
         $state.go('app.filters.location');

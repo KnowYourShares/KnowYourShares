@@ -1,35 +1,17 @@
-<div class="container">
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="board">
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="home">
-              <div class="text-center">
-                <span class="round one"><i class="fa fa-thumbs-o-up"></i> </span>
-              </div>
-              <h3 class="head text-center">Welcome to KNOWYOURSHARES</h3>
-              <p class="narrow text-center"> See how your company status evolves. Visually. Simply.  </p>
-              <p class="text-center"><a ui-sref="app.filters.location" class="btn btn-success btn-outline-rounded blue">
-                Start! <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-              </p>
-              <p class="blue text-center" style="color: #1e5872;">OR</p>
-              <p class="text-center">
-                <md-input-container class="text-center">
-                  <label>Insert your code!</label>
-                  <input type="text" ng-model="code">
-                </md-input-container>
-                <a ng-click="getBusiness()" class="btn btn-success btn-outline-rounded blue">
-                  Start! <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-              </p>
-            </div>
-
-            <div class="clearfix"></div>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
+<div layout="row" layout-align="center center">
+    <section flex="40" layout="column" md-whiteframe layout-padding="20">
+      <h2 md-display-2>
+      Welcome to KNOWYOURSHARES
+      <span class=""><i class="fa fa-thumbs-o-up"></i> </span>
+    </h2>
+      <p> See how your company status evolves. Play. Predict. Simply. </p>
+      <md-input-container flex="50">
+        <label>Did you have a code? </label>
+        <input type="text" ng-model="code">
+      </md-input-container>
+      <p></p>
+      <md-button class="md-raised md-primary" ng-click="getBusiness()">
+        Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
+      </md-button>
+    </section>
 </div>
