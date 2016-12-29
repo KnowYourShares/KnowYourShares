@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function homeController($scope, getBusiness, $rootScope, $state) {
+  function homeController($scope, $state) {
 
     $scope.getBusiness = getObject;
 

@@ -27,19 +27,7 @@ module.exports = /*@ngInject*/
           children: [{
             name: 'location',
             url: '/:id',
-            template: '<filter-location></filter-location>',
-            resolve: {
-              //TODO Killian
-               Business: function functionName(getBusiness, $stateParams) {
-                if($stateParams.id){
-                  return getBusiness.get({
-                    businessId: $stateParams.id
-                  }).$promise;
-                }else{
-                  return {};
-                }
-              }
-            }
+            template: '<filter-location></filter-location>'
           }]
         }]
       });

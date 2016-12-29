@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function filtersController($scope, $rootScope, createBusiness, putBusiness, Business) {
+  function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state) {
     //TODO Killian
 
     var data = {
@@ -15,14 +15,12 @@ module.exports = /*@ngInject*/
     initialize();
 
     function initialize() {
-      if(Business){
-        Business.then(
-          function(data) {
-            data = data.data;
-          });
-      }
 
-      console.log('Business ' + Business);
+      if($state.params.id !== "") {
+        getBusiness.get({businessId: $state.params.id}).$promise.then(function (data) {
+          $scope.data = data.data;
+        });
+      }
 
       $scope.data = data;
 
