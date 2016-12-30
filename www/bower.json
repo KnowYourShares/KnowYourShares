@@ -1,5 +1,5 @@
 {
-  "name": "PAE project",
+  "name": "KnowYourShares",
   "private": true,
   "dependencies": {
     "angular": "1.6.0",
@@ -11,6 +11,7 @@
     "chart.js": "^2.4.0"
   },
   "resolutions": {
-    "angular-ui-router": "^0.3.1"
+    "angular-ui-router": "^0.3.1",
+    "angular": "1.6.1"
   }
 }

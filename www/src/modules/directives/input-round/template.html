@@ -34,6 +34,11 @@
   </div>
 </div>
 
+<div layout="row" style="padding-left:20px" ng-if="$ctrl.index === 0">
+  <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
+  </h3>
+</div>
+
 <div layout="row" md-content layout-padding>
   <input-shares entity="$ctrl.round.founders" label="Founders" flex="33"></input-shares>
   <input-shares entity="$ctrl.round.investors" label="Investors" flex="33"></input-shares>
