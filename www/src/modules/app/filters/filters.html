@@ -4,11 +4,16 @@
       <!--<div class="board-inner" layout-fill>-->
         <md-toolbar class="md-hue-2">
           <div class="md-toolbar-tools">
-            <span> KNOWYOURSHARES</span>
+            <span><a ui-sref="home"> KNOWYOURSHARES</a></span>
 
             <span flex></span>
 
             <md-button  class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">ADD A ROUND
+            </md-button>
+
+            <span flex></span>
+
+            <md-button  class="md-raised" ng-click="save()" aria-label="regular-button">SAVE
             </md-button>
 
             <span flex></span>
@@ -33,7 +38,7 @@
                 layout="column"
                 layout-fill
               >
-                <input-round round="round"></input-round>
+                <input-round round="round" index="$index"></input-round>
               </md-tab-content>
             </md-tab>
           </md-tabs>

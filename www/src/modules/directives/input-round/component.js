@@ -26,7 +26,8 @@ InputRoundCtrl.$inject = [];
 module.exports = {
   controller: InputRoundCtrl,
   bindings: {
-    round : "="
+    round : "=",
+    index : "<"
   },
   templateUrl: 'directives/input-round/template.html'
 };
