@@ -65,3 +65,10 @@ en el apartado de "browser".
 1. bower install --save modulo
 1. En src/modules/index.js : añadir require('...')
 1. En src/modules/app/index.js: añadir el nombre del módulo en el array
+
+
+Licensing
+=========
+KnowYourShares is licensed under the Apache License, Version 2.0. See
+[LICENSE](https://github.com/KnowYourShares/KnowYourShares/blob/master/LICENSE)
+for the full license text.
