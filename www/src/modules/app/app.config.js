@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function config($locationProvider, $httpProvider, $mdThemingProvider, createBusinessProvider, putBusinessProvider, deleteBusinessProvider, getBusinessProvider) {
+  function config($locationProvider, $httpProvider, $mdThemingProvider, createBusinessProvider, putBusinessProvider, deleteBusinessProvider, getBusinessProvider, $compileProvider) {
     $locationProvider.html5Mode(true);
     //HTTP
     $httpProvider.defaults.headers.common.Accept = 'application/json';
@@ -15,6 +15,10 @@ module.exports = /*@ngInject*/
     var restConfig = {
       baseUrl: "http://localhost:8080" || ''
     };
+
+
+    //Uncomment for development
+    $compileProvider.debugInfoEnabled(false);
 
     //OPENSHIFT
     /*var restConfig = {

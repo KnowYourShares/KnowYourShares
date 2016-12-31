@@ -6,23 +6,23 @@ Este proyecto nace de la asignatura PAE enseñada en la FIB (Facultat d'informat
 
 ## Dev config
 First of all we must install all the dependencies that are needed.
-* npm install
-* cd www
-* npm install
-* bower install
+1. npm install
+1. cd www
+1. npm install
+1. bower install
 
 
 ## Build for dev
 In progress. Ideal: livereload
-* cd www
-* gulp --build
-
+1. Terminal 1: cd www && gulp
+1. Terminal 2: nodemon
+1. Open localhost:8080
 
 ## Build for production
-* cd www
-* gulp --build
-* cd ..
-* pm2 start -i 0 server.js
+1. cd www
+1. gulp
+1. cd ..
+1. pm2 start -i 0 server.js
 
 
 # Front-End:

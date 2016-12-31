@@ -25,10 +25,9 @@ module.exports = /*@ngInject*/
       $scope.data = data;
 
       $scope.createRound = function () {
-        console.log("createRound");
         var newRound = {};
         if (!data.rounds || !data.rounds.length) {
-          newRound.name = "Round 0";
+          newRound.name = "Milestone 1";
           newRound.preMoney = data.companyValue;
           newRound.moneyRaised = 1000000;
           newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
@@ -38,7 +37,7 @@ module.exports = /*@ngInject*/
           data.rounds = [];
         } else {
           var lastRound = data.rounds[data.rounds.length - 1];
-          newRound.name = "Round " + data.rounds.length;
+          newRound.name = "Milestone " + data.rounds.length;
           newRound.preMoney = lastRound.postMoney;
           newRound.moneyRaised = 1000000;
           newRound.postMoney = newRound.preMoney + newRound.moneyRaised;

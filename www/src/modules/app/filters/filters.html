@@ -1,52 +1,39 @@
 <!--<div class="container" flex layout-fill>-->
-  <!--<div class="row" layout-fill>-->
-    <!--<div class="board" layout-fill>-->
-      <!--<div class="board-inner" layout-fill>-->
-        <md-toolbar class="md-hue-2">
-          <div class="md-toolbar-tools">
-            <span><a ui-sref="home"> KNOWYOURSHARES</a></span>
+<!--<div class="row" layout-fill>-->
+<!--<div class="board" layout-fill>-->
+<!--<div class="board-inner" layout-fill>-->
+<style>
+[role="tabpanel"] {
+    transition: none;
+}
+</style>
+<md-toolbar class="md-hue-2">
+  <div class="md-toolbar-tools">
+    <span><a ui-sref="app.home"> KNOWYOURSHARES</a></span>
 
-            <span flex></span>
+    <span flex></span>
 
-            <md-button  class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">ADD A ROUND
-            </md-button>
+    <md-button class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">ADD A NEW MILESTONE
+    </md-button>
 
-            <span flex></span>
+    <span flex></span>
 
-            <md-button  class="md-raised" ng-click="save()" aria-label="regular-button">SAVE
-            </md-button>
+    <md-button ng-if="data.rounds.length" class="md-raised md-warn" ng-click="removeRound(selectedIndex)" aria-label="regular-button">REMOVE MILESTONE
+    </md-button>
 
-            <span flex></span>
+    <span flex></span>
 
-            <md-button class="md-raised md-warn" ng-click="removeRound(selectedIndex)" aria-label="regular-button">REMOVE ROUND
-            </md-button>
+    <md-button class="md-raised" ng-click="save()" aria-label="regular-button">SAVE
+    </md-button>
+  </div>
+</md-toolbar>
 
-          </div>
-        </md-toolbar>
-        <div layout="row" layout-align="center center" layout-fill>
-
-          <md-tabs
-            flex layout="column" layout-fill
-            md-center-tabs
-            md-selected="selectedIndex" md-border-bottom md-autoselect>
-            <md-tab
-              flex layout="column"
-              ng-repeat="round in data.rounds track by $index"
-              label="{{round.name}}"
-            >
-              <md-tab-content
-                layout="column"
-                layout-fill
-              >
-                <input-round round="round" index="$index"></input-round>
-              </md-tab-content>
-            </md-tab>
-          </md-tabs>
-
-        </div>
-
-
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-<!--</div>-->
+<div layout="row" layout-align="center center" layout-fill ng-cloack>
+  <md-tabs flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
+    <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
+      <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
+        <input-round round="round" index="$index"></input-round>
+      </md-tab-content>
+    </md-tab>
+  </md-tabs>
+</div>
