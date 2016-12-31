@@ -11,6 +11,7 @@
   <div class="md-toolbar-tools">
     <span><a ui-sref="app.home"> KNOWYOURSHARES</a></span>
 
+
     <span flex></span>
 
     <md-button class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">ADD A NEW MILESTONE
@@ -27,6 +28,20 @@
     </md-button>
   </div>
 </md-toolbar>
+
+<div layout="row" layout-align="center">
+  <br>
+  <span ng-if="data._id.length">
+        <span ng-if="readOnly">{{(host ||'localhost:8080/business/') + data._id}}</span>
+        <span ng-if="!readOnly">{{(host ||'localhost:8080/business/') + data._id + "/token"}}</span>
+        <a clipboard text="sup"><span class="fa fa-clipboard"></span></a>
+    <md-checkbox aria-label="Checkbox No Ink" ng-model="readOnly">
+      Read only
+    </md-checkbox>
+  </span>
+  <span ng-if="!data._id.length">Want a unique link? Save your current status</span>
+
+</div>
 
 <div layout="row" layout-align="center center" layout-fill ng-cloack>
   <md-tabs flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>

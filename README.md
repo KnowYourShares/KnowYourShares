@@ -62,10 +62,10 @@ en el apartado de "browser".
 
 ##### Para añadir un modulo de bower:
 
-1. bower install --save modulo
+1. bower install --save modulo o npm install --save modulo
 1. En src/modules/index.js : añadir require('...')
 1. En src/modules/app/index.js: añadir el nombre del módulo en el array
-
+1. Añadir en el package.json en el apartado "browser" el nombre del módulo y la ruta.
 
 Licensing
 =========

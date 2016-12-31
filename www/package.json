@@ -47,7 +47,8 @@
     "angular-messages": "./bower_components/angular-messages/angular-messages.js",
     "angular-material": "./bower_components/angular-material/angular-material.js",
     "angular-chart.js": "./node_modules/angular-chart.js/dist/angular-chart.js",
-    "chart.js": "./node_modules/chart.js/dist/Chart.js"
+    "chart.js": "./node_modules/chart.js/dist/Chart.js",
+    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js"
   },
   "browserify-shim": {},
   "name": "www",
@@ -55,6 +56,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "angular-chart.js": "^1.1.1",
+    "angular-clipboard": "^1.5.0",
     "browserify": "^13.1.1",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^5.0.0",

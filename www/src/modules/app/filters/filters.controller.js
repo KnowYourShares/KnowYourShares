@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state) {
-    //TODO Killian
+  function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state, $location, $mdToast) {
 
     var data = {
       companyValue: 3000,
@@ -56,18 +55,20 @@ module.exports = /*@ngInject*/
 
       $scope.selectedIndex = 0;
 
+
+
       $scope.save = function save() {
-          //Tener en cuenta si se está editando o bien es la primera vez que se crea.
           if(!$scope.data._id){
-              // console.log('create');
               createBusiness.startBusiness($scope.data).$promise.then(function (data) {
-                $scope.data = data;
+                // $scope.data = data;
+                console.log('Going to ' + '/business/' + data._id);
+                $mdToast.show($mdToast.simple().textContent('Changes saved'));
+                $location.path('/business/' + data._id);
               });
           }
           else{
-            // console.log('update');
-            putBusiness.save($scope.data).$promise.then(function (data) {
-              // console.log('data is ', data);
+            putBusiness.save({businessId: $scope.data._id}, $scope.data).$promise.then(function (data) {
+              $mdToast.show($mdToast.simple().textContent('Changes saved.'));
               $scope.data = data;
             });
           }

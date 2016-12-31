@@ -10,6 +10,7 @@ require('angular-aria');
 require('angular-messages');
 require('angular-material');
 require('angular-chart.js');
+require('angular-clipboard');
 
 
 window._ = require('underscore');
