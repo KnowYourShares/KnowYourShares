@@ -1,10 +1,9 @@
 'use strict';
 
 var gulp = require('gulp');
-var gulpif = require('gulp-if');
-var rimraf = require('gulp-rimraf');
+var clean = require('gulp-clean');
 
 module.exports = gulp.task('clean', function () {
-  return gulpif(release, gulp.src(RELEASE_FOLDER, {read: false}), gulp.src(BUILD_FOLDER, {read: false}))
-    .pipe(rimraf());
+  return gulp.src(BUILD_FOLDER, {read: false})
+    .pipe(clean());
 });
