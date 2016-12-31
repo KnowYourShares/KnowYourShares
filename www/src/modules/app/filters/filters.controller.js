@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state, $location, $mdToast) {
+  function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state, $location, $mdToast, clipboard) {
+
 
     var data = {
       companyValue: 3000,
@@ -22,8 +23,11 @@ module.exports = /*@ngInject*/
       }
 
       $scope.data = data;
+      $scope.host = 'localhost:8080/';
+      $scope.businessPath = 'business/';
 
       $scope.createRound = function () {
+        console.log('Create round');
         var newRound = {};
         if (!data.rounds || !data.rounds.length) {
           newRound.name = "Milestone 1";
@@ -36,7 +40,7 @@ module.exports = /*@ngInject*/
           data.rounds = [];
         } else {
           var lastRound = data.rounds[data.rounds.length - 1];
-          newRound.name = "Milestone " + data.rounds.length;
+          newRound.name = "Milestone " + (data.rounds.length + 1);
           newRound.preMoney = lastRound.postMoney;
           newRound.moneyRaised = 1000000;
           newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
@@ -55,13 +59,25 @@ module.exports = /*@ngInject*/
 
       $scope.selectedIndex = 0;
 
+      if (!clipboard.supported) {
+          console.log('Sorry, copy to clipboard is not supported');
+      }
 
+      $scope.copyToClipboard = function () {
+
+          var path = $scope.host + $scope.businessPath + $scope.data._id;
+          if(!$scope.readOnly) {
+            path += '/token';
+          }
+          clipboard.copyText(path);
+
+          $mdToast.show($mdToast.simple().textContent('Link copied to clipboard!'));
+      };
 
       $scope.save = function save() {
           if(!$scope.data._id){
               createBusiness.startBusiness($scope.data).$promise.then(function (data) {
-                // $scope.data = data;
-                console.log('Going to ' + '/business/' + data._id);
+                $scope.data = data;
                 $mdToast.show($mdToast.simple().textContent('Changes saved'));
                 $location.path('/business/' + data._id);
               });
