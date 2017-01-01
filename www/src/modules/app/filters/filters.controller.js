@@ -3,30 +3,32 @@
 module.exports = /*@ngInject*/
   function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state, $location, $mdToast, clipboard, $mdDialog) {
 
-    console.log('Params ' +  $state.params.id);
-    console.log('Params ' +  $state.params.password);
-
     function initialize() {
       getBusiness.get({
         businessId: $state.params.id
       }).$promise.then(function(response) {
         $scope.data = response.data;
+        $scope.buildPath();
       },function(){
         $state.go('app.home');
       });
 
       $scope.host = 'localhost:8080/';
       $scope.businessPath = 'business/';
-      $scope.token = '/token'
       $scope.selectedIndex = 0;
+      $scope.password = $state.params.password;
 
       if (!clipboard.supported) {
         console.log('Sorry, copy to clipboard is not supported');
       }
     }
 
+    $scope.buildPath = function buildPath() {
+      $scope.readOnlyPath = $scope.host + $scope.businessPath + $scope.data._id;
+      $scope.editPath =  $scope.readOnlyPath + '/' + ($scope.password || 'testPassword');
+    };
+
     $scope.createRound = function() {
-      console.log('Create round');
       var newRound = {};
       if (!$scope.data.rounds || !$scope.data.rounds.length) {
         newRound.name = "Milestone 1";

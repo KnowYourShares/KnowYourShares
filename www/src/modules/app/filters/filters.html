@@ -33,8 +33,8 @@
 <div layout="row" layout-align="center">
   <br>
   <span ng-if="data._id.length">
-        <span ng-if="readOnly">{{host + businessPath  + data._id}}</span>
-        <span ng-if="!readOnly">{{host + businessPath + data._id + "/token"}}</span>
+        <span ng-if="readOnly">{{readOnlyPath}}</span>
+        <span ng-if="!readOnly">{{editPath}}</span>
           <md-button class="md-icon-button md-accent" aria-label="Favorite" ng-click="copyToClipboard()">
             <md-icon md-font-icon="fa fa-clipboard" class="fa s64 md-primary md-hue-2"></md-icon>
           </md-button>
