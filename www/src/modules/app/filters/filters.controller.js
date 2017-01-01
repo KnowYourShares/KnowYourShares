@@ -57,11 +57,7 @@ module.exports = /*@ngInject*/
     };
 
     $scope.copyToClipboard = function() {
-      var path = $scope.host + $scope.businessPath + $scope.data._id;
-      if (!$scope.readOnly) {
-        path += $scope.token;
-      }
-      clipboard.copyText(path);
+      clipboard.copyText($scope.readOnly ? $scope.readOnlyPath : $scope.editPath);
       $mdToast.show($mdToast.simple().textContent('Link copied to clipboard!'));
     };
 
