@@ -3,24 +3,17 @@
 module.exports = /*@ngInject*/
   function filtersController($scope, $rootScope, createBusiness, putBusiness, getBusiness, $state, $location, $mdToast, clipboard, $mdDialog) {
 
-    function initialize() {
-      var data = {
-        companyValue: 3000,
-        founders: [],
-        employees: [],
-        investors: [],
-        rounds: []
-      };
+    console.log('Params ' +  $state.params.id);
+    console.log('Params ' +  $state.params.password);
 
-      if ($state.params.id !== "") {
-        getBusiness.get({
-          businessId: $state.params.id
-        }).$promise.then(function(response) {
-          $scope.data = response.data;
-        });
-      } else {
-        $scope.data = data;
-      }
+    function initialize() {
+      getBusiness.get({
+        businessId: $state.params.id
+      }).$promise.then(function(response) {
+        $scope.data = response.data;
+      },function(){
+        $state.go('app.home');
+      });
 
       $scope.host = 'localhost:8080/';
       $scope.businessPath = 'business/';

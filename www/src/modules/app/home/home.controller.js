@@ -16,7 +16,7 @@ module.exports = /*@ngInject*/
           console.log('ERROR 404');
         });
       }
-      
+
       createBusiness.startBusiness({}).$promise.then(function(data) {
         $state.go('app.filters.location', {id: data._id});
       });

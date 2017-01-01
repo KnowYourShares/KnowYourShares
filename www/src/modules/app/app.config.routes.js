@@ -26,7 +26,7 @@ module.exports = /*@ngInject*/
           controllerAs: 'filters',
           children: [{
             name: 'location',
-            url: '/:id',
+            url: '/:id/:password',
             template: '<filter-location></filter-location>'
           }]
         }]
