@@ -10,6 +10,17 @@ router.route('/rest/business')
     });
 
 
+router.route('/rest/business/:id/:password')
+    .get(function(req,res) {
+        return cruder.geter(req, res);
+    })
+    .put(function(req, res) {
+        return cruder.modifier(req, res);
+    })
+    .delete(function(req, res) {
+        return cruder.deleter(req, res);
+    });
+
 router.route('/rest/business/:id')
     .get(function(req,res) {
         return cruder.geter(req, res);

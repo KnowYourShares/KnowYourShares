@@ -5,11 +5,13 @@ module.exports = /*@ngInject*/
 
     function initialize() {
       getBusiness.get({
-        businessId: $state.params.id
+        businessId : $state.params.id,
+        password : $state.params.password
       }).$promise.then(function(response) {
         $scope.data = response.data;
         $scope.buildPath();
-      },function(){
+      },function(err){
+        console.log('error ', err);
         $state.go('app.home');
       });
 

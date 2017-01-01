@@ -65,7 +65,7 @@ var getBusiness = function() {
     // Allowed operations
     var actions = {
       get: {
-        url: baseUrl + serviceBaseUrl + ':businessId',
+        url: baseUrl + serviceBaseUrl + ':businessId' + '/:password' ,
         method: 'GET'
       }
     };

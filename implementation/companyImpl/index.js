@@ -38,13 +38,14 @@ function _modifier(req, res) {
  * Get a model
  */
 function _geter(req, res) {
-    model.findById(req.params.id, function (err, entity) {
+    model.findById(req.params.id).lean().exec(function (err, entity) {
         if (err) {
             return res.status(500).send(err);
         }
         if (!entity) {
             return res.sendStatus(404);
         } else {
+            entity.canEdit = entity.password == req.params.password ? true : false;
             return res.json({data:entity});
         }
     });
@@ -71,4 +72,3 @@ module.exports = {
     geter: _geter,
     creater: _creater
 };
-

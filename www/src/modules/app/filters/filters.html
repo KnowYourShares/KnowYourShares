@@ -1,17 +1,15 @@
-<!--<div class="container" flex layout-fill>-->
-<!--<div class="row" layout-fill>-->
-<!--<div class="board" layout-fill>-->
-<!--<div class="board-inner" layout-fill>-->
 <style>
 [role="tabpanel"] {
     transition: none;
 }
 </style>
 
+<div ng-if="!data.canEdit" style="background-color: rgba(0, 92, 174, 0.2); width:100%;height:100%; position:absolute; z-index: 100;">
+</div>
+
 <md-toolbar class="md-hue-2">
   <div class="md-toolbar-tools">
     <span><a ui-sref="app.home">KNOWYOURSHARES</a></span>
-
 
     <span flex></span>
 
