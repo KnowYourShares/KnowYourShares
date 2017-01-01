@@ -22,7 +22,7 @@ function _modifier(req, res) {
         if (err) {
           return res.status(500).send(err);
         }
-        if (!entity || entity.password !== req.params.password) {
+        if (!entity || entity.password != req.params.password) {
           return res.sendStatus(404);
         }
         else {

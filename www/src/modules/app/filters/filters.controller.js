@@ -65,7 +65,8 @@ module.exports = /*@ngInject*/
 
     $scope.save = function save() {
         putBusiness.save({
-          businessId: $scope.data._id
+          businessId: $scope.data._id,
+          password : $scope.password
         }, $scope.data).$promise.then(function(data) {
           $mdToast.show($mdToast.simple().textContent('Changes saved.'));
           $scope.data = data;

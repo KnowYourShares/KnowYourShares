@@ -41,7 +41,7 @@ var putBusiness = function() {
     // Allowed operations
     var actions = {
       save: {
-        url: baseUrl + serviceBaseUrl + ':businessId',
+        url: baseUrl + serviceBaseUrl + ':businessId' + '/:password',
         method: 'PUT'
       }
     };
