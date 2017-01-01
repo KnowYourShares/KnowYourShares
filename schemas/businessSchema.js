@@ -6,7 +6,11 @@ var BusinessSchema = new Schema({
     founders: [{}],
     investors: [{}],
     employees:[{}],
-    rounds:[{}]
+    rounds:[{}],
+    password : {
+      type: String,
+      default: 'generatedString'
+    }
 });
 
 module.exports = mongoose.model('Business', BusinessSchema);

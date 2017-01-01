@@ -18,7 +18,7 @@ module.exports = /*@ngInject*/
       }
 
       createBusiness.startBusiness({}).$promise.then(function(data) {
-        $state.go('app.filters.location', {id: data._id});
+        $state.go('app.filters.location', {id: data._id, password: data.password});
       });
     }
   };
