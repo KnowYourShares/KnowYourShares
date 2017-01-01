@@ -2,6 +2,7 @@
 
 module.exports = /*@ngInject*/
   function routesConfig($stateProvider, $urlRouterProvider, stateHelperProvider) {
+    $urlRouterProvider.when('/business/:id', '/business/:id/');
     $urlRouterProvider.otherwise('/');
 
     stateHelperProvider
