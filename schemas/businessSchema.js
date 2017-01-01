@@ -8,7 +8,7 @@ var BusinessSchema = new Schema({
     employees:[{}],
     rounds:[{}],
     password : {
-      type: String,
+      type: Number,
       default: function() {
             return Math.floor((Math.random() * 99999) + 1);
       }
