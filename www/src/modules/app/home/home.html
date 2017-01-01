@@ -1,17 +1,49 @@
 <div layout="row" layout-align="center center">
-    <section flex="40" layout="column" md-whiteframe layout-padding="20">
-      <h2 md-display-2>
-      Welcome to KNOWYOURSHARES
-      <span class=""><i class="fa fa-thumbs-o-up"></i> </span>
-    </h2>
-      <p> See how your company status evolves. Play. Predict. Simply. </p>
-      <md-input-container flex="50">
-        <label>Do you have a code? </label>
-        <input type="text" ng-model="code">
-      </md-input-container>
-      <p></p>
-      <md-button class="md-raised md-primary" ng-click="getBusiness()">
-        Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
-      </md-button>
+    <section flex="50" layout="column" md-whiteframe layout-padding="20">
+      <div layout="column" layout-align="center center">
+        <h2 md-display-2>
+        Welcome to KNOWYOURSHARES
+        <span class=""><i class="fa fa-thumbs-o-up"></i> </span>
+        </h2>
+        <p> See how your company status evolves. Play. Predict. Simply. </p>
+      </div>
+
+      <div layout="row" layout-align="space-between start">
+        <div layout="column" flex="50" layout-align="center center">
+          <h3>Do you have a code?</h3>
+          <form name="codeInput">
+            <md-input-container class="md-block">
+              <label>Code</label>
+              <div class="form-group" ng-class="{ 'has-error': codeInput.codeNumber.$invalid }">
+                <input type="text" name="codeNumber" class="form-control input-sm" ng-model="code">
+                <div class="help-block" ng-messages="codeNumber.$error">
+                  <p ng-message="notFound">The code doesn't match any company history.</p>
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+              <label>Password</label>
+              <div class="form-group" ng-class="{ 'has-error': codeInput.codePass.$invalid }">
+                <input type="text" name="codePass" class="form-control input-sm" ng-model="password">
+                <div class="help-block" ng-messages="codePass.$error">
+                  <p ng-message="incorrect">Password incorrect.</p>
+                </div>
+              </div>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+              <md-button class="md-raised md-primary" ng-click="getBusiness()">
+                Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              </md-button>
+            </div>
+          </form>
+        </div>
+
+        <div layout="column" flex="50" layout-align="center center">
+          <h3>Create a new one</h3>
+          <md-button class="md-raised md-primary" ng-click="getBusiness()">
+            Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          </md-button>
+        </div>
+      </div>
     </section>
 </div>

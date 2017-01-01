@@ -12,7 +12,9 @@ module.exports = /*@ngInject*/
         }).$promise.then(function(response) {
           $state.go('app.filters.location', {id: $scope.code});
         },function () {
-          //TODO ADD ERROR TO FORM
+          //TODO IF WRONG PASSWORD
+          //$scope.codeInput.codePass.$setValidity("incorrect", false);
+          $scope.codeInput.codeNumber.$setValidity("notFound", false);
           console.log('ERROR 404');
         });
       }
