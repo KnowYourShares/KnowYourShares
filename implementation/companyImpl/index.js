@@ -19,8 +19,12 @@ function _deleter(req, res) {
  */
 function _modifier(req, res) {
     model.findById(req.params.id, function (err, entity) {
-        if (err) return res.status(500).send(err);
-        if (!entity) return res.sendStatus(404);
+        if (err) {
+          return res.status(500).send(err);
+        }
+        if (!entity || entity.password !== req.params.password) {
+          return res.sendStatus(404);
+        }
         else {
             Object.assign(entity, req.body);
             entity.save(function (err) {
@@ -46,6 +50,7 @@ function _geter(req, res) {
             return res.sendStatus(404);
         } else {
             entity.canEdit = entity.password == req.params.password ? true : false;
+            delete entity.password;
             return res.json({data:entity});
         }
     });
