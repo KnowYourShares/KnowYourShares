@@ -10,7 +10,7 @@ var BusinessSchema = new Schema({
     password : {
       type: String,
       default: function() {
-            return Math.floor((Math.random() * 10000) + 1);
+            return Math.floor((Math.random() * 99999) + 1);
       }
     }
 });
