@@ -9,7 +9,9 @@ var BusinessSchema = new Schema({
     rounds:[{}],
     password : {
       type: String,
-      default: 'generatedString'
+      default: function() {
+            return Math.floor((Math.random() * 10000) + 1);
+      }
     }
 });
 
