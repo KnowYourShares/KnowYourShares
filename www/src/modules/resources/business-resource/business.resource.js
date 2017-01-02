@@ -41,7 +41,7 @@ var putBusiness = function() {
     // Allowed operations
     var actions = {
       save: {
-        url: baseUrl + serviceBaseUrl + ':businessId' + '/:password',
+        url: baseUrl + serviceBaseUrl + ':id' + '/:password',
         method: 'PUT'
       }
     };
@@ -65,7 +65,7 @@ var getBusiness = function() {
     // Allowed operations
     var actions = {
       get: {
-        url: baseUrl + serviceBaseUrl + ':businessId' + '/:password' ,
+        url: baseUrl + serviceBaseUrl + ':id' + '/:password' ,
         method: 'GET'
       }
     };
@@ -89,7 +89,7 @@ var deleteBusiness = function() {
     // Allowed operations
     var actions = {
       remove: {
-        url: baseUrl + serviceBaseUrl + ':businessId',
+        url: baseUrl + serviceBaseUrl + ':id',
         method: 'DELETE'
       }
     };

@@ -31,13 +31,13 @@
 <div layout="row" layout-align="center">
   <br>
   <span ng-if="data._id.length">
-        <span ng-if="readOnly">{{readOnlyPath}}</span>
-        <span ng-if="!readOnly">{{editPath}}</span>
-          <md-button class="md-icon-button md-accent" aria-label="Favorite" ng-click="copyToClipboard()">
+        <span ng-if="link.readOnly">{{readOnlyPath}}</span>
+        <span ng-if="!link.readOnly">{{editPath}}</span>
+          <md-button class="md-icon-button md-accent" ng-click="copyToClipboard()">
             <md-icon md-font-icon="fa fa-clipboard" class="fa s64 md-primary md-hue-2"></md-icon>
           </md-button>
-          <md-checkbox aria-label="Checkbox No Ink" ng-model="readOnly">
-            Read only
+          <md-checkbox aria-label="Checkbox No Ink" ng-model="link.readOnly">
+            Read only {{link.readOnly}}
           </md-checkbox>
   </span>
   <span ng-if="!data._id.length">Want a unique link? Save your current status</span>
