@@ -8,6 +8,7 @@ function InputRoundCtrl() {
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.employees = ctrl.round.employees || [];
+  ctrl.total = 0;
 
   ctrl.updateTotal = function(){
     console.log("updateTotal");

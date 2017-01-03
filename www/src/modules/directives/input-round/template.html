@@ -29,9 +29,9 @@
 
 <div layout="row" md-content layout-padding>
   <span flex="15"></span>
-  <input-shares entity="$ctrl.round.founders" label="Founders" flex="30"></input-shares>
+  <input-shares entity="$ctrl.round.founders" ng-model="$ctrl.total" label="Founders" flex="30"></input-shares>
   <span flex="10"></span>
-  <input-shares entity="$ctrl.round.investors" label="Investors" flex="30"></input-shares>
+  <input-shares entity="$ctrl.round.investors" ng-model="$ctrl.total" label="Investors" flex="30"></input-shares>
   <span flex="15"></span>
 </div>
 

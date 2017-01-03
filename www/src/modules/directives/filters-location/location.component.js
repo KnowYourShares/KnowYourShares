@@ -10,11 +10,12 @@ function locationDirective() {
     };
 }
 
-locationController.$inject = [];
-function locationController() {
-
-
-
+locationController.$inject = ['$scope'];
+function locationController($scope) {
+  $scope.total = 0;
+  $scope.$watch($scope.total, function () {
+    console.log($scope.total);
+  });
 }
 
 module.exports = locationDirective;
