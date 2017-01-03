@@ -8,8 +8,7 @@ Este proyecto nace de la asignatura PAE enseñada en la FIB (Facultat d'informat
 First of all we must install all the dependencies that are needed.
 1. npm install
 1. cd www
-1. npm install
-1. bower install
+1. npm install (bower dependencies will be installed automatically)
 
 
 ## Build for dev
