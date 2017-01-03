@@ -40,7 +40,6 @@ module.exports = /*@ngInject*/
     $scope.createRound = function() {
       $scope.data = roundService.createRound($scope.data);
       $scope.selectedIndex = $scope.data.rounds.length - 1;
-      console.log($scope.data);
     };
 
     $scope.removeRound = function(index) {
