@@ -4,7 +4,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "postinstall": "npm install browserify gulp-header"
+    "postinstall": "npm install browserify gulp-header && bower install"
   },
   "devDependencies": {
     "browserify-shim": "^3.8.12",
@@ -65,4 +65,5 @@
   "author": "",
   "license": "ISC",
   "description": ""
+
 }
