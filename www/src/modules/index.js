@@ -22,5 +22,6 @@ require('./app');
 module.exports =
   angular.module('app.components', [
     require('./directives').name,
-    require('./resources').name
+    require('./resources').name,
+    require('./services').name
   ]);

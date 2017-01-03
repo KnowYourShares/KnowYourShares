@@ -14,6 +14,7 @@ module.exports =
     require('../../../tmp/templates').name,
     require('../directives').name,
     require('../resources').name,
+    require('../services').name,
     require('./home').name,
     require('./filters').name
 

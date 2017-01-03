@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function appController() {
+  function appController(roundService) {
     console.log('our controller!');
+    roundService.createRound();
   };
