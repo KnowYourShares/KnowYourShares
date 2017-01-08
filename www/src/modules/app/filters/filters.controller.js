@@ -54,10 +54,10 @@ module.exports = /*@ngInject*/
 
     $scope.save = function save() {
       putBusiness.save($scope.businessKeys, $scope.data).$promise.then(function(data) {
-        $mdToast.show($mdToast.simple().textContent('Changes saved.'));
+        $mdToast.show($mdToast.simple().textContent('Changes saved.').position('top right'));
         $scope.data = data;
       }, function() {
-        $mdToast.show($mdToast.simple().textContent('Error saving.'));
+        $mdToast.show($mdToast.simple().textContent('Error saving.').position('top right'));
       });
     };
 

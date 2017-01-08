@@ -1,6 +1,6 @@
 'use strict';
 
-function InputRoundCtrl() {
+function InputRoundCtrl($scope) {
   var ctrl = this;
   console.log("InputRoundCtrl");
 
@@ -9,6 +9,19 @@ function InputRoundCtrl() {
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.employees = ctrl.round.employees || [];
   ctrl.total = 0;
+
+  $scope.$watch('$ctrl.round.moneyRaised', function () {
+    valoracionPremoney();
+    valoracionPostmoney();
+  });
+
+  var valoracionPremoney = function () {
+    ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
+  };
+
+  var valoracionPostmoney = function () {
+
+  };
 
   ctrl.updateTotal = function(){
     console.log("updateTotal");
@@ -22,7 +35,7 @@ function InputRoundCtrl() {
 
 }
 
-InputRoundCtrl.$inject = [];
+InputRoundCtrl.$inject = ['$scope'];
 
 module.exports = {
   controller: InputRoundCtrl,

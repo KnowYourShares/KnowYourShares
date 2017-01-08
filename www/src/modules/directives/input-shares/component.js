@@ -17,6 +17,10 @@ function InputSharesCtrl() {
     }
   };
 
+  ctrl.calculateRound = function () {
+    console.log('calculate round');
+  }
+
   ctrl.removeItem = function(index){
     ctrl.total -= ctrl.entity[index].value;
     ctrl.entity.splice(index,1);
