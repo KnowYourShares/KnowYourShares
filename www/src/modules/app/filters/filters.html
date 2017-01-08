@@ -13,7 +13,7 @@
 
     <span flex></span>
 
-    <md-button class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">ADD NEW EVENT
+    <md-button class="md-raised md-primary" ng-click="createRound()" ng-if="data.rounds.length" aria-label="regular-button">ADD NEW EVENT
     </md-button>
 
     <span flex></span>
@@ -51,7 +51,9 @@
       </md-tab-content>
     </md-tab>
   </md-tabs>
-  <div ng-if="!data.rounds.length">
-    <h1 class="md-display-3">Create a new event to start!</h1>
+  <div ng-if="!data.rounds.length" layout="column" layout-align="start center">
+    <h1 flex="33">Let'us know your initial state to start!</h1>
+    <md-button flex="33" class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">CREATE INITIAL STATE
+    </md-button>
   </div>
 </div>

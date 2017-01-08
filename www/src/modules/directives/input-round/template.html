@@ -1,24 +1,30 @@
-<h3 class="head text-center">{{$ctrl.round.name}}</h3>
 <div layout="row">
-  <div layout="column" flex="33" layout-align="center center">
+  <div layout="column" flex="33" layout-align="center center" ng-if="$ctrl.index != 0">
     <h3>Pre money</h3>
       <md-input-container flex="50">
-        <input type="number" ng-model="$ctrl.round.preMoney" aria-label="regular-slider">
+        <input disabled type="number" ng-model="$ctrl.round.preMoney" aria-label="regular-slider">
       </md-input-container>
   </div>
 
-  <div layout="column" flex="33" layout-align="center center">
+  <div layout="column" flex="33" layout-align="center center" ng-if="$ctrl.index != 0">
     <h3>Money raised</h3>
       <md-input-container flex="50">
         <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
       </md-input-container>
   </div>
 
-  <div layout="column" flex="33" layout-align="center center">
+  <div layout="column" flex="33" layout-align="center center" ng-if="$ctrl.index != 0">
     <h3>Post money</h3>
       <md-input-container flex="50">
-        <input type="number" ng-model="$ctrl.round.postMoney" aria-label="regular-slider">
+        <input disabled type="number" ng-model="$ctrl.round.postMoney" aria-label="regular-slider">
       </md-input-container>
+  </div>
+
+  <div layout="column" flex-offset="33" flex="33" layout-align="center center" ng-if="$ctrl.index === 0">
+    <h3>Money raised</h3>
+    <md-input-container flex="50">
+      <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
+    </md-input-container>
   </div>
 </div>
 
