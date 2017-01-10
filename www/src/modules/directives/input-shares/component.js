@@ -1,7 +1,7 @@
 'use strict';
 
 
-function InputSharesCtrl() {
+function InputSharesCtrl($mdDialog) {
   var ctrl = this;
 
   ctrl.entity = ctrl.entity ? ctrl.entity : {};
@@ -15,10 +15,22 @@ function InputSharesCtrl() {
       ctrl.total += ctrl.newItem.value;
       ctrl.newItem = {};
     }
+    else{
+      $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Maximum Shares Raised')
+        .textContent('Sorry but you are doing really god job, you raise 100% of shares')
+        .ariaLabel('Maximum Shares Raised Dialog')
+        .ok('Got it!')
+      );
+    }
   };
 
   ctrl.calculateRound = function () {
     console.log('calculate round');
+    console.log($scope.data);
   }
 
   ctrl.removeItem = function(index){
@@ -43,7 +55,7 @@ function InputSharesCtrl() {
   };
 }
 
-InputSharesCtrl.$inject = [];
+InputSharesCtrl.$inject = ["$mdDialog"];
 
 module.exports = {
   controller: InputSharesCtrl,

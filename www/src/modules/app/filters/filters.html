@@ -17,11 +17,12 @@
   </div>
 </md-toolbar>
 
-<div layout="row" layout-align="center">
+<div layout="row" layout-xs="column" flex-gt-sm="100" layout-align="center center">
+  <div layout="column" flex="100" layout-align="center center">
   <br>
-  <span ng-if="data._id.length">
-        <span ng-if="link.readOnly">{{readOnlyPath}}</span>
-        <span ng-if="!link.readOnly">{{editPath}}</span>
+  <span layout="row" layout-xs="column" flex="100" ng-if="data._id.length">
+        <span layout="row" layout-xs="column" ng-if="link.readOnly">{{readOnlyPath}}</span>
+        <span layout="row" layout-xs="column" ng-if="!link.readOnly">{{editPath}}</span>
           <md-button class="md-icon-button md-accent" ng-click="copyToClipboard()">
             <md-icon md-font-icon="fa fa-clipboard" class="fa s64 md-primary md-hue-2"></md-icon>
           </md-button>
@@ -30,9 +31,10 @@
           </md-checkbox>
   </span>
   <span ng-if="!data._id.length">Want a unique link? Save your current status</span>
+  </div>
 </div>
 
-<div layout="row" layout-align="center center" layout-fill ng-cloack>
+<div layout="row" layout-xs="column" layout-align="center center" layout-fill ng-cloack>
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
@@ -43,9 +45,9 @@
       </md-button>
     </md-tab>
   </md-tabs>
-  <div ng-if="!data.rounds.length" layout="column" layout-align="start center">
-    <h1 flex="33">Let'us know your initial state to start!</h1>
-    <md-button flex="33" class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">CREATE INITIAL STATE
+  <div ng-if="!data.rounds.length" layout="column" flex="100" layout-align="start center">
+    <h1 flex-gt-sm="33">Let'us know your initial state to start!</h1>
+    <md-button flex-gt-sm="33" class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">CREATE INITIAL STATE
     </md-button>
   </div>
 </div>
