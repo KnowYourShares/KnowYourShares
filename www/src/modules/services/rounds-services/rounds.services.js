@@ -2,7 +2,9 @@
 
 module.exports = /*@ngInject*/
   function roundService(/* inject dependencies here, i.e. : $rootScope */) {
+    var currentState;
     var _createRound = function (data) {
+      currentState = data;
       var newRound = {};
       if(data) {
         if (!data.rounds || !data.rounds.length) {
@@ -30,16 +32,16 @@ module.exports = /*@ngInject*/
       return data;
     };
 
-    var _calculateRound = function (data, lastRound) {
-      var i;
-      for(i = 0; i < data.length; ++i) {
-        var founder = data[i];
-        data[i].value = (founder.value * lastRound.preMoney)/ lastRound.postMoney;
+    var _getLastRound = function () {
+      if(currentState.rounds.length) {
+        return currentState.rounds[currentState.rounds.length - 2];
+      } else {
+        return undefined;
       }
-      console.log(data);
-      return data;
     };
+
     return {
-      createRound: _createRound
+      createRound: _createRound,
+      getLastRound: _getLastRound
     };
   };

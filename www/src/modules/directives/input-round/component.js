@@ -1,5 +1,5 @@
 'use strict';
-function InputRoundCtrl($scope) {
+function InputRoundCtrl($scope, roundService) {
   var ctrl = this;
 
   console.log("InputRoundCtrl");
@@ -10,7 +10,11 @@ function InputRoundCtrl($scope) {
   ctrl.round.employees = ctrl.round.employees || [];
   ctrl.total = 0;
   ctrl.showGraph = (ctrl.index === 0) ? 1 : 0;
-  //Conseguir tener aqui previousInvestors y previousFounders
+
+
+  var lastRound = roundService.getLastRound(); //<-- aqui tienes la ultima ronda, si es la primera sera undefined
+  console.log(lastRound);
+
 
   var valoracionPremoney = function () {
     ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
@@ -47,20 +51,20 @@ function InputRoundCtrl($scope) {
       return !(obj.name in bIds);
     });
     */
-    
 
-    
+
+
     for(var i = 0; i < ctrl.round.investors.length; i++)
     {
       investorsShares = investorsShares + ctrl.round.investors[i].value;
     }
     ctrl.round.preMoney = ctrl.round.moneyRaised * investorsShares;
     ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
-    for(var i = 0; i < ctrl.round.founders.length; i++)
+    for(var j = 0; j < ctrl.round.founders.length; j++)
     {
-      var sharesFounder = ctrl.round.founders[i].value;
+      var sharesFounder = ctrl.round.founders[j].value;
       var dilutedShares = Math.trunc( (sharesFounder*ctrl.round.preMoney) / ctrl.round.postMoney );
-      ctrl.round.founders[i].value = dilutedShares;
+      ctrl.round.founders[j].value = dilutedShares;
     }
     /*for(var i = 0; i < ctrl.round.investorsPrev; i++)
     {
@@ -70,7 +74,7 @@ function InputRoundCtrl($scope) {
       //getIndex of investor
       var f = 0;
       var found = ctrl.round.investors.some(function(item, index) {
-       f = index; return item.name == nameInvestor; 
+       f = index; return item.name == nameInvestor;
       });
 
       if (found) {
@@ -80,7 +84,7 @@ function InputRoundCtrl($scope) {
     }*/
   };
 }
-InputRoundCtrl.$inject = ['$scope'];
+InputRoundCtrl.$inject = ['$scope', 'roundService'];
 
 module.exports = {
   controller: InputRoundCtrl,
