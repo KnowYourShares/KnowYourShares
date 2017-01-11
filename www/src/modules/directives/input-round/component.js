@@ -37,6 +37,8 @@ function InputRoundCtrl($scope, roundService) {
   ctrl.calculateRound = function () {
     mixpanel.track("user calculate the round value");
     console.log('calculate round');
+    //SharesPrevias * Pre-Money  = Valor Participación Actual
+    //SharesActuales = Valor Participación Actual / PostMoney
     var investorsShares = 0;
     var investorsPrev = lastRound.investors;
     var bIds = {};
@@ -55,25 +57,30 @@ function InputRoundCtrl($scope, roundService) {
     {
       investorsShares = investorsShares + newInvestors[i].value;
     }
-    console.log("DILUTED BY " + investorsShares + "%");
     var howMany = 100/investorsShares;
     ctrl.round.preMoney = ctrl.round.moneyRaised * howMany;
     ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
     for(var j = 0; j < ctrl.round.founders.length; j++)
     {
       var sharesFounder = ctrl.round.founders[j].value;
-      var dilutedShares = (sharesFounder*ctrl.round.preMoney) / ctrl.round.postMoney ;
+      var actualValuation = sharesFounder * ctrl.round.preMoney;
+      var dilutedShares = actualValuation / ctrl.round.postMoney;
       ctrl.round.founders[j].value = dilutedShares;
     }
-    console.log("READY TO DILUTE INVESTORS");
-    for(var t = 0; t < investorsPrev.length; t++)
+    for(var j = 0; j < ctrl.round.investors.length; j++)
+    {
+      var sharesInvestor = ctrl.round.investors[j].value;
+      var actualValuation = sharesInvestor * ctrl.round.preMoney;
+      var dilutedShares = actualValuation / ctrl.round.postMoney;
+      ctrl.round.investors[j].value = dilutedShares;
+    }
+    /*for(var t = 0; t < investorsPrev.length; t++)
     {
       console.log(investorsPrev[t]);
       var sharesInvestor = investorsPrev[t].value;
       var nameInvestor = investorsPrev[t].name;
-
-      var dilutedShares = (sharesInvestor*ctrl.round.preMoney) / ctrl.round.postMoney;
-      console.log("Investor " + nameInvestor + " has " + sharesInvestor + " % and was diluted " + dilutedShares + "%");
+      var actualValuation = sharesInvestor * ctrl.round.preMoney;
+      var dilutedShares = actualValuation / ctrl.round.postMoney;
       //getIndex of investor
       var f = 0;
       var found = ctrl.round.investors.some(function(item, index) {
@@ -84,7 +91,7 @@ function InputRoundCtrl($scope, roundService) {
        ctrl.round.investors[f].value = dilutedShares;
       }
 
-    }
+    }*/
   };
 }
 InputRoundCtrl.$inject = ['$scope', 'roundService'];
