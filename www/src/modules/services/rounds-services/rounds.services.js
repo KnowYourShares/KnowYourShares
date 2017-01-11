@@ -6,6 +6,7 @@ module.exports = /*@ngInject*/
       var newRound = {};
       if(data) {
         if (!data.rounds || !data.rounds.length) {
+          console.log("FIRST");
           newRound.name = "Initial State";
           newRound.preMoney = data.companyValue || 0;
           newRound.moneyRaised = 0;

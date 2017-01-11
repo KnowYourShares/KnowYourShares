@@ -36,6 +36,9 @@
   <h3 class="md-subhead"> In order to calculate a round, first input money you want to raise, then how many shares do you want to give to investors, finally press "Calculate Round" button.
   </h3>
 </div>
+<div layout="row" layout-align="center center">
+  <md-button class="md-raised md-primary" ng-click="$ctrl.calculateRound()" ng-if="$ctrl.index != 0" aria-label="regular-button">Calculate round</md-button>
+</div>
 <div layout="row" layout-xs="column" md-content layout-padding>
   <span flex-gt-sm="15"></span>
   <input-shares entity="$ctrl.round.founders" ng-model="$ctrl.total" label="Founders" flex-gt-sm="50"></input-shares>
@@ -49,6 +52,4 @@
     <chart-shares entity="$ctrl.round"></chart-shares>
   </div>
 </div>
-<div layout="row" layout-align="center center">
-  <md-button class="md-raised md-primary" ng-click="$ctrl.calculateRound()" ng-if="$ctrl.index != 0" aria-label="regular-button">Calculate round</md-button>
-</div>
+

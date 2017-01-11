@@ -20,18 +20,13 @@ function InputSharesCtrl($mdDialog) {
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('body')))
         .clickOutsideToClose(true)
-        .title('Maximum Shares Raised')
-        .textContent('Sorry but you are doing really god job, you raise 100% of shares')
+        .title('Some error in shares')
+        .textContent('Sorry but the value has to be between 1-100')
         .ariaLabel('Maximum Shares Raised Dialog')
         .ok('Got it!')
       );
     }
   };
-
-  ctrl.calculateRound = function () {
-    console.log('calculate round');
-    console.log($scope.data);
-  }
 
   ctrl.removeItem = function(index){
     ctrl.total -= ctrl.entity[index].value;
