@@ -38,39 +38,42 @@ function InputRoundCtrl($scope, roundService) {
     mixpanel.track("user calculate the round value");
     console.log('calculate round');
     var investorsShares = 0;
+    var investorsPrev = lastRound.investors;
+    var bIds = {};
 
-    /*var bIds = {};
-    console.log(ctrl.round.investorsPrev);
-    console.log(ctrl.round.investors);
-
-    ctrl.round.investorsPrev.forEach(function(obj){
+    investorsPrev.forEach(function(obj){
         bIds[obj.name] = obj;
     });
 
     var newInvestors = ctrl.round.investors.filter(function(obj){
       return !(obj.name in bIds);
     });
-    */
+    
 
 
-
-    for(var i = 0; i < ctrl.round.investors.length; i++)
+    for(var i = 0; i < newInvestors.length; i++)
     {
-      investorsShares = investorsShares + ctrl.round.investors[i].value;
+      investorsShares = investorsShares + newInvestors[i].value;
     }
-    ctrl.round.preMoney = ctrl.round.moneyRaised * investorsShares;
+    console.log("DILUTED BY " + investorsShares + "%");
+    var howMany = 100/investorsShares;
+    ctrl.round.preMoney = ctrl.round.moneyRaised * howMany;
     ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
     for(var j = 0; j < ctrl.round.founders.length; j++)
     {
       var sharesFounder = ctrl.round.founders[j].value;
-      var dilutedShares = Math.trunc( (sharesFounder*ctrl.round.preMoney) / ctrl.round.postMoney );
+      var dilutedShares = (sharesFounder*ctrl.round.preMoney) / ctrl.round.postMoney ;
       ctrl.round.founders[j].value = dilutedShares;
     }
-    /*for(var i = 0; i < ctrl.round.investorsPrev; i++)
+    console.log("READY TO DILUTE INVESTORS");
+    for(var t = 0; t < investorsPrev.length; t++)
     {
-      var sharesInvestor = ctrl.round.investorsPrev[i].value;
-      var nameInvestor = ctrl.round.investorsPrev[i].name;
-      var dilutedShares = Math.trunc( (sharesInvestor*ctrl.round.preMoney) / ctrl.round.postMoney );
+      console.log(investorsPrev[t]);
+      var sharesInvestor = investorsPrev[t].value;
+      var nameInvestor = investorsPrev[t].name;
+
+      var dilutedShares = (sharesInvestor*ctrl.round.preMoney) / ctrl.round.postMoney;
+      console.log("Investor " + nameInvestor + " has " + sharesInvestor + " % and was diluted " + dilutedShares + "%");
       //getIndex of investor
       var f = 0;
       var found = ctrl.round.investors.some(function(item, index) {
@@ -81,7 +84,7 @@ function InputRoundCtrl($scope, roundService) {
        ctrl.round.investors[f].value = dilutedShares;
       }
 
-    }*/
+    }
   };
 }
 InputRoundCtrl.$inject = ['$scope', 'roundService'];
