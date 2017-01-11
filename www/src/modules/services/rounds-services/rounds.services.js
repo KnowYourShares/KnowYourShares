@@ -8,6 +8,7 @@ module.exports = /*@ngInject*/
       var newRound = {};
       if(data) {
         if (!data.rounds || !data.rounds.length) {
+          newRound.index = 0;
           console.log("FIRST");
           newRound.name = "Initial State";
           newRound.preMoney = data.companyValue || 0;
@@ -19,6 +20,7 @@ module.exports = /*@ngInject*/
           data.rounds = [];
         } else {
           var lastRound = data.rounds[data.rounds.length - 1];
+          newRound.index = data.rounds.length;
           newRound.name = "Event " + (data.rounds.length);
           newRound.preMoney = lastRound.postMoney;
           newRound.moneyRaised = 0;
@@ -32,9 +34,10 @@ module.exports = /*@ngInject*/
       return data;
     };
 
-    var _getLastRound = function () {
-      if(currentState.rounds.length) {
-        return currentState.rounds[currentState.rounds.length - 2];
+    var _getLastRound = function (index) {
+      console.log(index);
+      if(index) {
+        return currentState.rounds[index - 1];
       } else {
         return undefined;
       }

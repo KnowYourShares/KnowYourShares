@@ -8,21 +8,15 @@ function InputRoundCtrl($scope, roundService) {
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.employees = ctrl.round.employees || [];
+  ctrl.round.index = ctrl.round.index || 0;
   ctrl.total = 0;
-  ctrl.showGraph = (ctrl.index === 0) ? 1 : 0;
+  ctrl.showGraph = 1;
 
+  var lastRound;
 
-  var lastRound = roundService.getLastRound(); //<-- aqui tienes la ultima ronda, si es la primera sera undefined
-  console.log(lastRound);
-
-
-  var valoracionPremoney = function () {
-    ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
-  };
-
-  var valoracionPostmoney = function () {
-
-  };
+  $scope.$watch('$ctrl.round.index', function(newValue) {
+    lastRound = roundService.getLastRound(newValue);
+  });
 
   ctrl.updateTotal = function(){
     console.log("updateTotal");
@@ -36,7 +30,7 @@ function InputRoundCtrl($scope, roundService) {
 
   ctrl.calculateRound = function () {
     mixpanel.track("user calculate the round value");
-    console.log('calculate round');
+    console.log('calculate round', lastRound);
     //SharesPrevias * Pre-Money  = Valor Participación Actual
     //SharesActuales = Valor Participación Actual / PostMoney
     var investorsShares = 0;
@@ -50,7 +44,7 @@ function InputRoundCtrl($scope, roundService) {
     var newInvestors = ctrl.round.investors.filter(function(obj){
       return !(obj.name in bIds);
     });
-    
+
 
 
     for(var i = 0; i < newInvestors.length; i++)
@@ -100,7 +94,7 @@ module.exports = {
   controller: InputRoundCtrl,
   bindings: {
     round : "=",
-    index : "<"
+    indexRound : "<"
   },
   templateUrl: 'directives/input-round/template.html'
 };
