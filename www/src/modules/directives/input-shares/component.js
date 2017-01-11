@@ -10,6 +10,7 @@ function InputSharesCtrl($mdDialog) {
   ctrl.newItem = {};
 
   ctrl.addItem = function(){
+    mixpanel.track("user add new shareholder");
     if(ctrl.entity && ctrl.validateItem()) {
       ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
       ctrl.total += ctrl.newItem.value;
@@ -29,6 +30,7 @@ function InputSharesCtrl($mdDialog) {
   };
 
   ctrl.removeItem = function(index){
+    mixpanel.track("user remove a shareholder");
     ctrl.total -= ctrl.entity[index].value;
     ctrl.entity.splice(index,1);
   };

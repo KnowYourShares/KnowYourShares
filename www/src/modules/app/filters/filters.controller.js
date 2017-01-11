@@ -38,21 +38,25 @@ module.exports = /*@ngInject*/
     };
 
     $scope.createRound = function() {
+      mixpanel.track("User Create a new Round");
       $scope.data = roundService.createRound($scope.data);
       $scope.selectedIndex = $scope.data.rounds.length - 1;
     };
 
     $scope.removeRound = function(index) {
+      mixpanel.track("User Remove a Round");
       $scope.data.rounds.splice(index, 1);
       $scope.selectedIndex = $scope.data.rounds.length - 1;
     };
 
     $scope.copyToClipboard = function() {
+      mixpanel.track("User Copy URL");
       clipboard.copyText($scope.link.readOnly ? $scope.readOnlyPath : $scope.editPath);
       $mdToast.show($mdToast.simple().textContent('Link copied to clipboard!'));
     };
 
     $scope.save = function save() {
+      mixpanel.track("User save the state");
       putBusiness.save($scope.businessKeys, $scope.data).$promise.then(function(data) {
         $mdToast.show($mdToast.simple().textContent('Changes saved.').position('top right'));
         $scope.data = data;

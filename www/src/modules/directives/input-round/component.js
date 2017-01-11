@@ -31,6 +31,7 @@ function InputRoundCtrl($scope) {
   };
 
   ctrl.calculateRound = function () {
+    mixpanel.track("user calculate the round value");
     console.log('calculate round');
     var investorsShares = 0;
 

@@ -50,6 +50,9 @@ var putBusiness = function() {
 };
 
 var getBusiness = function() {
+  
+  mixpanel.track("User start new business");
+
   // Configuration and default parameters
   var params = {};
   var baseUrl = '';
