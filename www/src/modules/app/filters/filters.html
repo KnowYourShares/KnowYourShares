@@ -21,8 +21,8 @@
   <div layout="column" flex="100" layout-align="center center">
   <br>
   <span layout="row" layout-xs="column" flex="100" ng-if="data._id.length">
-        <h5 layout="row" layout-xs="column" ng-if="link.readOnly">{{readOnlyPath}}</h5>
-        <h5 layout="row" layout-xs="column" ng-if="!link.readOnly">{{editPath}}</h5>
+        <h5 hide show-gt-sm layout="row" layout-xs="column" ng-if="link.readOnly">{{readOnlyPath}}</h5>
+        <h5 hide show-gt-sm layout="row" layout-xs="column" ng-if="!link.readOnly">{{editPath}}</h5>
           <md-button class="md-icon-button md-accent" ng-click="copyToClipboard()">
             <md-icon md-font-icon="fa fa-clipboard" class="fa s64 md-primary md-hue-2"></md-icon>
           </md-button>
