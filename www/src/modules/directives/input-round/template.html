@@ -20,12 +20,12 @@
       </md-input-container>
   </div>
 
-  <div layout="column" flex-gt-sm-offset="33" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.index === 0">
+  <!--<div layout="column" flex-gt-sm-offset="33" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.index === 0">
     <h3>Money raised</h3>
     <md-input-container flex="50">
       <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
     </md-input-container>
-  </div>
+  </div>-->
 </div>
 
 <div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-if="$ctrl.index === 0">
@@ -38,7 +38,9 @@
 </div>
 <div layout="row" layout-align="center center">
   <md-button class="md-raised md-primary" ng-click="$ctrl.calculateRound()" ng-if="$ctrl.index != 0" aria-label="regular-button">Calculate round</md-button>
+  <md-button class="md-raised md-primary" ng-click="$ctrl.resetRound()" ng-if="$ctrl.index != 0" aria-label="regular-button">Reset Values</md-button>
 </div>
+  
 <div layout="row" layout-xs="column" md-content layout-padding>
   <span flex-gt-sm="15"></span>
   <input-shares entity="$ctrl.round.founders" ng-model="$ctrl.total" label="Founders" flex-gt-sm="50"></input-shares>
