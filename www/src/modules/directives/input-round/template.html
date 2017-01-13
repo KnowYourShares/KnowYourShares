@@ -37,15 +37,14 @@
   </h3>
 </div>
 <div layout="row" layout-align="center center">
-  <md-button class="md-raised md-primary" ng-click="$ctrl.calculateRound()" ng-if="$ctrl.indexRound != 0" aria-label="regular-button">Calculate round</md-button>
   <md-button class="md-raised md-primary" ng-click="$ctrl.resetRound()" ng-if="$ctrl.indexRound != 0" aria-label="regular-button">Reset Values</md-button>
 </div>
 
 <div layout="row" layout-xs="column" md-content layout-padding>
   <span flex-gt-sm="15"></span>
-  <input-shares entity="$ctrl.round.founders" ng-model="$ctrl.total" label="Founders" flex-gt-sm="50"></input-shares>
+  <input-shares round="$ctrl.round" index-round="$ctrl.indexRound" entity="$ctrl.round.founders" type="founder" ng-model="$ctrl.total" label="Founders" flex-gt-sm="50"></input-shares>
   <span flex-gt-sm="10"></span>
-  <input-shares entity="$ctrl.round.investors" ng-model="$ctrl.total" label="Investors" flex-gt-sm="50"></input-shares>
+  <input-shares round="$ctrl.round" index-round="$ctrl.indexRound" entity="$ctrl.round.investors" type="investor" ng-model="$ctrl.total" label="Investors" flex-gt-sm="50"></input-shares>
   <span flex-gt-sm="15"></span>
 </div>
 
