@@ -30,6 +30,8 @@ module.exports = /*@ngInject*/
         console.log('Sorry, copy to clipboard is not supported');
       }
 
+      $scope.isOpen = false;
+
     }
 
     $scope.buildPath = function buildPath() {

@@ -38,10 +38,47 @@
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
         <input-round round="round" index-round="selectedIndex"></input-round>
+        <md-fab-toolbar md-open="isOpen" md-direction="left">
+          <md-fab-trigger class="align-with-text">
+            <md-button aria-label="menu" class="md-fab md-primary">
+              <md-icon> reply </md-icon>
+            </md-button>
+          </md-fab-trigger>
+
+          <md-toolbar>
+            <md-fab-actions class="md-toolbar-tools">
+              <md-button ng-click="save()" class="md-fab md-mini md-raised" aria-label="Comment">
+                <md-icon> save </md-icon>
+              </md-button>
+              <md-button aria-label="Copy URL" class="md-fab md-raised md-mini" ng-click="copyToClipboard();">
+                <md-icon> content_copy </md-icon>
+              </md-button>
+            </md-fab-actions>
+          </md-toolbar>
+      </md-fab-toolbar>
       </md-tab-content>
-      <md-button ng-click="save()" class="md-fab md-fab-bottom-right" aria-label="Comment">
-        <md-icon> save </md-icon>
-      </md-button>
+
+
+      
+
+
+      <!--<md-fab-speed-dial md-open="isOpened" md-direction="up"
+                         ng-class="md-scale" class="md-fab-bottom-right">
+        <md-fab-trigger>
+          <md-button aria-label="share" class="md-fab md-warn">
+              <md-icon> reply </md-icon>
+          </md-button>
+        </md-fab-trigger>
+
+        <md-fab-actions>
+          <md-button ng-click="save()" class="md-fab md-mini md-raised" aria-label="Comment">
+            <md-icon> save </md-icon>
+          </md-button>
+          <md-button aria-label="Copy URL" class="md-fab md-raised md-mini" ng-click="copyToClipboard();">
+            <md-icon> copy </md-icon>
+          </md-button>
+        </md-fab-actions>
+      </md-fab-speed-dial>-->
     </md-tab>
   </md-tabs>
   <div ng-if="!data.rounds.length" layout="column" flex="100" layout-align="start center">
