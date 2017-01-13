@@ -129,6 +129,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
           if (found) {
            ctrl.round.founders[f].value = dilutedShares;
+           ctrl.round.founders[f].prevvalue = sharesFounder;
           }
         }
         /*for(var j = 0; j < ctrl.round.investors.length; j++)
@@ -152,6 +153,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
           if (found) {
            ctrl.round.investors[f].value = dilutedShares;
+           ctrl.round.investors[f].prevvalue = sharesInvestor;
           }
 
         }
