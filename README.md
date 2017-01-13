@@ -12,10 +12,11 @@ First of all we must install all the dependencies that are needed.
 
 
 ## Build for dev
-In progress. Ideal: livereload
-1. Terminal 1: cd www && gulp
-1. Terminal 2: nodemon
-1. Open localhost:8080
+In progress. Ideal: livereload. Remember to have a mongodb instance running !
+1. Terminal 1: cd www
+1. Terminal 1: gulp
+1. Terminal 2 (open a new terminal): nodemon
+1. Open localhost:8080 in the browser.
 
 ## Build for production
 1. cd www
@@ -33,7 +34,7 @@ propia applicacion.
 
 * En la carpeta `modules` se encuentra el codigo Angular .
 
-* El archivo `index.html` es el archivo base de nuetra applicacion, en el se encuentra el modulo raiz de Angular `<ng-app>`
+* El archivo `index.html` es el archivo base de nuetra applicación, en el se encuentra el modulo raiz de Angular `<ng-app>`
 
 Dentro de la carpeta `modules` se encuentran las partes de nuestra aplicacion dividida por componentes y el archivo `index.js`:
 
@@ -47,7 +48,7 @@ Dentro de la carpeta `modules` se encuentran las partes de nuestra aplicacion di
   * En esta carpeta se encuentran los servicos que realizaran peticiones REST a nuestro servidor node.
 
 * La carpeta `services`
-  *  En esta carpeta se encuentran los servicios que utilizara internamente la aplicacion como por ejemplo
+  *  En esta carpeta se encuentran los servicios que utilizara internamente la aplicación como por ejemplo
   las funciones para calcular los diferentes calculos empresariales.
 
 * El archivo `index.js`
