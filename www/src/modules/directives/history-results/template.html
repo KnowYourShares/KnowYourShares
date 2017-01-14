@@ -1,0 +1,14 @@
+<div layout="row" layout-xs="column">
+  <div layout="column" flex-gt-sm="50" layout-align="center center">
+    <h3>CAP Table</h3>
+  </div>
+
+  <div layout="column" flex-gt-sm="50" layout-align="center center">
+    <canvas height="250" id="line" class="chart chart-line"
+            chart-data="$ctrl.mappedData" chart-labels="$ctrl.labels" chart-options="$ctrl.options">
+    </canvas>
+  </div>
+  <span>Test:</span>
+  <span>{{ctrl.history}}</span>
+  <span>{{ctrl.label}}</span>
+</div>

@@ -59,7 +59,7 @@
       </md-tab-content>
 
 
-      
+
 
 
       <!--<md-fab-speed-dial md-open="isOpened" md-direction="up"
@@ -79,6 +79,13 @@
           </md-button>
         </md-fab-actions>
       </md-fab-speed-dial>-->
+    </md-tab>
+    <md-tab flex layout="column" label="results">
+      <md-tab-content layout="column" layout-fill>
+        <div layout="row" layout-xs="column" layout-align="center center" layout-fill>
+          <history-results history="data.rounds" label="'fe'"></history-results>
+        </div>
+      </md-tab-content>
     </md-tab>
   </md-tabs>
   <div ng-if="!data.rounds.length" layout="column" flex="100" layout-align="start center">

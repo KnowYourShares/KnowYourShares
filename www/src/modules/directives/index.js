@@ -11,4 +11,5 @@ module.exports =
     .component('inputShares', require('./input-shares/component'))
     .component('chartShares', require('./chart-shares/component'))
     .component('inputRound', require('./input-round/component'))
-    .component('valuesLayout', require('./values-layout/component'));
+    .component('valuesLayout', require('./values-layout/component'))
+    .component('historyResults', require('./history-results/component'));
