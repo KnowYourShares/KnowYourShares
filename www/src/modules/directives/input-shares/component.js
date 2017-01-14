@@ -21,7 +21,6 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   });
 
   ctrl.changeTotal = function (item, oldvalue) {
-    console.log('old', oldvalue);
     var union = window._.union(ctrl.round.founders, ctrl.round.investors, ctrl.round.employees);
     var i;
     ctrl.total = 0;
@@ -40,18 +39,42 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
             .ok('Got it!')
         );
     }
-    console.log(ctrl.total);
   };
 
   ctrl.addItem = function(){
     mixpanel.track("user add new shareholder");
-    if(ctrl.entity && ctrl.validateItem()) {
-      ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
-      ctrl.total += ctrl.newItem.value;
-      ctrl.newItem = {};
+
+    if (!lastRound) {
+      if (ctrl.entity && ctrl.validateItem()) {
+        ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
+        ctrl.total += ctrl.newItem.value;
+        ctrl.newItem = {};
+      }
+      else {
+        ctrl.showErrorShares();
+      }
     }
-    else{
-      $mdDialog.show(
+    else {
+      if (ctrl.round.moneyRaised > 0) {
+        if (ctrl.entity && ctrl.validateItem()) {
+          ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
+          ctrl.total += ctrl.newItem.value;
+          ctrl.newItem = {};
+
+          ctrl.calculateRound();
+        }
+        else {
+          ctrl.showErrorShares();
+        }
+      }
+      else {
+        ctrl.showErrorMoneyRaised();
+      }
+    }
+  };
+
+  ctrl.showErrorShares = function() {
+    $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('body')))
         .clickOutsideToClose(true)
@@ -59,8 +82,31 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         .textContent('Sorry but the value has to be between 1-100 and all the fields must be filled')
         .ariaLabel('Maximum Shares Raised Dialog')
         .ok('Got it!')
-      );
-    }
+    );
+  };
+
+  ctrl.showErrorMoneyRaised = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Missing some values')
+        .textContent('Sorry, money raised has to be great than 0 to calculate the round')
+        .ariaLabel('No Money Raised Error')
+        .ok('Got it!')
+    );
+  };
+
+  ctrl.showErrorNewInvestor = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Missing some values')
+        .textContent("Sorry, you has to type some new investor in order to calculate the round")
+        .ariaLabel('No New Investors Error')
+        .ok('Got it!')
+    );
   };
 
   ctrl.removeItem = function(index){
@@ -79,12 +125,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.Full = function () {
-    console.log(ctrl.total);
-    if((ctrl.total + ctrl.newItem.value) > 100) {
-      return true;
-    } else {
-      return false;
-    }
+    return ((ctrl.total + ctrl.newItem.value) > 100);
   };
 
   ctrl.calculateRound = function () {
@@ -100,27 +141,11 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       var bIds = {};
       if(ctrl.round.moneyRaised <= 0)
       {
-        $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Missing some values')
-          .textContent('Sorry, money raised has to be great than 0 to calculate the round')
-          .ariaLabel('No Money Raised Error')
-          .ok('Got it!')
-        );
+        ctrl.showErrorMoneyRaised();
       }
       else if(investorsPrev.length === ctrl.round.investors.length)
       {
-        $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Missing some values')
-          .textContent("Sorry, you has to type some new investor in order to calculate the round")
-          .ariaLabel('No New Investors Error')
-          .ok('Got it!')
-        );
+        ctrl.showErrorNewInvestor();
       }
       else{
 
@@ -131,8 +156,6 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         var newInvestors = ctrl.round.investors.filter(function(obj){
           return !(obj.name in bIds);
         });
-
-
 
         for(var i = 0; i < newInvestors.length; i++)
         {
