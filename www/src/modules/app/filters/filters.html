@@ -9,7 +9,22 @@
 
 <md-toolbar class="md-hue-2">
   <div class="md-toolbar-tools" layout="row" layout-align="start center">
-    <span flex="40"><a ui-sref="app.home">KNOWYOURSHARES</a></span>
+    <span flex="40">
+      <a ui-sref="app.home">KNOWYOURSHARES</a>
+
+      <div>
+        <span class="md-caption"> Autosave
+          <input type="checkbox"
+                 ng-model="saveStatus.autoSave"
+                 ng-click="saveStatus.autoSave ? enableAutoSave() : disableAutoSave()"
+            >
+        </span>
+        <span class="md-caption" ng-if="!saveStatus.alreadySaved"><i>Changes not saved</i></span>
+        <span class="md-caption" ng-if="saveStatus.saving"><i>Saving changes...</i></span>
+        <span class="md-caption" ng-if="saveStatus.alreadySaved && !saveStatus.saving"><i>Changes saved {{saveStatus.lastSave | elapsed }}</i></span>
+      </div>
+    </span>
+
     <div flex="60" layout="row" layout-align="start center">
       <md-button class="md-raised md-primary" ng-click="createRound()" ng-if="data.rounds.length" aria-label="regular-button">ADD NEW EVENT</md-button>
       <md-button ng-if="data.rounds.length" class="md-raised md-warn" ng-click="removeRound(selectedIndex)" aria-label="regular-button">REMOVE LAST EVENT</md-button>
@@ -59,7 +74,7 @@
       </md-tab-content>
 
 
-      
+
 
 
       <!--<md-fab-speed-dial md-open="isOpened" md-direction="up"
