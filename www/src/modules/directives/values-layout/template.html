@@ -1,0 +1,12 @@
+<div id="layoutValuesContainer">
+  <div layout="row" >
+    <div flex="33" class="blue box">Name</div>
+    <div flex="33" class="blue box">Shares</div>
+    <div flex="33" class="blue box">Value</div>
+  </div>
+  <div layout="row" ng-repeat="c in values">
+    <div flex="33" >{{c.name}}</div>
+    <div flex="33" >{{c.shares}}</div>
+    <div flex="33" >{{c.value}}</div>
+  </div>
+</div>
