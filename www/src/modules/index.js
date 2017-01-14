@@ -11,7 +11,6 @@ require('angular-messages');
 require('angular-material');
 require('angular-chart.js');
 require('angular-clipboard');
-require('angular-responsive-tables');
 
 window._ = require('underscore');
 

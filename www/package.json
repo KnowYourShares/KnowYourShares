@@ -48,8 +48,7 @@
     "angular-material": "./bower_components/angular-material/angular-material.js",
     "angular-chart.js": "./node_modules/angular-chart.js/dist/angular-chart.js",
     "chart.js": "./node_modules/chart.js/dist/Chart.js",
-    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js",
-    "angular-responsive-tables": "./bower_components/angular-responsive-tables/release/angular-responsive-tables.min.js"
+    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js"
   },
   "browserify-shim": {},
   "name": "www",
