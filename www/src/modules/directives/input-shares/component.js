@@ -44,7 +44,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   ctrl.addItem = function(){
     mixpanel.track("user add new shareholder");
 
-    if (typeof lastRound === 'undefined') {
+    if (!lastRound) {
       if (ctrl.entity && ctrl.validateItem()) {
         ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
         ctrl.total += ctrl.newItem.value;
