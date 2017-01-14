@@ -15,7 +15,7 @@ module.exports = /*@ngInject*/
       $scope.saveStatus = {
         alreadySaved : false,
         saving : false,
-        autoSave: true
+        autoSave: false
       };
 
       $scope.host = 'localhost:8080/';
