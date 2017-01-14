@@ -16,8 +16,9 @@
               <label>Code</label>
               <div class="form-group" ng-class="{ 'has-error': codeInput.codeNumber.$invalid }">
                 <input type="text" name="codeNumber" class="form-control input-sm" ng-model="code">
-                <div class="help-block" ng-messages="codeNumber.$error">
+                <div class="help-block" ng-messages="codeInput.codeNumber.$error" role="alert">
                   <p ng-message="notFound">The code doesn't match any company history.</p>
+                  <p ng-message="required">You must provide a code.</p>
                 </div>
               </div>
             </md-input-container>
@@ -25,13 +26,13 @@
               <label>Password</label>
               <div class="form-group" ng-class="{ 'has-error': codeInput.codePass.$invalid }">
                 <input type="text" name="codePass" class="form-control input-sm" ng-model="password">
-                <div class="help-block" ng-messages="codePass.$error">
+                <div class="help-block" ng-messages="codeInput.codePass.$error" role="alert">
                   <p ng-message="incorrect">Password incorrect.</p>
                 </div>
               </div>
             </md-input-container>
             <div layout="row" layout-align="center center">
-              <md-button class="md-raised md-primary" ng-click="getBusiness()">
+              <md-button class="md-raised md-primary" ng-click="getBusiness(true)">
                 Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
               </md-button>
             </div>
@@ -40,7 +41,7 @@
 
         <div layout="column" flex-gt-sm="50" layout-align="center center">
           <h3>Create a new one</h3>
-          <md-button class="md-raised md-primary" ng-click="getBusiness()">
+          <md-button class="md-raised md-primary" ng-click="getBusiness(false)">
             Start <i class="fa fa-paper-plane" aria-hidden="true"></i>
           </md-button>
         </div>
