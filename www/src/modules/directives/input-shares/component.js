@@ -20,6 +20,29 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     lastRound = roundService.getLastRound(newValue);
   });
 
+  ctrl.changeTotal = function (item, oldvalue) {
+    console.log('old', oldvalue);
+    var union = window._.union(ctrl.round.founders, ctrl.round.investors, ctrl.round.employees);
+    var i;
+    ctrl.total = 0;
+    for(i = 0; i < union.length; ++i) {
+      ctrl.total += union[i].value;
+    }
+    if(ctrl.total > 100) {
+      item.value = oldvalue;
+        $mdDialog.show(
+          $mdDialog.alert()
+            .parent(angular.element(document.querySelector('body')))
+            .clickOutsideToClose(true)
+            .title('Some error in shares')
+            .textContent('Sorry but the total percentage can not exceed 100')
+            .ariaLabel('Maximum Shares Raised Dialog')
+            .ok('Got it!')
+        );
+    }
+    console.log(ctrl.total);
+  };
+
   ctrl.addItem = function(){
     mixpanel.track("user add new shareholder");
     if(ctrl.entity && ctrl.validateItem()) {
@@ -33,7 +56,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         .parent(angular.element(document.querySelector('body')))
         .clickOutsideToClose(true)
         .title('Some error in shares')
-        .textContent('Sorry but the value has to be between 1-100')
+        .textContent('Sorry but the value has to be between 1-100 and all the fields must be filled')
         .ariaLabel('Maximum Shares Raised Dialog')
         .ok('Got it!')
       );
@@ -48,7 +71,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
   ctrl.validateItem = function() {
     console.log(ctrl.newItem.value);
-    if (ctrl.newItem.name === null || ctrl.newItem.name.toString() === "" ||
+    if (!ctrl.newItem.name || ctrl.newItem.name.toString() === "" ||
       ctrl.newItem.value === null || !ctrl.newItem.value || ctrl.Full()) {
       return false;
     }
@@ -56,6 +79,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.Full = function () {
+    console.log(ctrl.total);
     if((ctrl.total + ctrl.newItem.value) > 100) {
       return true;
     } else {
