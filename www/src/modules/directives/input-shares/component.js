@@ -21,7 +21,6 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   });
 
   ctrl.changeTotal = function (item, oldvalue) {
-    console.log('old', oldvalue);
     var union = window._.union(ctrl.round.founders, ctrl.round.investors, ctrl.round.employees);
     var i;
     ctrl.total = 0;
@@ -30,28 +29,79 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     }
     if(ctrl.total > 100) {
       item.value = oldvalue;
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('Some error in shares')
-            .textContent('Sorry but the total percentage can not exceed 100')
-            .ariaLabel('Maximum Shares Raised Dialog')
-            .ok('Got it!')
-        );
+      ctrl.showErrorMaxShares();
     }
-    console.log(ctrl.total);
+  };
+
+  ctrl.addToListIfValidationOK = function () {
+    if (ctrl.entity && ctrl.validateItem()) {
+      ctrl.addToList();
+    } else {
+      ctrl.showErrorShares();
+    }
+  };
+
+  ctrl.addToList = function() {
+    ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
+    ctrl.total += ctrl.newItem.value;
+    ctrl.newItem = {};
   };
 
   ctrl.addItem = function(){
     mixpanel.track("user add new shareholder");
-    if(ctrl.entity && ctrl.validateItem()) {
-      ctrl.entity[ctrl.entity.length] = angular.extend({},ctrl.newItem);
-      ctrl.total += ctrl.newItem.value;
-      ctrl.newItem = {};
+    // Initial State
+    if (!lastRound) {
+      // Adding founder
+      if (ctrl.type === 'founder') {
+        // If not exists
+        if (!ctrl.founderNameExists()) {
+          // & Validate is OK
+          ctrl.addToListIfValidationOK();
+        } else {
+          ctrl.showErrorFounderNameExists();
+        }
+      }
+      else if (ctrl.type === 'investor') {
+        // If investor, validate & add
+        ctrl.addToListIfValidationOK();
+      }
+    } // In events
+    else {
+      if (ctrl.type === 'founder') {
+        if (!ctrl.founderNameExists()) {
+          ctrl.addToListIfValidationOK();
+        } else {
+          ctrl.showErrorFounderNameExists();
+        }
+      } else if (ctrl.type === 'investor') {
+        if (ctrl.entity && ctrl.validateItem()) {
+          if (ctrl.round.moneyRaised > 0) {
+            ctrl.addToList();
+            ctrl.calculateRound();
+          } else {
+            ctrl.showErrorMoneyRaised();
+          }
+        } else {
+          ctrl.showErrorShares();
+        }
+      }
     }
-    else{
-      $mdDialog.show(
+  };
+
+  ctrl.showErrorMaxShares = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Some error in shares')
+        .textContent('Sorry but the total percentage can not exceed 100')
+        .ariaLabel('Maximum Shares Raised Dialog')
+        .ok('Got it!')
+    );
+  };
+
+  ctrl.showErrorShares = function() {
+    $mdDialog.show(
       $mdDialog.alert()
         .parent(angular.element(document.querySelector('body')))
         .clickOutsideToClose(true)
@@ -59,8 +109,43 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         .textContent('Sorry but the value has to be between 1-100 and all the fields must be filled')
         .ariaLabel('Maximum Shares Raised Dialog')
         .ok('Got it!')
-      );
-    }
+    );
+  };
+
+  ctrl.showErrorMoneyRaised = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Missing some values')
+        .textContent('Sorry, money raised has to be great than 0 to calculate the round')
+        .ariaLabel('No Money Raised Error')
+        .ok('Got it!')
+    );
+  };
+
+  ctrl.showErrorNewInvestor = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Missing some values')
+        .textContent("Sorry, you has to type some new investor in order to calculate the round")
+        .ariaLabel('No New Investors Error')
+        .ok('Got it!')
+    );
+  };
+
+  ctrl.showErrorFounderNameExists = function () {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Error with founders name')
+        .textContent("Sorry, there can't be two founders with the same name.")
+        .ariaLabel('Founders name exists')
+        .ok('Got it!')
+    );
   };
 
   ctrl.removeItem = function(index){
@@ -79,12 +164,13 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.Full = function () {
-    console.log(ctrl.total);
-    if((ctrl.total + ctrl.newItem.value) > 100) {
-      return true;
-    } else {
-      return false;
-    }
+    return ((ctrl.total + ctrl.newItem.value) > 100);
+  };
+
+  ctrl.founderNameExists = function () {
+    var newName = ctrl.newItem.name;
+    var names = _.pluck(ctrl.round.founders, 'name');
+    return _.contains(names,newName);
   };
 
   ctrl.calculateRound = function () {
@@ -100,27 +186,11 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       var bIds = {};
       if(ctrl.round.moneyRaised <= 0)
       {
-        $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Missing some values')
-          .textContent('Sorry, money raised has to be great than 0 to calculate the round')
-          .ariaLabel('No Money Raised Error')
-          .ok('Got it!')
-        );
+        ctrl.showErrorMoneyRaised();
       }
       else if(investorsPrev.length === ctrl.round.investors.length)
       {
-        $mdDialog.show(
-        $mdDialog.alert()
-          .parent(angular.element(document.querySelector('body')))
-          .clickOutsideToClose(true)
-          .title('Missing some values')
-          .textContent("Sorry, you has to type some new investor in order to calculate the round")
-          .ariaLabel('No New Investors Error')
-          .ok('Got it!')
-        );
+        ctrl.showErrorNewInvestor();
       }
       else{
 
@@ -131,8 +201,6 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         var newInvestors = ctrl.round.investors.filter(function(obj){
           return !(obj.name in bIds);
         });
-
-
 
         for(var i = 0; i < newInvestors.length; i++)
         {
