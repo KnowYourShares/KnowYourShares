@@ -29,48 +29,75 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     }
     if(ctrl.total > 100) {
       item.value = oldvalue;
-        $mdDialog.show(
-          $mdDialog.alert()
-            .parent(angular.element(document.querySelector('body')))
-            .clickOutsideToClose(true)
-            .title('Some error in shares')
-            .textContent('Sorry but the total percentage can not exceed 100')
-            .ariaLabel('Maximum Shares Raised Dialog')
-            .ok('Got it!')
-        );
+      ctrl.showErrorMaxShares();
     }
+  };
+
+  ctrl.addToListIfValidationOK = function () {
+    if (ctrl.entity && ctrl.validateItem()) {
+      ctrl.addToList();
+    } else {
+      ctrl.showErrorShares();
+    }
+  };
+
+  ctrl.addToList = function() {
+    ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
+    ctrl.total += ctrl.newItem.value;
+    ctrl.newItem = {};
   };
 
   ctrl.addItem = function(){
     mixpanel.track("user add new shareholder");
-
+    // Initial State
     if (!lastRound) {
-      if (ctrl.entity && ctrl.validateItem()) {
-        ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
-        ctrl.total += ctrl.newItem.value;
-        ctrl.newItem = {};
-      }
-      else {
-        ctrl.showErrorShares();
-      }
-    }
-    else {
-      if (ctrl.round.moneyRaised > 0) {
-        if (ctrl.entity && ctrl.validateItem()) {
-          ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
-          ctrl.total += ctrl.newItem.value;
-          ctrl.newItem = {};
-
-          ctrl.calculateRound();
+      // Adding founder
+      if (ctrl.type === 'founder') {
+        // If not exists
+        if (!ctrl.founderNameExists()) {
+          // & Validate is OK
+          ctrl.addToListIfValidationOK();
+        } else {
+          ctrl.showErrorFounderNameExists();
         }
-        else {
+      }
+      else if (ctrl.type === 'investor') {
+        // If investor, validate & add
+        ctrl.addToListIfValidationOK();
+      }
+    } // In events
+    else {
+      if (ctrl.type === 'founder') {
+        if (!ctrl.founderNameExists()) {
+          ctrl.addToListIfValidationOK();
+        } else {
+          ctrl.showErrorFounderNameExists();
+        }
+      } else if (ctrl.type === 'investor') {
+        if (ctrl.entity && ctrl.validateItem()) {
+          if (ctrl.round.moneyRaised > 0) {
+            ctrl.addToList();
+            ctrl.calculateRound();
+          } else {
+            ctrl.showErrorMoneyRaised();
+          }
+        } else {
           ctrl.showErrorShares();
         }
       }
-      else {
-        ctrl.showErrorMoneyRaised();
-      }
     }
+  };
+
+  ctrl.showErrorMaxShares = function() {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Some error in shares')
+        .textContent('Sorry but the total percentage can not exceed 100')
+        .ariaLabel('Maximum Shares Raised Dialog')
+        .ok('Got it!')
+    );
   };
 
   ctrl.showErrorShares = function() {
@@ -109,6 +136,18 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     );
   };
 
+  ctrl.showErrorFounderNameExists = function () {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Error with founders name')
+        .textContent("Sorry, there can't be two founders with the same name.")
+        .ariaLabel('Founders name exists')
+        .ok('Got it!')
+    );
+  };
+
   ctrl.removeItem = function(index){
     mixpanel.track("user remove a shareholder");
     ctrl.total -= ctrl.entity[index].value;
@@ -126,6 +165,12 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
   ctrl.Full = function () {
     return ((ctrl.total + ctrl.newItem.value) > 100);
+  };
+
+  ctrl.founderNameExists = function () {
+    var newName = ctrl.newItem.name;
+    var names = _.pluck(ctrl.round.founders, 'name');
+    return _.contains(names,newName);
   };
 
   ctrl.calculateRound = function () {
