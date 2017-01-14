@@ -21,6 +21,7 @@ module.exports = /*@ngInject*/
         $scope.data = response.data;
         $scope.link.readOnly = !$scope.data.canEdit;
         $scope.buildPath();
+        roundService.inputCurrentState(response.data);
       }, function(err) {
         console.log('error ', err);
         $state.go('app.home');

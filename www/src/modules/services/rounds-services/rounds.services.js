@@ -3,6 +3,11 @@
 module.exports = /*@ngInject*/
   function roundService(/* inject dependencies here, i.e. : $rootScope */) {
     var currentState;
+
+    var _inputCurrentState = function (state) {
+      console.log('input state:', state);
+      currentState = state;
+    };
     var _createRound = function (data) {
       currentState = data;
       var newRound = {};
@@ -45,6 +50,7 @@ module.exports = /*@ngInject*/
 
     return {
       createRound: _createRound,
-      getLastRound: _getLastRound
+      getLastRound: _getLastRound,
+      inputCurrentState: _inputCurrentState
     };
   };

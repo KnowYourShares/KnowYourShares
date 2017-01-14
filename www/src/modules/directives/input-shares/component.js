@@ -47,14 +47,15 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.validateItem = function() {
+    console.log(ctrl.newItem.value);
     if (ctrl.newItem.name === null || ctrl.newItem.name.toString() === "" ||
-      ctrl.newItem.value === null || ctrl.newItem.value.undefined || ctrl.notFull()) {
+      ctrl.newItem.value === null || !ctrl.newItem.value || ctrl.Full()) {
       return false;
     }
     return true;
   };
 
-  ctrl.notFull = function () {
+  ctrl.Full = function () {
     if((ctrl.total + ctrl.newItem.value) > 100) {
       return true;
     } else {
