@@ -30,6 +30,18 @@ module.exports = /*@ngInject*/
             url: '/:id/:password',
             template: '<filter-location></filter-location>'
           }]
+        },  {
+          name: 'results',
+          url: '/results',
+          abstract: true,
+          templateUrl: 'app/results/results.html',
+          controller: 'resultsController',
+          controllerAs: 'results',
+          children: [{
+            name: 'location',
+            url: '/:id',
+            template: '<results-view></results-view>'
+          }]
         }]
       });
   };

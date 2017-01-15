@@ -48,7 +48,8 @@
   <span ng-if="!data._id.length">Want a unique link? Save your current status</span>
   </div>
 </div>
-<div layout="row" layout-xs="column" layout-align="center center" layout-fill ng-cloack>
+<div layout="row" layout-xs="column" layout-align="center center" layout-fill>
+
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
@@ -94,6 +95,11 @@
           </md-button>
         </md-fab-actions>
       </md-fab-speed-dial>-->
+    </md-tab>
+    <md-tab flex layout="column" label="RESULTS">
+      <md-tab-content layout="column" layout-fill>
+          <results entity="data"></results>
+      </md-tab-content>
     </md-tab>
   </md-tabs>
   <div ng-if="!data.rounds.length" layout="column" flex="100" layout-align="start center">

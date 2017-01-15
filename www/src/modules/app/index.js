@@ -17,7 +17,8 @@ module.exports =
     require('../resources').name,
     require('../services').name,
     require('./home').name,
-    require('./filters').name
+    require('./filters').name,
+    require('./results').name
 
   ])
     .config(require('./app.config'))
