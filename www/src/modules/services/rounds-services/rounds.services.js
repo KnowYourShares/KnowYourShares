@@ -12,6 +12,8 @@ module.exports = /*@ngInject*/
       currentState = data;
       var newRound = {};
       if(data) {
+        console.log("createRound rounds: ", data.rounds);
+        console.log("createRound length: ", data.rounds.length);
         if (!data.rounds || !data.rounds.length) {
           newRound.index = 0;
           newRound.name = "Initial State";
@@ -33,23 +35,12 @@ module.exports = /*@ngInject*/
             newRound.founders = lastRound.founders;
             newRound.investors = lastRound.investors;
           } else {
-            newRound.index = lastRound.index;
-            newRound.name = lastRound.name;
-            newRound.preMoney = lastRound.preMoney || 0;
-            newRound.moneyRaised = 0;
-            newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
-            newRound.founders = lastRound.founders;
-            newRound.investors = lastRound.investors;
-
-            data.rounds[lastRound.index] = angular.copy(newRound);
-
             if (total < 100) {
               showErrorSharesNotCompleted();
             } else {
               showErrorSharesExceeded();
             }
-
-            return data;
+            return undefined;
           }
         }
         data.rounds[data.rounds.length] = angular.copy(newRound);
