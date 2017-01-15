@@ -11,6 +11,7 @@ require('angular-messages');
 require('angular-material');
 require('angular-chart.js');
 require('angular-clipboard');
+require('svg-assets-cache');
 
 window._ = require('underscore');
 

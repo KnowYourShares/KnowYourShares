@@ -36,7 +36,7 @@ module.exports = /*@ngInject*/
       if (!clipboard.supported) {
         console.log('Sorry, copy to clipboard is not supported');
       }
-      $scope.isOpen = false;
+      $scope.dial = 'md-fling';
     }
 
 
@@ -45,12 +45,14 @@ module.exports = /*@ngInject*/
       $scope.editPath = $scope.readOnlyPath + '/' + $scope.password;
     };
 
-    $scope.createRound = function() {
+    $scope.createRound = function(first) {
       mixpanel.track("User Create a new Round");
       $scope.data = roundService.createRound($scope.data);
 
       $scope.selectedIndex = $scope.data.rounds.length - 1;
-      $scope.save();
+      if(!first) {
+        $scope.save();
+      }
     };
 
     $scope.removeRound = function(index) {
@@ -59,10 +61,26 @@ module.exports = /*@ngInject*/
       $scope.selectedIndex = $scope.data.rounds.length - 1;
     };
 
-    $scope.copyToClipboard = function() {
+    $scope.copyToClipboard = function(readOnly) {
       mixpanel.track("User Copy URL");
-      clipboard.copyText($scope.link.readOnly ? $scope.readOnlyPath : $scope.editPath);
-      $mdToast.show($mdToast.simple().textContent('Link copied to clipboard!'));
+      try {
+        clipboard.copyText(readOnly ? $scope.readOnlyPath : $scope.editPath);
+        $mdToast.show($mdToast.simple().textContent('Link copied to clipboard!').position('top right'));
+      } catch (e) {
+        $mdToast.show($mdToast.simple().textContent('Error while copying').position('top right'));
+      }
+    };
+
+    $scope.fabCopyToClipboard = function() {
+      $mdDialog.show({
+      controller: filtersController,
+      templateUrl: 'app/filters/templates/copy-dialog.html',
+      parent: angular.element(document.querySelector('body')),
+      clickOutsideToClose:true,
+    });};
+
+    $scope.hideDialog = function () {
+      $mdDialog.hide();
     };
 
     $scope.save = function save() {
@@ -71,10 +89,9 @@ module.exports = /*@ngInject*/
       //We trigger auto updates
       if(!$scope.saveStatus.alreadySaved){
         $scope.saveStatus.alreadySaved = true;
-        $scope.enableAutoSave();
       }
 
-      console.log('Saving...');
+      console.log('Saving...' + new Date());
       $scope.saveStatus.saving = true;
       putBusiness.save($scope.businessKeys, $scope.data).$promise.then(function(data) {
         $mdToast.show($mdToast.simple().textContent('Changes saved.').position('top right'));
@@ -90,6 +107,9 @@ module.exports = /*@ngInject*/
     var autoSaveInterval;
 
     $scope.enableAutoSave = function(){
+      if(autoSaveInterval) {
+        $scope.disableAutoSave();
+      }
       autoSaveInterval = $interval($scope.save, 120000);
     };
 
@@ -97,6 +117,11 @@ module.exports = /*@ngInject*/
       $interval.cancel(autoSaveInterval);
       autoSaveInterval = null;
     };
+
+    $scope.$on('$destroy', function() {
+      // Make sure that the interval is destroyed too
+      $interval.cancel(autoSaveInterval);
+    });
 
     initialize();
   };

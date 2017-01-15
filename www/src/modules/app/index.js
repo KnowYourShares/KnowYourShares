@@ -1,5 +1,10 @@
 'use strict';
 
+Object.defineProperty(Array.prototype, 'totalSumByField',{
+  value: function(key){var value = 0; this.forEach(function(obj){ value += (obj[key] || 0); }); return value; },
+  enumerable: false
+});
+
 module.exports =
   angular.module('app', [
     'ui.router',
@@ -8,6 +13,7 @@ module.exports =
     'ngResource',
     'ui.router.stateHelper',
     'ngMaterial',
+    'material.svgAssetsCache',
     'chart.js',
     'ngMessages',
     'angular-clipboard',

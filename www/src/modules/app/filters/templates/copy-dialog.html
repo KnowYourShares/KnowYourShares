@@ -1,0 +1,21 @@
+<md-dialog aria-label="share">
+  <form ng-cloak>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Generate link to share</h2>
+        <p>
+          Which share mode do you want?
+        </p>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" layout-align="center center">
+      <md-button ng-click="copyToClipboard(false);hideDialog()">
+       Modifiable
+      </md-button>
+      <md-button ng-click="copyToClipboard(true);hideDialog()">
+        Read only
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

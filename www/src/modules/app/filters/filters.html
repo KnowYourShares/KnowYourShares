@@ -31,29 +31,33 @@
     </div>
   </div>
 </md-toolbar>
-
-<div layout="row" layout-xs="column" flex-gt-sm="100" layout-align="center center">
-  <div layout="column" flex="100" layout-align="center center">
-  <br>
-  <span layout="row" layout-xs="column" flex="100" ng-if="data._id.length">
-        <h5 hide show-gt-sm layout="row" layout-xs="column" ng-if="link.readOnly">{{readOnlyPath}}</h5>
-        <h5 hide show-gt-sm layout="row" layout-xs="column" ng-if="!link.readOnly">{{editPath}}</h5>
-          <md-button class="md-icon-button md-accent" ng-click="copyToClipboard()">
-            <md-icon md-font-icon="fa fa-clipboard" class="fa s64 md-primary md-hue-2"></md-icon>
-          </md-button>
-          <md-checkbox aria-label="Checkbox No Ink" ng-model="link.readOnly">
-            Read only {{link.readOnly}}
-          </md-checkbox>
-  </span>
-  <span ng-if="!data._id.length">Want a unique link? Save your current status</span>
-  </div>
-</div>
 <div layout="row" layout-xs="column" layout-align="center center" layout-fill ng-cloack>
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
-        <input-round round="round" index-round="selectedIndex"></input-round>
-        <md-fab-toolbar md-open="isOpen" md-direction="left">
+        <div class="lock-size" layout="row" layout-align="end start" ng-cloak>
+          <md-fab-speed-dial md-direction="down" ng-class="dial">
+          <md-fab-trigger class="align-with-text">
+            <md-button aria-label="Menu" class="md-fab md-primary">
+              <md-icon md-svg-src="img/icons/menu.svg" aria-label="Menu"></md-icon>
+            </md-button>
+          </md-fab-trigger>
+
+          <md-fab-actions>
+            <md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">
+              <md-icon aria-label="Save"> save </md-icon>
+            </md-button>
+            <md-button ng-click="fabCopyToClipboard()" aria-label="Share" class="md-fab md-raised md-mini">
+              <md-icon aria-label="Share"> share </md-icon>
+            </md-button>
+          </md-fab-actions>
+        </md-fab-speed-dial>
+      </div>
+
+
+
+
+        <!--<md-fab-toolbar md-open="isOpen" md-direction="left">
           <md-fab-trigger class="align-with-text">
             <md-button aria-label="menu" class="md-fab md-primary">
               <md-icon> reply </md-icon>
@@ -70,7 +74,8 @@
               </md-button>
             </md-fab-actions>
           </md-toolbar>
-      </md-fab-toolbar>
+        </md-fab-toolbar>-->
+        <input-round round="round" index-round="selectedIndex"></input-round>
       </md-tab-content>
 
 
@@ -98,7 +103,7 @@
   </md-tabs>
   <div ng-if="!data.rounds.length" layout="column" flex="100" layout-align="start center">
     <h1 flex-gt-sm="33">Let'us know your initial state to start!</h1>
-    <md-button flex-gt-sm="33" class="md-raised md-primary" ng-click="createRound()" aria-label="regular-button">CREATE INITIAL STATE
+    <md-button flex-gt-sm="33" class="md-raised md-primary" ng-click="createRound(true)" aria-label="regular-button">CREATE INITIAL STATE
     </md-button>
   </div>
 </div>

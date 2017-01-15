@@ -8,7 +8,8 @@
     "underscore": "^1.8.3",
     "angular-ui-router.stateHelper": "^1.3.1",
     "angular-material": "^1.1.1",
-    "chart.js": "^2.4.0"
+    "chart.js": "^2.4.0",
+    "svg-assets-cache.js": "svg-assets-cache#*"
   },
   "resolutions": {
     "angular-ui-router": "^0.3.1",

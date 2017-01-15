@@ -4,10 +4,9 @@
 function InputSharesCtrl($mdDialog,roundService,$scope) {
   var ctrl = this;
 
-  ctrl.entity = ctrl.entity ? ctrl.entity : {};
   ctrl.entity = ctrl.entity || [];
   ctrl.type = ctrl.type || "";
-  ctrl.round = ctrl.round ? ctrl.round : {};
+  ctrl.round = ctrl.round || {};
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.employees = ctrl.round.employees || [];
@@ -21,12 +20,13 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   });
 
   ctrl.changeTotal = function (item, oldvalue) {
-    var union = window._.union(ctrl.round.founders, ctrl.round.investors, ctrl.round.employees);
-    var i;
-    ctrl.total = 0;
-    for(i = 0; i < union.length; ++i) {
-      ctrl.total += union[i].value;
-    }
+    var total = 0;
+    console.log("totalSumFounders: ", ctrl.round.founders);
+    console.log("totalSumInvestors: ", ctrl.round.investors);
+    total += ctrl.round.founders.totalSumByField("value");
+    total += ctrl.round.investors.totalSumByField("value");
+    console.log("totalSumFounders2: ", ctrl.round.founders);
+    console.log("totalSumInvestors2: ", ctrl.round.investors);
     if(ctrl.total > 100) {
       item.value = oldvalue;
       ctrl.showErrorMaxShares();
@@ -150,8 +150,11 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
   ctrl.removeItem = function(index){
     mixpanel.track("user remove a shareholder");
-    ctrl.total -= ctrl.entity[index].value;
+    console.log('remove round actual', ctrl.round);
+    var lastValue = (ctrl.entity[index].value || 0);
+    ctrl.total -= lastValue;
     ctrl.entity.splice(index,1);
+    ctrl.calculateRound(true, lastValue);
   };
 
   ctrl.validateItem = function() {
@@ -173,11 +176,12 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     return _.contains(names,newName);
   };
 
-  ctrl.calculateRound = function () {
-    if(typeof lastRound !=='undefined' && typeof ctrl.type !== 'undefined' && ctrl.type === 'investor')
+  ctrl.calculateRound = function (isDelete, lastValue) {
+    if(lastRound && ctrl.type === 'investor')
     {
       mixpanel.track("user calculate the round value");
-      console.log('calculate round', lastRound);
+      console.log('calculate round last', lastRound);
+      console.log('calculate round actual', ctrl.round);
       //SharesPrevias * Pre-Money  = Valor Participación Actual
       //SharesActuales = Valor Participación Actual / PostMoney
       var investorsShares = 0;
@@ -188,9 +192,17 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       {
         ctrl.showErrorMoneyRaised();
       }
-      else if(investorsPrev.length === ctrl.round.investors.length)
+      else if(!isDelete && investorsPrev.length === ctrl.round.investors.length)
       {
         ctrl.showErrorNewInvestor();
+      }
+      else if (isDelete) {
+        var people = ctrl.round.investors.length + ctrl.round.founders.length;
+        if (people) {
+          var toShare = lastValue / people;
+          ctrl.round.investors.forEach(function(obj){obj.value += toShare});
+          ctrl.round.founders.forEach(function(obj){obj.value += toShare});
+        }
       }
       else{
 
@@ -199,57 +211,54 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         });
 
         var newInvestors = ctrl.round.investors.filter(function(obj){
-          return !(obj.name in bIds);
+          return !(bIds.hasOwnProperty(obj.name));
         });
+        console.log("totalSumnewInvestors: ", newInvestors);
+        investorsShares = newInvestors.totalSumByField("value");
+        console.log("totalSumnewInvestors2: ", newInvestors);
 
-        for(var i = 0; i < newInvestors.length; i++)
-        {
-          investorsShares = investorsShares + newInvestors[i].value;
-        }
         var howMany = 100/investorsShares;
+        console.log("investorsShares: ", investorsShares);
         ctrl.round.postMoney = ctrl.round.moneyRaised * howMany;
         ctrl.round.preMoney = ctrl.round.postMoney - ctrl.round.moneyRaised;
-        for(var j = 0; j < foundersPrev.length; j++)
-        {
-          var sharesFounder = foundersPrev[j].value;
-          var founderName = foundersPrev[j].name;
+        console.log("ctrl.round.preMoney: ", ctrl.round.preMoney);
+        console.log("ctrl.round.postMoney: ", ctrl.round.postMoney);
+
+        _.map(foundersPrev, function(previousFounder){
+          var sharesFounder = previousFounder.value;
+          var founderName = previousFounder.name;
           var actualValuation = sharesFounder * ctrl.round.preMoney;
           var dilutedShares = actualValuation / ctrl.round.postMoney;
-          var f = 0;
-          var found = ctrl.round.founders.some(function(item, index) {
-           f = index; return item.name == founderName;
+          console.log("actualValuationFounder: ", actualValuation);
+          console.log("dilutedSharesFounder: ", dilutedShares);
+          var currentFounder = _.find(ctrl.round.founders, function(founder) {
+            if(founder.hasOwnProperty('name') && founderName === founder.name) {
+              return founder;
+            }
           });
-
-          if (found) {
-           ctrl.round.founders[f].value = dilutedShares;
-           ctrl.round.founders[f].prevvalue = sharesFounder;
+          if (currentFounder) {
+            currentFounder.value = dilutedShares;
+            currentFounder.prevvalue = sharesFounder;
           }
-        }
-        /*for(var j = 0; j < ctrl.round.investors.length; j++)
-        {
-          var sharesInvestor = ctrl.round.investors[j].value;
+        });
+
+        _.map(investorsPrev, function(previousInvestor){
+          var sharesInvestor = previousInvestor.value;
+          var investorName = previousInvestor.name;
           var actualValuation = sharesInvestor * ctrl.round.preMoney;
           var dilutedShares = actualValuation / ctrl.round.postMoney;
-          ctrl.round.investors[j].value = dilutedShares;
-        }*/
-        for(var t = 0; t < investorsPrev.length; t++)
-        {
-          var sharesInvestor = investorsPrev[t].value;
-          var nameInvestor = investorsPrev[t].name;
-          var actualValuation = sharesInvestor * ctrl.round.preMoney;
-          var dilutedShares = actualValuation / ctrl.round.postMoney;
-          //getIndex of investor
-          var f = 0;
-          var found = ctrl.round.investors.some(function(item, index) {
-           f = index; return item.name == nameInvestor;
+          console.log("actualValuationInvestor: ", actualValuation);
+          console.log("dilutedSharesInvestor: ", dilutedShares);
+          var currentInvestor = _.find(ctrl.round.investors, function(investor) {
+            if(investor.hasOwnProperty('name') && investorName === investor.name) {
+              return investor;
+            }
           });
-
-          if (found) {
-           ctrl.round.investors[f].value = dilutedShares;
-           ctrl.round.investors[f].prevvalue = sharesInvestor;
+          if (currentInvestor) {
+            currentInvestor.value = dilutedShares;
+            currentInvestor.prevvalue = sharesInvestor;
           }
-
-        }
+        });
       }
     }
   };

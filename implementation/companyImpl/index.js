@@ -26,6 +26,8 @@ function _modifier(req, res) {
           return res.sendStatus(404);
         }
         else {
+            delete req.body._id;
+            delete req.body.__v;
             Object.assign(entity, req.body);
             entity.save(function (err) {
                 if (err) {

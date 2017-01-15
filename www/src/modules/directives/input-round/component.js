@@ -30,31 +30,12 @@ function InputRoundCtrl($scope, roundService,$mdDialog) {
 
   ctrl.resetRound = function(){
     mixpanel.track("user reset round event");
-    for (var i = 0; i < lastRound.founders.length; i++) {
-      var founderName = lastRound.founders[i].name;
-      var f = 0;
-      var found = ctrl.round.founders.some(function(item, index) {
-       f = index; return item.name == founderName;
-      });
 
-      if (found) {
-       ctrl.round.founders[f].value = lastRound.founders[i].value;
-      }
-    }
-
-    for (var i = 0; i < lastRound.investors.length; i++) {
-      var investorName = lastRound.investors[i].name;
-      var f = 0;
-      var found = ctrl.round.investors.some(function(item, index) {
-       f = index; return item.name == investorName;
-      });
-
-      if (found) {
-       ctrl.round.investors[f].value = lastRound.investors[i].value;
-      }
-    }
-
-  }
+    angular.copy(lastRound.founders, ctrl.round.founders);
+    angular.copy(lastRound.investors, ctrl.round.investors);
+    ctrl.modifyPostMoney();
+    ctrl.updateTotal();
+  };
 
 
 }

@@ -48,7 +48,8 @@
     "angular-material": "./bower_components/angular-material/angular-material.js",
     "angular-chart.js": "./node_modules/angular-chart.js/dist/angular-chart.js",
     "chart.js": "./node_modules/chart.js/dist/Chart.js",
-    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js"
+    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js",
+    "svg-assets-cache":"./bower_components/svg-assets-cache.js/svg-assets-cache.js"
   },
   "browserify-shim": {},
   "name": "www",
