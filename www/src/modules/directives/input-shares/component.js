@@ -158,12 +158,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.validateItem = function() {
-    console.log(ctrl.newItem.value);
-    if (!ctrl.newItem.name || ctrl.newItem.name.toString() === "" ||
-      ctrl.newItem.value === null || !ctrl.newItem.value || ctrl.Full()) {
-      return false;
-    }
-    return true;
+    return !(!ctrl.newItem.name || !ctrl.newItem.value);
   };
 
   ctrl.Full = function () {
