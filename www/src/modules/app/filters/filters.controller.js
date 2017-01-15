@@ -36,7 +36,13 @@ module.exports = /*@ngInject*/
       if (!clipboard.supported) {
         console.log('Sorry, copy to clipboard is not supported');
       }
+<<<<<<< HEAD
       $scope.dial = 'md-fling';
+=======
+      $scope.isOpen = false;
+      $scope.selectedMode = 'md-scale';
+      $scope.selectedDirection = 'up';
+>>>>>>> e6d4d24f745e3b1c756a6cf733132b9d9749a938
     }
 
 
