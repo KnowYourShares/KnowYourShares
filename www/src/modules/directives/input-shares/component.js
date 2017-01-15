@@ -20,6 +20,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     lastRound = roundService.getLastRound(newValue);
   });
 
+  /*
   ctrl.changeTotal = function (item, oldvalue) {
     var union = window._.union(ctrl.round.founders, ctrl.round.investors, ctrl.round.employees);
     var i;
@@ -32,6 +33,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       ctrl.showErrorMaxShares();
     }
   };
+  */
 
   ctrl.addToListIfValidationOK = function () {
     if (ctrl.entity && ctrl.validateItem()) {
@@ -88,6 +90,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     }
   };
 
+  /*
   ctrl.showErrorMaxShares = function() {
     $mdDialog.show(
       $mdDialog.alert()
@@ -99,6 +102,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         .ok('Got it!')
     );
   };
+  */
 
   ctrl.showErrorShares = function() {
     $mdDialog.show(
