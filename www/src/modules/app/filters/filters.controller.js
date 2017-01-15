@@ -37,6 +37,8 @@ module.exports = /*@ngInject*/
         console.log('Sorry, copy to clipboard is not supported');
       }
       $scope.isOpen = false;
+      $scope.selectedMode = 'md-scale';
+      $scope.selectedDirection = 'up';
     }
 
 
