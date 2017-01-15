@@ -179,8 +179,8 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         var people = ctrl.round.investors.length + ctrl.round.founders.length;
         if (people) {
           var toShare = lastValue / people;
-          ctrl.round.investors.forEach(function(obj){obj.value += toShare});
-          ctrl.round.founders.forEach(function(obj){obj.value += toShare});
+          ctrl.round.investors.forEach(function(obj){obj.value += toShare;});
+          ctrl.round.founders.forEach(function(obj){obj.value += toShare;});
         }
       }
       else{
@@ -240,6 +240,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         });
       }
     }
+    console.log("CalculateRound initalState");
   };
 }
 
