@@ -48,17 +48,25 @@
     "angular-material": "./bower_components/angular-material/angular-material.js",
     "angular-chart.js": "./node_modules/angular-chart.js/dist/angular-chart.js",
     "chart.js": "./node_modules/chart.js/dist/Chart.js",
-    "angular-clipboard":"./node_modules/angular-clipboard/angular-clipboard.js",
-    "svg-assets-cache":"./bower_components/svg-assets-cache.js/svg-assets-cache.js"
+    "angular-clipboard": "./node_modules/angular-clipboard/angular-clipboard.js",
+    "svg-assets-cache": "./bower_components/svg-assets-cache.js/svg-assets-cache.js",
+    "angular-chartist.js": "./node_modules/angular-chartist.js/dist/angular-chartist.min.js",
+    "chartist.js": "./node_modules/chartist/dist/chartist.js",
+    "chartist-plugin-tooltips": "./node_modules/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"
+
   },
   "browserify-shim": {},
   "name": "www",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "dependencies": {
+    "angular": "^1.6.1",
     "angular-chart.js": "^1.1.1",
+    "angular-chartist.js": "^4.3.0",
     "angular-clipboard": "^1.5.0",
     "browserify": "^13.1.1",
+    "chartist": "^0.10.1",
+    "chartist-plugin-tooltips": "0.0.17",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^5.0.0",
     "gulp-header": "^1.8.8"
@@ -66,5 +74,4 @@
   "author": "",
   "license": "ISC",
   "description": ""
-
 }

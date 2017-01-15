@@ -57,9 +57,15 @@ module.exports = /*@ngInject*/
       }
     };
 
+
+    $scope.goToResults = function(){
+      $state.go('app.results.results',$scope.businessKeys);
+    };
+
+
     $scope.removeLastRound = function() {
       mixpanel.track("User Remove a Round");
-      $scope.data.rounds.splice(-1,1)
+      $scope.data.rounds.splice(-1,1);
       $scope.selectedIndex = $scope.data.rounds.length - 1;
     };
 

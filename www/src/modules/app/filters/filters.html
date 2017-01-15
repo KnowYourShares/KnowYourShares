@@ -23,6 +23,7 @@
         <span class="md-caption" ng-if="saveStatus.saving"><i>Saving changes...</i></span>
         <span class="md-caption" ng-if="saveStatus.alreadySaved && !saveStatus.saving"><i>Changes saved {{saveStatus.lastSave | elapsed }}</i></span>
       </div>
+
     </span>
 
     <div flex="60" layout="row" layout-align="start center" ng-if="data.rounds.length" hide-xs>
@@ -38,7 +39,7 @@
             REMOVE LAST EVENT
         </md-tooltip>
       </md-button>
-      <md-button ng-click="" aria-label="Results" class="md-fab md-raised md-mini">
+      <md-button ng-click="goToResults()" ng-if="data.rounds.length" aria-label="Results" class="md-fab md-raised md-mini">
         <md-icon aria-label="Results"> trending_up </md-icon>
         <md-tooltip md-direction="down">
             SEE RESULTS
@@ -57,7 +58,7 @@
         </md-tooltip>
       </md-button>
     </div>
-  </div>
+   </div>
 </md-toolbar>
 <div layout="row" layout-xs="column" layout-align="center center" layout-fill ng-cloack>
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
