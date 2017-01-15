@@ -95,6 +95,10 @@ module.exports = /*@ngInject*/
       );
     };
 
+    var _getCurrentState = function () {
+      return currentState;
+    };
+
     var _getLastRound = function (index) {
       console.log(index);
       if(index) {
@@ -107,6 +111,7 @@ module.exports = /*@ngInject*/
     return {
       createRound: _createRound,
       getLastRound: _getLastRound,
-      inputCurrentState: _inputCurrentState
+      inputCurrentState: _inputCurrentState,
+      getCurrentState: _getCurrentState
     };
   };

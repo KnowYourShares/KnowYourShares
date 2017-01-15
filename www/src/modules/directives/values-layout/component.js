@@ -1,7 +1,14 @@
 'use strict';
-function LayoutValuesCtrl($scope) {
+function LayoutValuesCtrl($scope,roundService) {
 
   var ctrl = this;
+
+  initialize();
+
+  function initialize() {
+    ctrl.entity = roundService.getCurrentState();
+    console.log('entro entity', ctrl.entity);
+  }
 
   function calculate(shares, postmoney) {
     return (shares/100)*postmoney;
@@ -37,7 +44,7 @@ function LayoutValuesCtrl($scope) {
 
 }
 
-LayoutValuesCtrl.$inject = ["$scope"];
+LayoutValuesCtrl.$inject = ['$scope', 'roundService'];
 
 module.exports = /* @NgInject */
 {
