@@ -155,9 +155,8 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.validateItem = function() {
-    console.log(ctrl.newItem.value);
     if (!ctrl.newItem.name || ctrl.newItem.name.toString() === "" ||
-      ctrl.newItem.value === null || !ctrl.newItem.value || ctrl.Full()) {
+      ctrl.newItem.value === null || !ctrl.newItem.value) {
       return false;
     }
     return true;
