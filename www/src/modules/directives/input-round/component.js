@@ -7,7 +7,6 @@ function InputRoundCtrl($scope, roundService,$mdDialog) {
   ctrl.round = ctrl.round ? ctrl.round : {};
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
-  ctrl.round.employees = ctrl.round.employees || [];
   ctrl.round.index = ctrl.round.index || 0;
   ctrl.total = 0;
   ctrl.showGraph = 1;
