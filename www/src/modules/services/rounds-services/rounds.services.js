@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-  function roundService(/* inject dependencies here, i.e. : $rootScope */) {
+  function roundService($mdDialog /* inject dependencies here, i.e. : $rootScope */) {
     var currentState;
 
     var _inputCurrentState = function (state) {
@@ -14,7 +14,6 @@ module.exports = /*@ngInject*/
       if(data) {
         if (!data.rounds || !data.rounds.length) {
           newRound.index = 0;
-          console.log("FIRST");
           newRound.name = "Initial State";
           newRound.preMoney = data.companyValue || 0;
           newRound.moneyRaised = 0;
@@ -25,18 +24,75 @@ module.exports = /*@ngInject*/
           data.rounds = [];
         } else {
           var lastRound = data.rounds[data.rounds.length - 1];
-          newRound.index = data.rounds.length;
-          newRound.name = "Event " + (data.rounds.length);
-          newRound.preMoney = lastRound.postMoney;
-          newRound.moneyRaised = 0;
-          newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
-          newRound.founders = lastRound.founders;
-          newRound.investors = lastRound.investors;
-          newRound.employees = lastRound.employees;
+          var total = getSharesTotal(lastRound);
+          if (total === 100) {
+            newRound.index = data.rounds.length;
+            newRound.name = "Event " + (data.rounds.length);
+            newRound.preMoney = lastRound.postMoney;
+            newRound.moneyRaised = 0;
+            newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
+            newRound.founders = lastRound.founders;
+            newRound.investors = lastRound.investors;
+            newRound.employees = lastRound.employees;
+          } else {
+            newRound.index = lastRound.index;
+            newRound.name = lastRound.name;
+            newRound.preMoney = lastRound.preMoney || 0;
+            newRound.moneyRaised = 0;
+            newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
+            newRound.founders = lastRound.founders;
+            newRound.investors = lastRound.investors;
+            newRound.employees = lastRound.employees;
+
+            data.rounds[lastRound.index] = angular.copy(newRound);
+
+            if (total < 100) {
+              showErrorSharesNotCompleted();
+            } else {
+              showErrorSharesExceeded();
+            }
+
+            return data;
+          }
         }
         data.rounds[data.rounds.length] = angular.copy(newRound);
       }
       return data;
+    };
+
+
+    var getSharesTotal = function(lastRound) {
+      var valuesInvestors = _.pluck(lastRound.investors,'value');
+      var valuesFounders = _.pluck(lastRound.founders,'value');
+
+      var totalInvestors = _.reduce(valuesInvestors,function(memo,num) {return memo+num;},0);
+      var totalFounders = _.reduce(valuesFounders,function(memo,num) {return memo+num;},0);
+
+      return totalInvestors+totalFounders;
+    };
+
+    var showErrorSharesNotCompleted = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Some error in shares.')
+          .textContent('You must distribute all the shares.')
+          .ariaLabel('Maximum Shares Dialog')
+          .ok('Got it!')
+      );
+    };
+
+    var showErrorSharesExceeded = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .parent(angular.element(document.querySelector('body')))
+          .clickOutsideToClose(true)
+          .title('Some error in shares.')
+          .textContent('Sorry but the total percentage can not exceed 100.')
+          .ariaLabel('Maximum Shares Exceeded Dialog')
+          .ok('Got it!')
+      );
     };
 
     var _getLastRound = function (index) {
