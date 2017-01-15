@@ -57,9 +57,9 @@ module.exports = /*@ngInject*/
       }
     };
 
-    $scope.removeRound = function(index) {
+    $scope.removeLastRound = function() {
       mixpanel.track("User Remove a Round");
-      $scope.data.rounds.splice(index, 1);
+      $scope.data.rounds.splice(-1,1)
       $scope.selectedIndex = $scope.data.rounds.length - 1;
     };
 

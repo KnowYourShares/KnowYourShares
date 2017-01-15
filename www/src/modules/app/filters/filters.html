@@ -32,7 +32,7 @@
             ADD NEW EVENT
         </md-tooltip>
       </md-button>
-      <md-button ng-click="removeRound(selectedIndex)" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
+      <md-button ng-click="removeLastRound()" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
         <md-icon aria-label="Remove"> delete </md-icon>
         <md-tooltip md-direction="down">
             REMOVE LAST EVENT
@@ -75,7 +75,7 @@
               <md-button ng-click="createRound()" ng-if="data.rounds.length" aria-label="Add" class="md-fab md-raised md-mini">
                 <md-icon aria-label="Add"> add </md-icon>
               </md-button>
-              <md-button ng-click="removeRound(selectedIndex)" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
+              <md-button ng-click="removeLastRound()" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
                 <md-icon aria-label="Remove"> delete </md-icon>
               </md-button>
               <md-button ng-click="" aria-label="Results" class="md-fab md-raised md-mini">

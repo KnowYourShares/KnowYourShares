@@ -12,6 +12,8 @@ module.exports = /*@ngInject*/
       currentState = data;
       var newRound = {};
       if(data) {
+        console.log("createRound rounds: ", data.rounds);
+        console.log("createRound length: ", data.rounds.length);
         if (!data.rounds || !data.rounds.length) {
           newRound.index = 0;
           newRound.name = "Initial State";
