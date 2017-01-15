@@ -13,9 +13,6 @@ function ChartSharesCtrl($scope) {
   $scope.$watch("$ctrl.entity.founders", function () {
     ctrl.mapValues();
   }, true);
-  $scope.$watch("$ctrl.entity.employees", function () {
-    ctrl.mapValues();
-  }, true);
   $scope.$watch("$ctrl.entity.investors", function () {
     ctrl.mapValues();
   }, true);
@@ -23,8 +20,7 @@ function ChartSharesCtrl($scope) {
   var calculateNotSet = function (ctrl) {
     var founders = ctrl.entity.founders.reduce(add, {value: 0}).value || 0;
     var inversors = ctrl.entity.investors.reduce(add, {value: 0}).value || 0;
-    var employees = ctrl.entity.employees.reduce(add, {value: 0}).value || 0;
-    return 100 - founders - inversors - employees;
+    return 100 - founders - inversors;
   };
 
   ctrl.mapValues = function () {
@@ -32,21 +28,17 @@ function ChartSharesCtrl($scope) {
     ctrl.mappedData = [];
     ctrl.notSetValue = 100;
     if (ctrl.group) {
-      ctrl.labels = ["Founders", "Investors", "Employees", "Not set"];
-      ctrl.mappedData[3] = 100;
+      ctrl.labels = ["Founders", "Investors", "Not set"];
+      ctrl.mappedData[2] = 100;
       if (ctrl.entity.founders) {
         ctrl.mappedData[0] = ctrl.entity.founders.reduce(add, {value: 0}).value || 0;
-        ctrl.mappedData[3] -= ctrl.mappedData[0];
+        ctrl.mappedData[2] -= ctrl.mappedData[0];
       }
       if (ctrl.entity.investors) {
         ctrl.mappedData[1] = ctrl.entity.investors.reduce(add, {value: 0}).value || 0;
-        ctrl.mappedData[3] -= ctrl.mappedData[1];
+        ctrl.mappedData[2] -= ctrl.mappedData[1];
       }
-      if (ctrl.entity.employees) {
-        ctrl.mappedData[2] = ctrl.entity.employees.reduce(add, {value: 0}).value || 0;
-
-      }
-      ctrl.mappedData[3] = calculateNotSet(ctrl);
+      ctrl.mappedData[2] = calculateNotSet(ctrl);
     } else {
       if (ctrl.entity.founders) {
         ctrl.entity.founders.forEach(function (o) {
@@ -56,12 +48,6 @@ function ChartSharesCtrl($scope) {
       }
       if (ctrl.entity.investors) {
         ctrl.entity.investors.forEach(function (o) {
-          ctrl.labels.push(o.name);
-          ctrl.mappedData.push(o.value);
-        });
-      }
-      if (ctrl.entity.employees) {
-        ctrl.entity.employees.forEach(function (o) {
           ctrl.labels.push(o.name);
           ctrl.mappedData.push(o.value);
         });

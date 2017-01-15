@@ -25,9 +25,37 @@
       </div>
     </span>
 
-    <div flex="60" layout="row" layout-align="start center">
-      <md-button class="md-raised md-primary" ng-click="createRound()" ng-if="data.rounds.length" aria-label="regular-button">ADD NEW EVENT</md-button>
-      <md-button ng-if="data.rounds.length" class="md-raised md-warn" ng-click="removeRound(selectedIndex)" aria-label="regular-button">REMOVE LAST EVENT</md-button>
+    <div flex="60" layout="row" layout-align="start center" ng-if="data.rounds.length" hide-xs>
+      <md-button ng-click="createRound()" ng-if="data.rounds.length" aria-label="Add" class="md-fab md-raised md-mini">
+        <md-icon aria-label="Add"> add </md-icon>
+        <md-tooltip md-direction="down">
+            ADD NEW EVENT
+        </md-tooltip>
+      </md-button>
+      <md-button ng-click="removeRound(selectedIndex)" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
+        <md-icon aria-label="Remove"> delete </md-icon>
+        <md-tooltip md-direction="down">
+            REMOVE LAST EVENT
+        </md-tooltip>
+      </md-button>
+      <md-button ng-click="" aria-label="Results" class="md-fab md-raised md-mini">
+        <md-icon aria-label="Results"> trending_up </md-icon>
+        <md-tooltip md-direction="down">
+            SEE RESULTS
+        </md-tooltip>
+      </md-button>
+      <md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">
+        <md-icon aria-label="Save"> save </md-icon>
+        <md-tooltip md-direction="down">
+            SAVE STATUS
+        </md-tooltip>
+      </md-button>
+      <md-button ng-click="fabCopyToClipboard()" aria-label="Share" class="md-fab md-raised md-mini">
+        <md-icon aria-label="Share"> share </md-icon>
+        <md-tooltip md-direction="down">
+            SHARE
+        </md-tooltip>
+      </md-button>
     </div>
   </div>
 </md-toolbar>
@@ -36,7 +64,7 @@
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
         <div class="lock-size" layout="row" layout-align="end start" ng-cloak>
-          <md-fab-speed-dial md-direction="down" ng-class="dial">
+          <md-fab-speed-dial md-direction="down" ng-class="dial" hide-gt-xs>
             <md-fab-trigger class="align-with-text">
               <md-button aria-label="Menu" class="md-fab md-primary">
                 <md-icon md-svg-src="img/icons/menu.svg" aria-label="Menu"></md-icon>
@@ -44,6 +72,15 @@
             </md-fab-trigger>
 
             <md-fab-actions>
+              <md-button ng-click="createRound()" ng-if="data.rounds.length" aria-label="Add" class="md-fab md-raised md-mini">
+                <md-icon aria-label="Add"> add </md-icon>
+              </md-button>
+              <md-button ng-click="removeRound(selectedIndex)" ng-if="data.rounds.length" aria-label="Remove" class="md-fab md-raised md-mini">
+                <md-icon aria-label="Remove"> delete </md-icon>
+              </md-button>
+              <md-button ng-click="" aria-label="Results" class="md-fab md-raised md-mini">
+                <md-icon aria-label="Results"> trending_up </md-icon>
+              </md-button>
               <md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">
                 <md-icon aria-label="Save"> save </md-icon>
               </md-button>

@@ -20,7 +20,6 @@ module.exports = /*@ngInject*/
           newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
           newRound.founders = data.founders;
           newRound.investors = data.investors;
-          newRound.employees = data.employees;
           data.rounds = [];
         } else {
           var lastRound = data.rounds[data.rounds.length - 1];
@@ -33,7 +32,6 @@ module.exports = /*@ngInject*/
             newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
             newRound.founders = lastRound.founders;
             newRound.investors = lastRound.investors;
-            newRound.employees = lastRound.employees;
           } else {
             newRound.index = lastRound.index;
             newRound.name = lastRound.name;
@@ -42,7 +40,6 @@ module.exports = /*@ngInject*/
             newRound.postMoney = newRound.preMoney + newRound.moneyRaised;
             newRound.founders = lastRound.founders;
             newRound.investors = lastRound.investors;
-            newRound.employees = lastRound.employees;
 
             data.rounds[lastRound.index] = angular.copy(newRound);
 
