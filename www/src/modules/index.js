@@ -12,7 +12,10 @@ require('angular-material');
 require('angular-chart.js');
 require('angular-clipboard');
 require('svg-assets-cache');
+require('chartist-plugin-tooltips');
+require('angular-chartist.js');
 
+window.Chartist = require('chartist.js');
 window._ = require('underscore');
 
 //app entry point
@@ -24,4 +27,4 @@ module.exports =
     require('./directives').name,
     require('./resources').name,
     require('./services').name
-  ]);
+]);

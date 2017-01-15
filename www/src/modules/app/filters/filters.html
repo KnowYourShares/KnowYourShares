@@ -23,13 +23,17 @@
         <span class="md-caption" ng-if="saveStatus.saving"><i>Saving changes...</i></span>
         <span class="md-caption" ng-if="saveStatus.alreadySaved && !saveStatus.saving"><i>Changes saved {{saveStatus.lastSave | elapsed }}</i></span>
       </div>
+
     </span>
 
-    <div flex="60" layout="row" layout-align="start center">
+    <div flex="40" layout="row" layout-align="start center">
       <md-button class="md-raised md-primary" ng-click="createRound()" ng-if="data.rounds.length" aria-label="regular-button">ADD NEW EVENT</md-button>
       <md-button ng-if="data.rounds.length" class="md-raised md-warn" ng-click="removeRound(selectedIndex)" aria-label="regular-button">REMOVE LAST EVENT</md-button>
     </div>
-  </div>
+    <div flex layout-align="center end">
+      <md-button class="md-raised md-primary" ng-click="goToResults()" ng-if="data.rounds.length" aria-label="regular-button">SEE RESULTS</md-button>
+    </div>
+   </div>
 </md-toolbar>
 <div layout="row" layout-xs="column" layout-align="center center" layout-fill ng-cloack>
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
