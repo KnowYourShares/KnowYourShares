@@ -4,15 +4,12 @@
 }
 </style>
 
-<div ng-if="!data.canEdit" style="background-color: rgba(0, 92, 174, 0.2); width:100%;height:100%; position:absolute; z-index: 100;">
-</div>
-
 <md-toolbar class="md-hue-2">
   <div class="md-toolbar-tools" layout="row" layout-align="start center">
     <span flex="40">
       <a ui-sref="app.home">KNOWYOURSHARES</a>
 
-      <div>
+      <div ng-if="data.canEdit && data.rounds.length">
         <span class="md-caption"> Autosave
           <input type="checkbox"
                  ng-model="saveStatus.autoSave"
@@ -64,8 +61,10 @@
   <md-tabs ng-if="data.rounds.length" flex layout="column" layout-fill md-center-tabs md-selected="selectedIndex" md-border-bottom md-autoselect>
     <md-tab flex layout="column" ng-repeat="round in data.rounds track by $index" label="{{round.name}}">
       <md-tab-content layout="column" layout-fill ng-if="$index === selectedIndex">
-        <div class="lock-size" layout="row" layout-align="end start" ng-cloak>
-          <md-fab-speed-dial md-direction="down" ng-class="dial" hide-gt-xs>
+        <div ng-if="!data.canEdit" style="background-color: rgba(0, 92, 174, 0.2); width:100%;height:100%; position:absolute; z-index: 100;">
+        </div>
+        <div ng-if="data.canEdit" class="lock-size" layout="row" layout-align="end start" ng-cloak>
+          <md-fab-speed-dial md-direction="down" ng-class="dial" hide-gt-xs >
             <md-fab-trigger class="align-with-text">
               <md-button aria-label="Menu" class="md-fab md-primary">
                 <md-icon md-svg-src="img/icons/menu.svg" aria-label="Menu"></md-icon>
@@ -89,6 +88,7 @@
                 <md-icon aria-label="Share"> share </md-icon>
               </md-button>
             </md-fab-actions>
+
           </md-fab-speed-dial>
         </div>
         <input-round round="round" index-round="selectedIndex"></input-round>

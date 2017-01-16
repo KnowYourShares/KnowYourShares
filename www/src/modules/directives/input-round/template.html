@@ -1,3 +1,8 @@
+<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-if="$ctrl.indexRound != 0">
+  <h3 class="md-subhead"> In order to calculate a round, first introduce the money you want to raise, then how many shares
+    do you want to give to the investor and finally press ADD button.
+  </h3>
+</div>
 <div layout="row" layout-xs="column">
   <div layout="column" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.indexRound != 0">
     <h3>Pre money</h3>
@@ -25,21 +30,21 @@
       </md-input-container> k</span>
     </div>
   </div>
-
-  <!--<div layout="column" flex-gt-sm-offset="33" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.index === 0">
-    <h3>Money raised</h3>
-    <md-input-container flex="50">
-      <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
-    </md-input-container>
-  </div>-->
 </div>
-<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-hide="$ctrl.index === 0">
-  <h3 class="md-subhead"> In order to calculate a round, first input money you want to raise, then how many shares do you want to give to investors, finally press "Calculate Round" button.
+<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-hide="$ctrl.indexRound != 0">
+  <h3 class="md-subhead"> Doesn't know how to distribute your shares? Check <a target="_blank" href="http://foundrs.com">Founders</a>
   </h3>
 </div>
-<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-if="$ctrl.index === 0">
-  <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
-  </h3>
+<div layout="row" layout-xs="column" layout-align="space-around start" layout-padding>
+  <span flex="10" show-gt-sm></span>
+  <div flex-gt-sm="30">
+    <chart-shares entity="$ctrl.round"></chart-shares>
+  </div>
+  <span flex="20" show-gt-sm></span>
+  <div flex-gt-sm="30">
+    <values-layout entity="$ctrl.round"></values-layout>
+  </div>
+  <span flex="10" show-gt-sm></span>
 </div>
 
 <div layout="row" layout-align="center center">
@@ -52,16 +57,4 @@
   <span flex-gt-sm="10"></span>
   <input-shares round="$ctrl.round" index-round="$ctrl.indexRound" entity="$ctrl.round.investors" type="investor" ng-model="$ctrl.total" label="Investors" flex-gt-sm="50"></input-shares>
   <span flex-gt-sm="15"></span>
-</div>
-
-<div layout="row" layout-xs="column" layout-align="space-around start" layout-padding>
-  <span flex="10" show-gt-sm></span>
-  <div flex-gt-sm="30">
-    <chart-shares entity="$ctrl.round"></chart-shares>
-  </div>
-  <span flex="20" show-gt-sm></span>
-  <div flex-gt-sm="30">
-    <values-layout entity="$ctrl.round"></values-layout>
-  </div>
-  <span flex="10" show-gt-sm></span>
 </div>

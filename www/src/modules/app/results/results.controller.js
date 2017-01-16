@@ -3,18 +3,21 @@
 module.exports = /*@ngInject*/
     function resultsController($scope, $state, getBusiness) {
         /*
-        * Helper functions
-        */
-        function getRoundValues (round) {
-            return _.map(round,function(people){
+         * Helper functions
+         */
+        function getRoundValues(round) {
+            return _.map(round, function (people) {
                 return people.value;
             })
         }
+
         function getRoundLabels(rounds) {
             return _.pluck(rounds, 'name');
         }
 
-        function sum(a, b) { return a + b }
+        function sum(a, b) {
+            return a + b
+        }
 
         $scope.businessKeys = {
             id: $state.params.id,
@@ -22,12 +25,13 @@ module.exports = /*@ngInject*/
         };
 
         $scope.goEdit = function () {
-            console.log('business keys:', $scope.businessKeys);
             $state.go('app.filters.location', $scope.businessKeys);
         };
 
         getBusiness.get($scope.businessKeys).$promise.then(function (response) {
             $scope.data = response.data;
+            console.log('Data ' ,$scope.data);
+
 
             doLineChart('#preMoneyChartLine', true);
             doLineChart('#postMoneyChartLine', false);
@@ -48,16 +52,16 @@ module.exports = /*@ngInject*/
             var finalRound = $scope.data.rounds[$scope.data.rounds.length - 1];
 
             var hash = {};
-            if(grouped){
+            if (grouped) {
                 var founders = finalRound.founders;
                 var investors = finalRound.investors;
-                hash.labels = ['Founders','Investors'];
+                hash.labels = ['Founders', 'Investors'];
                 hash.series = [
-                    _.pluck(founders,'value').reduce(sum),
-                    _.pluck(investors,'value').reduce(sum)
+                    _.pluck(founders, 'value').reduce(sum),
+                    _.pluck(investors, 'value').reduce(sum)
                 ];
             }
-            else{
+            else {
                 var allPeople = finalRound.founders.concat(finalRound.investors);
                 hash.labels = getRoundLabels(allPeople);
                 hash.series = getRoundValues(allPeople);
@@ -69,11 +73,13 @@ module.exports = /*@ngInject*/
 
             var data = getFinalRoundPie(group);
 
-            function pieChartInterpolationFunc (label, index) {
-                return label + ' : ' + data.series[index]+ 'k';
+            function pieChartInterpolationFunc(label, index) {
+                return label + ' : ' + data.series[index] + 'k';
             }
 
             var options = {
+                plugins: [Chartist.plugins.tooltip()
+                ],
                 labelInterpolationFnc: pieChartInterpolationFunc
             };
 
@@ -86,17 +92,18 @@ module.exports = /*@ngInject*/
             _.map(rounds, function (round) {
                 var roundValuation = byPremoney ? round.preMoney : round.postMoney;
                 var allPeopleInRound = round.founders.concat(round.investors);
-                _.map(allPeopleInRound, function(people){
+                _.map(allPeopleInRound, function (people) {
                     var roundValueForPeople = {
-                        meta : people.name,
-                        value : people.value * roundValuation / 100
+                        meta: people.name,
+                        value: people.value * roundValuation / 100,
+                        round : round.name
                     };
-                    if(hash.hasOwnProperty(people.name)){
+                    if (hash.hasOwnProperty(people.name)) {
                         hash[people.name].values.push(roundValueForPeople);
-                    }else{
+                    } else {
                         hash[people.name] = {
                             name: people.name,
-                            values : [roundValueForPeople]
+                            values: [roundValueForPeople]
                         }
                     }
                 });
@@ -104,7 +111,11 @@ module.exports = /*@ngInject*/
             return _.pluck(hash, 'values');
         }
 
-        function doBarChart(selector, byPremoney ,labels, series){
+        function formatNumber(a) {
+            return parseFloat(a.toFixed(2));
+        }
+
+        function doBarChart(selector, byPremoney, labels, series) {
             labels = labels || getRoundLabels($scope.data.rounds);
             series = series || getAllRoundSeries($scope.data.rounds, byPremoney);
 
@@ -143,11 +154,11 @@ module.exports = /*@ngInject*/
 
         function doLineChart(selector, byPremoney, labels, series) {
             // Our labels and three data series
-            console.log('Suppp');
             labels = labels || getRoundLabels($scope.data.rounds);
             series = series || getAllRoundSeries($scope.data.rounds, byPremoney);
 
-            console.log('LINE SERIES ', series);
+            console.log('labels ' , labels);
+            console.log('SERIES ' , series);
 
             var data = {
                 labels: labels,
@@ -185,4 +196,10 @@ module.exports = /*@ngInject*/
             // All you need to do is pass your configuration as third parameter to the chart function
             new Chartist.Line(selector, data, options);
         }
+
+
+
+        $scope.doPieChart = doPieChart;
+        $scope.doLineChart = doLineChart;
+        $scope.doBarChart = doBarChart;
     };

@@ -53,7 +53,6 @@
     "angular-chartist.js": "./node_modules/angular-chartist.js/dist/angular-chartist.min.js",
     "chartist.js": "./node_modules/chartist/dist/chartist.js",
     "chartist-plugin-tooltips": "./node_modules/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"
-
   },
   "browserify-shim": {},
   "name": "www",
