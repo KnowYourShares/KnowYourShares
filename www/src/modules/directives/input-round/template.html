@@ -19,19 +19,12 @@
         <input disabled type="number" ng-model="$ctrl.round.postMoney" aria-label="regular-slider">
       </md-input-container>
   </div>
-
-  <!--<div layout="column" flex-gt-sm-offset="33" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.index === 0">
-    <h3>Money raised</h3>
-    <md-input-container flex="50">
-      <input type="number" ng-model="$ctrl.round.moneyRaised" aria-label="regular-slider">
-    </md-input-container>
-  </div>-->
 </div>
-<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-hide="$ctrl.index === 0">
+<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-if="$ctrl.indexRound != 0">
   <h3 class="md-subhead"> In order to calculate a round, first input money you want to raise, then how many shares do you want to give to investors, finally press "Calculate Round" button.
   </h3>
 </div>
-<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-if="$ctrl.index === 0">
+<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-hide="$ctrl.indexRound != 0">
   <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
   </h3>
 </div>
