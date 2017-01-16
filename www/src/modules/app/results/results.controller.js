@@ -19,6 +19,24 @@ module.exports = /*@ngInject*/
             return a + b
         }
 
+        function getValuationForPeople(people, isPercentage, roundValuation){
+            if(isPercentage){
+                return formatNumber(people.value * roundValuation / 100);
+            }
+            else{
+                return formatNumber(people.value);
+            }
+        }
+
+        function kValueInterpolation(value) {
+                        return value + 'k';
+        }
+        
+        function formatNumber(a) {
+            return parseFloat(a.toFixed(2));
+        }
+
+
         $scope.businessKeys = {
             id: $state.params.id,
             password: $state.params.password
@@ -31,7 +49,6 @@ module.exports = /*@ngInject*/
         getBusiness.get($scope.businessKeys).$promise.then(function (response) {
             $scope.data = response.data;
             console.log('Data ' ,$scope.data);
-
 
             doLineChart('#preMoneyChartLine', true);
             doLineChart('#postMoneyChartLine', false);
@@ -74,28 +91,20 @@ module.exports = /*@ngInject*/
             var data = getFinalRoundPie(group);
 
             function pieChartInterpolationFunc(label, index) {
-                return label + ' : ' + data.series[index] + 'k';
+                return label + ' : ' +  data.series[index] + 'k';
             }
 
             var options = {
                 plugins: [Chartist.plugins.tooltip()
                 ],
-                labelInterpolationFnc: pieChartInterpolationFunc
+                labelInterpolationFnc: pieChartInterpolationFunc,
+
             };
 
             new Chartist.Pie(selector, data, options);
         }
 
-        function getValuationForPeople(people, isPercentage, roundValuation){
-            if(isPercentage){
-                return people.value * roundValuation / 100;
-            }
-            else{
-                return people.value;
-            }
-        }
-
-
+  
         function getAllRoundSeries(rounds, byPremoney) {
             var hash = {};
             
@@ -107,8 +116,7 @@ module.exports = /*@ngInject*/
                 console.log('Round valuation ', roundValuation);
 
                 var allPeopleInRound = round.founders.concat(round.investors);
-                _.map(allPeopleInRound, function (people) {
-                    
+                _.map(allPeopleInRound, function (people) {     
                     console.log('People ', people)
                     var roundValueForPeople = {
                         meta: people.name,
@@ -139,10 +147,6 @@ module.exports = /*@ngInject*/
             return result;
         }
 
-        function formatNumber(a) {
-            return parseFloat(a.toFixed(2));
-        }
-
         function doBarChart(selector, byPremoney, labels, series) {
             labels = labels || getRoundLabels($scope.data.rounds);
             series = series || getAllRoundSeries($scope.data.rounds, byPremoney);
@@ -156,23 +160,24 @@ module.exports = /*@ngInject*/
                 plugins: [
                     Chartist.plugins.tooltip()
                 ],
-                seriesBarDistance: 15
+                seriesBarDistance: 15,
+                axisY: {
+                       labelInterpolationFnc: kValueInterpolation
+                }
             };
 
             var responsiveOptions = [
                 ['screen and (min-width: 641px) and (max-width: 1024px)', {
                     seriesBarDistance: 10,
                     axisX: {
-                        labelInterpolationFnc: function (value) {
-                            return value;
-                        }
+                        labelInterpolationFnc: kValueInterpolation
                     }
                 }],
                 ['screen and (max-width: 640px)', {
                     seriesBarDistance: 5,
                     axisX: {
                         labelInterpolationFnc: function (value) {
-                            return value[0];
+                            return kValueInterpolation(value[0]);
                         }
                     }
                 }]
@@ -216,15 +221,14 @@ module.exports = /*@ngInject*/
                     // The label interpolation function enables you to modify the values
                     // used for the labels on each axis. Here we are converting the
                     // values into million pound.
-                    labelInterpolationFnc: function (value) {
-                        return value + 'k';
-                    }
+                    labelInterpolationFnc: kValueInterpolation
                 }
             };
             // All you need to do is pass your configuration as third parameter to the chart function
             new Chartist.Line(selector, data, options);
         }
 
+        
 
 
         $scope.doPieChart = doPieChart;

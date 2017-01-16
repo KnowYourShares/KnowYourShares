@@ -16,18 +16,50 @@
 <div layout="row" layout-xs="column" layout-align="center center">
     <section flex-gt-sm="80" layout="column" md-whiteframe layout-padding="20">
 
-        <div layout="row" flex="100" layout-align="center center">
+
+
+      <div layout="row" flex="100" layout-align="center center">
             <div layout="column" flex="70">
                 <h1>
                     Equity evolution
                 </h1>
+
+                <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                     <md-tab >
+                        <md-tab-label>BAR CHART</md-tab-label>
+                        <md-tab-body>
+                        <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                            <md-tab md-on-select="doBarChart('#preMoneyChartBar',true)">
+                                <md-tab-label>Premoney</md-tab-label>
+                                
+                                <md-tab-body>
+                                    <div id="preMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab md-on-select="doBarChart('#preMoneyChartBar',false)">
+                                <md-tab-label>Postmoney</md-tab-label>
+                                <md-tab-body>
+                                    <div id="postMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
+                                </md-tab-body>
+                            </md-tab>
+                        </md-tabs>
+
+
+                        </md-tab-body>
+                    </md-tab>
+
+
+
+                    <md-tab>
+                        <md-tab-label>LINE CHART</md-tab-label>
+                        
+                        <md-tab-body>
                 <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
                     <md-tab md-on-select="doLineChart('#preMoneyChartLine',true)">
                         <md-tab-label>Premoney</md-tab-label>
                         <md-tab-body>
                             <div id="preMoneyChartLine"
                                  class="ct-chart ct-line ct-perfect-fourth ct-golden-section"></div>
-
                         </md-tab-body>
                     </md-tab>
                     <md-tab md-on-select="doLineChart('#preMoneyChartLine',false)">
@@ -38,33 +70,19 @@
                         </md-tab-body>
                     </md-tab>
                 </md-tabs>
-            </div>
-        </div>
 
-
-        <div layout="row" flex="100" layout-align="center center">
-            <div layout="column" flex="70">
-                <h1>
-                    Equity evolution
-                </h1>
-                <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
-                    <md-tab md-on-select="doBarChart('#preMoneyChartBar',true)">
-                        <md-tab-label>Premoney</md-tab-label>
-                        <md-tab-body>
-                            <div id="preMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
                         </md-tab-body>
                     </md-tab>
-                    <md-tab md-on-select="doBarChart('#preMoneyChartBar',false)">
-                        <md-tab-label>Postmoney</md-tab-label>
-                        <md-tab-body>
-                            <div id="postMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
-                        </md-tab-body>
-                    </md-tab>
+                   
                 </md-tabs>
+
+
+
             </div>
         </div>
 
 
+    
         <div layout="row" flex="100" layout-align="center center">
             <div layout="column" flex="70"><h1>
                 Final equity
@@ -73,7 +91,9 @@
                     <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',true)">
                         <md-tab-label>Grouped</md-tab-label>
                         <md-tab-body>
-                            <div id="totalPieChartGrouped" class="ct-chart ct-pie ct-golden-section"></div>
+                            <md-content>
+                                <div id="totalPieChartGrouped" class="ct-chart ct-pie ct-golden-section"></div>
+                            </md-content>
                         </md-tab-body>
                     </md-tab>
                     <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',false)">
