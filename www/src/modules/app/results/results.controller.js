@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = /*@ngInject*/
-    function resultsController($scope, $state, getBusiness, roundService, $timeout) {
+    function resultsController($scope, $state, getBusiness) {
         /*
         * Helper functions
         */
@@ -21,7 +21,8 @@ module.exports = /*@ngInject*/
             password: $state.params.password
         };
 
-        $scope.goToFilters = function () {
+        $scope.goEdit = function () {
+            console.log('business keys:', $scope.businessKeys);
             $state.go('app.filters.location', $scope.businessKeys);
         };
 
@@ -40,7 +41,6 @@ module.exports = /*@ngInject*/
             console.log('error ', err);
             $state.go('app.home');
         });
-
 
 
         function getFinalRoundPie(grouped) {

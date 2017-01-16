@@ -1,3 +1,25 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools" layout="row" layout-align="start center">
+    <span flex="40">
+      <a ui-sref="app.home">KNOWYOURSHARES</a>
+    </span>
+        <!--</md-button>-->
+        <!--<md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">-->
+            <!--<md-icon aria-label="Save"> save</md-icon>-->
+            <!--<md-tooltip md-direction="down">-->
+                <!--SAVE STATUS-->
+            <!--</md-tooltip>-->
+        <!--</md-button>-->
+        <span flex></span>
+        <!--<i style="vertical-align: middle;" class="material-icons">mode edit</i>-->
+        <md-button ng-click="goEdit()" aria-label="Edit" class="md-fab md-raised md-mini">
+            <md-icon><i class="material-icons">mode_edit</i></md-icon>
+            <md-tooltip md-direction="down">
+                Edit
+            </md-tooltip>
+
+    </div>
+</md-toolbar>
 <div layout="row" layout-xs="column" layout-align="center center">
     <section flex-gt-sm="80" layout="column" md-whiteframe layout-padding="20">
         <h1>
@@ -31,9 +53,11 @@
         </h1>
 
         <h3>Ungrouped</h3>
+
         <div id="totalPieChartUngrouped"></div>
 
         <h3>Grouped</h3>
+
         <div id="totalPieChartGrouped"></div>
 
 
