@@ -59,7 +59,9 @@ module.exports = /*@ngInject*/
 
 
     $scope.goToResults = function(){
-      $state.go('app.results.results',$scope.businessKeys);
+      ctrl.save(function(){
+        $state.go('app.results.results',$scope.businessKeys);
+      });
     };
 
 
@@ -84,14 +86,14 @@ module.exports = /*@ngInject*/
       controller: filtersController,
       templateUrl: 'app/filters/templates/copy-dialog.html',
       parent: angular.element(document.querySelector('body')),
-      clickOutsideToClose:true,
+      clickOutsideToClose:true
     });};
 
     $scope.hideDialog = function () {
       $mdDialog.hide();
     };
 
-    $scope.save = function save() {
+    $scope.save = function save(func) {
       mixpanel.track("User save the state");
 
       //We trigger auto updates
@@ -105,6 +107,9 @@ module.exports = /*@ngInject*/
         $mdToast.show($mdToast.simple().textContent('Changes saved.').position('top right'));
         $scope.data = data;
         $scope.saveStatus.lastSave = new Date();
+        if(func){
+          func();
+        }
       }, function() {
         $mdToast.show($mdToast.simple().textContent('Error saving.').position('top right'));
       }).finally(function(){
