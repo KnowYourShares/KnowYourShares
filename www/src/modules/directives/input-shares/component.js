@@ -18,6 +18,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     lastRound = roundService.getLastRound(newValue);
   });
 
+  /*
   ctrl.changeTotal = function (item, oldvalue) {
     var total = 0;
     console.log("totalSumFounders: ", ctrl.round.founders);
@@ -31,6 +32,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       ctrl.showErrorMaxShares();
     }
   };
+  */
 
   ctrl.addToListIfValidationOK = function () {
     if (ctrl.entity && ctrl.validateItem()) {
@@ -71,6 +73,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     }
   };
 
+  /*
   ctrl.showErrorMaxShares = function() {
     $mdDialog.show(
       $mdDialog.alert()
@@ -82,6 +85,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
         .ok('Got it!')
     );
   };
+  */
 
   ctrl.showErrorShares = function() {
     $mdDialog.show(
