@@ -29,7 +29,7 @@
         <div layout="row" layout-xs="column" ng-repeat="item in $ctrl.entity track by $index">
           <div layout="column" layout-padding flex-gt-sm="40"><input class="form-control input-sm" type="text" ng-disabled="item.addInRound != $ctrl.indexRound" ng-model="item.name"></div>
           <div layout="column" layout-padding flex-gt-sm="20"><input class="form-control input-sm" type="number" ng-model="item.prevvalue" disabled placeholder="Previous Share"></div>
-          <div layout="column" layout-padding flex-gt-sm="20"><input class="form-control input-sm" type="number" ng-model="item.value" ng-change="$ctrl.calculateRound(); $ctrl.changeTotal(item, {{item.value}})"></div>
+          <div layout="column" layout-padding flex-gt-sm="20"><input class="form-control input-sm" type="number" ng-disabled="item.addInRound != $ctrl.indexRound" ng-model="item.value" ng-change="$ctrl.calculateRound(); $ctrl.changeTotal(item, {{item.value}})"></div>
           <div layout="column" flex-gt-sm="20" class="text-center">
             <md-button class="md-icon-button md-primary" ng-click="$ctrl.removeItem($index)" aria-label="regular-button"><span class="fa fa-remove"></span></md-button>
           </div>
