@@ -33,7 +33,7 @@ module.exports = /*@ngInject*/
         function kValueInterpolation(value) {
                         return value + 'k';
         }
-        
+
         function formatNumber(a) {
             return parseFloat(a.toFixed(2));
         }
@@ -61,6 +61,9 @@ module.exports = /*@ngInject*/
 
             doBarChart('#preMoneyChartBar', false);
             doBarChart('#postMoneyChartBar', false);
+
+            buildCapTables();
+
         }, function (err) {
             console.log('error ', err);
             $state.go('app.home');
@@ -107,19 +110,49 @@ module.exports = /*@ngInject*/
             new Chartist.Pie(selector, data, options);
         }
 
-  
-        function getAllRoundSeries(rounds, byPremoney, showShares) {  
+
+        function buildCapTables() {
+          $scope.preMoneyValues = [];
+          $scope.postMoneyValues = [];
+
+          $scope.data.rounds.forEach(function (r) {
+            var preMoney = r.preMoney;
+            var postMoney = r.postMoney;
+
+            var valorPre = 0;
+            var valorPost = 0;
+            r.investors.forEach(function (i) {
+              valorPre = calculate(i.value, preMoney);
+              valorPost = calculate(i.value, postMoney);
+              $scope.preMoneyValues.push({name: i.name, shares: i.value, value: valorPre, preMoneyValue:preMoney});
+              $scope.postMoneyValues.push({name: i.name, shares: i.value, value: valorPost, postMoneyValue:postMoney});
+            });
+            r.founders.forEach(function (f) {
+              valorPost = calculate(f.value, postMoney);
+              valorPre = calculate(f.value, preMoney);
+              $scope.preMoneyValues.push({name: f.name, shares: f.value, value: valorPre, preMoneyValue:preMoney});
+              $scope.postMoneyValues.push({name: f.name, shares: f.value, value: valorPost, postMoneyValue:postMoney});
+            });
+          });
+        }
+
+        function calculate(shares, postmoney) {
+          return (shares/100)*postmoney;
+        }
+
+
+        function getAllRoundSeries(rounds, byPremoney, showShares) {
             var hash = {};
-            
+
             var totalRounds = rounds.length;
 
             _.map(rounds, function (round) {
                 var roundValuation = byPremoney ? round.preMoney : round.postMoney;
-                
+
                 console.log('Round valuation ', roundValuation);
 
                 var allPeopleInRound = round.founders.concat(round.investors);
-                _.map(allPeopleInRound, function (people) {     
+                _.map(allPeopleInRound, function (people) {
                     //console.log('People ', people)
                     var roundValueForPeople = {
                         meta: people.name,
@@ -139,16 +172,16 @@ module.exports = /*@ngInject*/
             });
 
             var series = _.pluck(hash, 'values');
-            
+
             var result = _.map(series,function(array){
                 for(var i = totalRounds - array.length; i > 0; --i){
-                    array.unshift([]);                    
+                    array.unshift([]);
                 }
                 return array;
             });
 
             return result;
-        
+
         }
 
         function doBarChart(selector, byPremoney, labels, series) {
@@ -242,7 +275,7 @@ module.exports = /*@ngInject*/
             new Chartist.Line(selector, data, options);
         }
 
-        
+
 
 
         $scope.doPieChart = doPieChart;
