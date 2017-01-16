@@ -167,7 +167,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       var investorsPrev = lastRound.investors;
       var foundersPrev = lastRound.founders;
       var bIds = {};
-      if(ctrl.round.moneyRaised <= 0)
+      if(!isDelete && ctrl.round.moneyRaised <= 0)
       {
         ctrl.showErrorMoneyRaised();
       }
