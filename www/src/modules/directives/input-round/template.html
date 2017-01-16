@@ -27,6 +27,7 @@
     </md-input-container>
   </div>-->
 </div>
+
 <div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-hide="$ctrl.index === 0">
   <h3 class="md-subhead"> In order to calculate a round, first input money you want to raise, then how many shares do you want to give to investors, finally press "Calculate Round" button.
   </h3>
@@ -34,6 +35,15 @@
 <div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-if="$ctrl.index === 0">
   <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
   </h3>
+</div>
+
+<div layout="row" layout-xs="column" layout-align="space-between start" layout-padding>
+  <div flex="40">
+    <chart-shares entity="$ctrl.round"></chart-shares>
+  </div>
+  <div flex="40">
+    <values-layout entity="$ctrl.round"></values-layout>
+  </div>
 </div>
 
 <div layout="row" layout-align="center center">
@@ -46,13 +56,4 @@
   <span flex-gt-sm="10"></span>
   <input-shares round="$ctrl.round" index-round="$ctrl.indexRound" entity="$ctrl.round.investors" type="investor" ng-model="$ctrl.total" label="Investors" flex-gt-sm="50"></input-shares>
   <span flex-gt-sm="15"></span>
-</div>
-
-<div layout="row" layout-xs="column" layout-align="space-between start" layout-padding>
-  <div flex="40">
-    <chart-shares entity="$ctrl.round"></chart-shares>
-  </div>
-  <div flex="40">
-    <values-layout entity="$ctrl.round"></values-layout>
-  </div>
 </div>

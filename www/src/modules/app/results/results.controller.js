@@ -185,4 +185,9 @@ module.exports = /*@ngInject*/
             // All you need to do is pass your configuration as third parameter to the chart function
             new Chartist.Line(selector, data, options);
         }
+
+
+        $scope.doPieChart = doPieChart;
+        $scope.doLineChart = doLineChart;
+        $scope.doBarChart = doBarChart;
     };

@@ -3,13 +3,7 @@
     <span flex="40">
       <a ui-sref="app.home">KNOWYOURSHARES</a>
     </span>
-        <!--</md-button>-->
-        <!--<md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">-->
-            <!--<md-icon aria-label="Save"> save</md-icon>-->
-            <!--<md-tooltip md-direction="down">-->
-                <!--SAVE STATUS-->
-            <!--</md-tooltip>-->
-        <!--</md-button>-->
+
         <span flex></span>
         <!--<i style="vertical-align: middle;" class="material-icons">mode edit</i>-->
         <md-button ng-click="goEdit()" aria-label="Edit" class="md-fab md-raised md-mini">
@@ -22,43 +16,72 @@
 </md-toolbar>
 <div layout="row" layout-xs="column" layout-align="center center">
     <section flex-gt-sm="80" layout="column" md-whiteframe layout-padding="20">
-        <h1>
-            Equity evolution - Pre Money
-        </h1>
-
-        <div id="preMoneyChartLine"></div>
-
-        <h1>
-            Equity evolution - Post Money
-        </h1>
-
-        <div id="postMoneyChartLine"></div>
 
 
-        <h1>
-            Equity evolution - Pre Money
-        </h1>
+        <md-content>
+            <h1>
+                Equity evolution
+            </h1>
+            <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
 
-        <div id="preMoneyChartBar"></div>
+                <md-tab md-on-select="doBarChart('#preMoneyChartBar',true)">
+                    <md-tab-label>Premoney</md-tab-label>
+                    <md-tab-body>
+                        <div id="preMoneyChartBar"></div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab md-on-select="doBarChart('#preMoneyChartBar',false)">
+                    <md-tab-label>Postmoney</md-tab-label>
+                    <md-tab-body>
+                        <div id="postMoneyChartBar"></div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
 
-        <h1>
-            Equity evolution - Post Money
-        </h1>
+        <md-content>
+            <h1>
+                Equity evolution
+            </h1>
+            <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                <md-tab md-on-select="doLineChart('#preMoneyChartLine',true)">
+                    <md-tab-label>Premoney</md-tab-label>
+                    <md-tab-body>
+                        <div id="preMoneyChartLine"></div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab md-on-select="doLineChart('#preMoneyChartLine',false)">
+                    <md-tab-label>Postmoney</md-tab-label>
+                    <md-tab-body>
+                        <div id="postMoneyChartLine"></div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
 
-        <div id="postMoneyChartBar"></div>
 
 
-        <h1>
-            Final equity
-        </h1>
 
-        <h3>Ungrouped</h3>
+        <md-content>
+            <h1>
+                Final equity
+            </h1>
+            <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
 
-        <div id="totalPieChartUngrouped"></div>
-
-        <h3>Grouped</h3>
-
-        <div id="totalPieChartGrouped"></div>
+                <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',false)">
+                    <md-tab-label>Ungrouped</md-tab-label>
+                    <md-tab-body>
+                        <div id="totalPieChartUngrouped"></div>
+                    </md-tab-body>
+                </md-tab>
+                <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',true)">
+                    <md-tab-label>Grouped</md-tab-label>
+                    <md-tab-body>
+                        <div id="totalPieChartGrouped"></div>
+                    </md-tab-body>
+                </md-tab>
+            </md-tabs>
+        </md-content>
 
 
     </section>
