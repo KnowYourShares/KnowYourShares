@@ -22,11 +22,6 @@
 
 
                 <h1>
-                    Shares % evolution
-                </h1>
-                <div id="sharesChartLine" class="ct-chart ct-bar ct-golden-section"></div>
-
-                <h1>
                     Equity evolution
                 </h1>
 
@@ -37,7 +32,7 @@
                         <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
                             <md-tab md-on-select="doBarChart('#preMoneyChartBar',true)">
                                 <md-tab-label>Premoney</md-tab-label>
-                                
+
                                 <md-tab-body>
                                     <div id="preMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
                                 </md-tab-body>
@@ -58,7 +53,7 @@
 
                     <md-tab>
                         <md-tab-label>LINE CHART</md-tab-label>
-                        
+
                         <md-tab-body>
                 <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
                     <md-tab md-on-select="doLineChart('#preMoneyChartLine',true)">
@@ -79,16 +74,65 @@
 
                         </md-tab-body>
                     </md-tab>
-                   
+
                 </md-tabs>
 
+              <h1>
+                Shares % evolution
+              </h1>
+              <div id="sharesChartLine" class="ct-chart ct-bar ct-golden-section"></div>
+
+
+              <h1>
+                Cap tables
+              </h1>
+              <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                <md-tab>
+                  <md-tab-label>Premoney</md-tab-label>
+                  <md-tab-body>
+                    <div layout="row" >
+                      <div flex="25" class="blue box">Name</div>
+                      <div flex="25" class="blue box">Shares</div>
+                      <div flex="25" class="blue box">Shares Value</div>
+                      <div flex="25" class="blue box">Company Value</div>
+                    </div>
+                    <div layout="row" ng-repeat="c in preMoneyValues">
+                      <div flex="25" >{{c.name}}</div>
+                      <div flex="25" >{{c.shares | number:2}}</div>
+                      <div flex="25" ng-if="c.value">{{c.value | number:2}} k</div>
+                      <div flex="25" ng-if="!c.value">-</div>
+                      <div flex="25" ng-if="c.preMoneyValue">{{c.preMoneyValue | number:2}} k</div>
+                      <div flex="25" ng-if="!c.preMoneyValue">-</div>
+                    </div>
+                  </md-tab-body>
+                </md-tab>
+                <md-tab>
+                  <md-tab-label>Postmoney</md-tab-label>
+                  <md-tab-body>
+                    <div layout="row" >
+                      <div flex="25" class="blue box">Name</div>
+                      <div flex="25" class="blue box">Shares</div>
+                      <div flex="25" class="blue box">Shares Value</div>
+                      <div flex="25" class="blue box">Company Value</div>
+                    </div>
+                    <div layout="row" ng-repeat="c in postMoneyValues">
+                      <div flex="25" >{{c.name}}</div>
+                      <div flex="25" >{{c.shares | number:2}}</div>
+                      <div flex="25" ng-if="c.value">{{c.value | number:2}} k</div>
+                      <div flex="25" ng-if="!c.value">-</div>
+                      <div flex="25" ng-if="c.postMoneyValue">{{c.postMoneyValue | number:2}} k</div>
+                      <div flex="25" ng-if="!c.postMoneyValue">-</div>
+                    </div>
+                  </md-tab-body>
+                </md-tab>
+              </md-tabs>
 
 
             </div>
         </div>
 
 
-    
+
         <div layout="row" flex="100" layout-align="center center">
             <div layout="column" flex="70"><h1>
                 Final equity
