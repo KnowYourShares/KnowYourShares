@@ -1,6 +1,12 @@
 # PAE PROJECT
 Este proyecto nace de la asignatura PAE enseñada en la FIB (Facultat d'informatica de Barcelona).
 
+# Desarrolladores
+Sufian Ben Bouker
+Daniel Domínguez Losa
+Kilian Perea Ruiz
+Marcos Pérez Rubio
+Cristian Vitales Muñóz
 
 # SETUP
 
@@ -12,7 +18,7 @@ First of all we must install all the dependencies that are needed.
 
 
 ## Build for dev
-In progress. Ideal: livereload. Remember to have a mongodb instance running !
+Remember to have a mongodb instance running
 1. Terminal 1: cd www
 1. Terminal 1: gulp
 1. Terminal 2 (open a new terminal): nodemon
