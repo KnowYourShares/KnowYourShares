@@ -21,21 +21,19 @@ function LayoutValuesCtrl($scope,roundService) {
     ctrl.calculateValues();
   }, true);
 
-  // TODO Obtener el postmoney calculado
-  var postmoney = 1000;
-
   ctrl.calculateValues = function() {
+    console.log("table calculateValues entity: ", ctrl.entity);
     $scope.values = [];
     if (ctrl.entity.founders) {
       ctrl.entity.founders.forEach(function (o) {
-        var valor = calculate(o.value,postmoney);
+        var valor = calculate(o.value,ctrl.entity.postMoney);
         $scope.values.push({name:o.name,shares:o.value,value:valor});
         //console.log($scope.values);
       });
     }
     if (ctrl.entity.investors) {
       ctrl.entity.investors.forEach(function (o) {
-        var valor = calculate(o.value,postmoney);
+        var valor = calculate(o.value,ctrl.entity.postMoney);
         $scope.values.push({name:o.name,shares:o.value,value:valor});
         //console.log($scope.values);
       });
