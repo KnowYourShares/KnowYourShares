@@ -19,12 +19,14 @@ module.exports = /*@ngInject*/
             return a + b
         }
 
-        function getValuationForPeople(people, isPercentage, roundValuation){
-            if(isPercentage){
-                return formatNumber(people.value * roundValuation / 100);
+        function getValuationForPeople(people, showShares, roundValuation){
+            console.log('is Percentage valuation ' + showShares);
+            console.log('People ', people);
+            if(showShares){
+                return formatNumber(people.value);
             }
             else{
-                return formatNumber(people.value);
+                return formatNumber(people.value * roundValuation / 100);
             }
         }
 
@@ -48,7 +50,8 @@ module.exports = /*@ngInject*/
 
         getBusiness.get($scope.businessKeys).$promise.then(function (response) {
             $scope.data = response.data;
-            console.log('Data ' ,$scope.data);
+
+            doLineChart('#sharesChartLine', false, true);
 
             doLineChart('#preMoneyChartLine', true);
             doLineChart('#postMoneyChartLine', false);
@@ -105,7 +108,7 @@ module.exports = /*@ngInject*/
         }
 
   
-        function getAllRoundSeries(rounds, byPremoney) {
+        function getAllRoundSeries(rounds, byPremoney, showShares) {  
             var hash = {};
             
             var totalRounds = rounds.length;
@@ -117,10 +120,10 @@ module.exports = /*@ngInject*/
 
                 var allPeopleInRound = round.founders.concat(round.investors);
                 _.map(allPeopleInRound, function (people) {     
-                    console.log('People ', people)
+                    //console.log('People ', people)
                     var roundValueForPeople = {
                         meta: people.name,
-                        value: getValuationForPeople(people,true,roundValuation),
+                        value: getValuationForPeople(people,showShares,roundValuation),
                         round : round.name
                     };
 
@@ -145,6 +148,7 @@ module.exports = /*@ngInject*/
             });
 
             return result;
+        
         }
 
         function doBarChart(selector, byPremoney, labels, series) {
@@ -185,10 +189,12 @@ module.exports = /*@ngInject*/
             new Chartist.Bar(selector, data, options, responsiveOptions);
         }
 
-        function doLineChart(selector, byPremoney, labels, series) {
+        function doLineChart(selector, byPremoney, showShares, labels, series) {
             // Our labels and three data series
+            console.log('BY PERCENTAGE ' , showShares);
+
             labels = labels || getRoundLabels($scope.data.rounds);
-            series = series || getAllRoundSeries($scope.data.rounds, byPremoney);
+            series = series || getAllRoundSeries($scope.data.rounds, byPremoney, showShares);
 
             console.log('labels ' , labels);
             console.log('SERIES ' , series);
@@ -197,6 +203,14 @@ module.exports = /*@ngInject*/
                 labels: labels,
                 series: series
             };
+
+            function getInterpolationFunction(showShares){
+                if(showShares){
+                    return function(a){return formatNumber(a)}
+                }else{
+                    return kValueInterpolation
+                }
+            }
 
             // We are setting a few options for our chart and override the defaults
             var options = {
@@ -221,7 +235,7 @@ module.exports = /*@ngInject*/
                     // The label interpolation function enables you to modify the values
                     // used for the labels on each axis. Here we are converting the
                     // values into million pound.
-                    labelInterpolationFnc: kValueInterpolation
+                    labelInterpolationFnc: getInterpolationFunction(showShares)
                 }
             };
             // All you need to do is pass your configuration as third parameter to the chart function
