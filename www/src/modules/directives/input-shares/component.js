@@ -131,7 +131,28 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     );
   };
 
+  ctrl.showErrorIsOldInvestor = function () {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Error deleting.')
+        .textContent("Sorry, you can not remove old investors.")
+        .ariaLabel('Removing old investor.')
+        .ok('Got it!')
+    );
+  };
+
   ctrl.removeItem = function(index){
+    if (lastRound && ctrl.type === 'investor') {
+      var nameRemoved = ctrl.entity[index].name;
+      var oldNames = _.pluck(lastRound.investors,'name');
+      if (_.contains(oldNames,nameRemoved)) {
+        ctrl.showErrorIsOldInvestor();
+        return;
+      }
+    }
+
     mixpanel.track("user remove a shareholder");
     console.log('remove round actual', ctrl.round);
     var lastValue = (ctrl.entity[index].value || 0);
@@ -173,7 +194,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       }
       else if(!isDelete && investorsPrev.length === ctrl.round.investors.length)
       {
-        ctrl.showErrorNewInvestor();
+        //ctrl.showErrorNewInvestor();
       }
       else if (isDelete) {
         var people = ctrl.round.investors.length + ctrl.round.founders.length;
