@@ -86,18 +86,36 @@ module.exports = /*@ngInject*/
             new Chartist.Pie(selector, data, options);
         }
 
+        function getValuationForPeople(people, isPercentage, roundValuation){
+            if(isPercentage){
+                return people.value * roundValuation / 100;
+            }
+            else{
+                return people.value;
+            }
+        }
+
 
         function getAllRoundSeries(rounds, byPremoney) {
             var hash = {};
+            
+            var totalRounds = rounds.length;
+
             _.map(rounds, function (round) {
                 var roundValuation = byPremoney ? round.preMoney : round.postMoney;
+                
+                console.log('Round valuation ', roundValuation);
+
                 var allPeopleInRound = round.founders.concat(round.investors);
                 _.map(allPeopleInRound, function (people) {
+                    
+                    console.log('People ', people)
                     var roundValueForPeople = {
                         meta: people.name,
-                        value: people.value * roundValuation / 100,
+                        value: getValuationForPeople(people,true,roundValuation),
                         round : round.name
                     };
+
                     if (hash.hasOwnProperty(people.name)) {
                         hash[people.name].values.push(roundValueForPeople);
                     } else {
@@ -108,7 +126,17 @@ module.exports = /*@ngInject*/
                     }
                 });
             });
-            return _.pluck(hash, 'values');
+
+            var series = _.pluck(hash, 'values');
+            
+            var result = _.map(series,function(array){
+                for(var i = totalRounds - array.length; i > 0; --i){
+                    array.unshift([]);                    
+                }
+                return array;
+            });
+
+            return result;
         }
 
         function formatNumber(a) {

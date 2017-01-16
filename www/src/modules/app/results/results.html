@@ -70,17 +70,16 @@
                 Final equity
             </h1>
                 <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
-
-                    <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',false)">
-                        <md-tab-label>Ungrouped</md-tab-label>
-                        <md-tab-body>
-                            <div id="totalPieChartUngrouped" class="ct-chart ct-pie ct-golden-section"></div>
-                        </md-tab-body>
-                    </md-tab>
                     <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',true)">
                         <md-tab-label>Grouped</md-tab-label>
                         <md-tab-body>
                             <div id="totalPieChartGrouped" class="ct-chart ct-pie ct-golden-section"></div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',false)">
+                        <md-tab-label>Ungrouped</md-tab-label>
+                        <md-tab-body>
+                            <div id="totalPieChartUngrouped" class="ct-chart ct-pie ct-golden-section"></div>
                         </md-tab-body>
                     </md-tab>
                 </md-tabs>
