@@ -29,23 +29,13 @@ function InputRoundCtrl($scope, roundService,$mdDialog) {
     ctrl.post = parseFloat(newValue.toFixed(2));
   });
 
-  ctrl.updateTotal = function(){
-    console.log("updateTotal");
-    ctrl.round.postMoney = ctrl.round.preMoney + ctrl.round.moneyRaised;
-  };
-
-  ctrl.modifyPostMoney = function(){
-    console.log("postmoney");
-    ctrl.round.moneyRaised = ctrl.round.postMoney - ctrl.round.preMoney;
-  };
-
   ctrl.resetRound = function(){
     mixpanel.track("user reset round event");
 
     angular.copy(lastRound.founders, ctrl.round.founders);
     angular.copy(lastRound.investors, ctrl.round.investors);
-    ctrl.modifyPostMoney();
-    ctrl.updateTotal();
+    ctrl.round.postMoney = 0;
+    ctrl.round.preMoney = 0;
   };
 
 

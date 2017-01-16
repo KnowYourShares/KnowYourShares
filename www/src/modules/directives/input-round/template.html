@@ -54,11 +54,14 @@
   <span flex-gt-sm="15"></span>
 </div>
 
-<div layout="row" layout-xs="column" layout-align="space-between start" layout-padding>
-  <div flex="40">
+<div layout="row" layout-xs="column" layout-align="space-around start" layout-padding>
+  <span flex="10" show-gt-sm></span>
+  <div flex-gt-sm="30">
     <chart-shares entity="$ctrl.round"></chart-shares>
   </div>
-  <div flex="40">
+  <span flex="20" show-gt-sm></span>
+  <div flex-gt-sm="30">
     <values-layout entity="$ctrl.round"></values-layout>
   </div>
+  <span flex="10" show-gt-sm></span>
 </div>

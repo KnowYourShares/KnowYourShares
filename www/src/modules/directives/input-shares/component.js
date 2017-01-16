@@ -10,6 +10,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.index = ctrl.round.index || 0;
+  ctrl.indexRound = ctrl.indexRound || 0;
   ctrl.newItem = {};
 
   var lastRound;
@@ -20,12 +21,8 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
   ctrl.changeTotal = function (item, oldvalue) {
     var total = 0;
-    console.log("totalSumFounders: ", ctrl.round.founders);
-    console.log("totalSumInvestors: ", ctrl.round.investors);
     total += ctrl.round.founders.totalSumByField("value");
     total += ctrl.round.investors.totalSumByField("value");
-    console.log("totalSumFounders2: ", ctrl.round.founders);
-    console.log("totalSumInvestors2: ", ctrl.round.investors);
     if(ctrl.total > 100) {
       item.value = oldvalue;
       ctrl.showErrorMaxShares();
@@ -41,6 +38,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.addToList = function() {
+    ctrl.newItem.addInRound = ctrl.indexRound;
     ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
     ctrl.total += ctrl.newItem.value;
     ctrl.newItem = {};
