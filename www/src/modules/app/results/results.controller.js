@@ -25,12 +25,13 @@ module.exports = /*@ngInject*/
         };
 
         $scope.goEdit = function () {
-            console.log('business keys:', $scope.businessKeys);
             $state.go('app.filters.location', $scope.businessKeys);
         };
 
         getBusiness.get($scope.businessKeys).$promise.then(function (response) {
             $scope.data = response.data;
+            console.log('Data ' ,$scope.data);
+
 
             doLineChart('#preMoneyChartLine', true);
             doLineChart('#postMoneyChartLine', false);
@@ -94,7 +95,8 @@ module.exports = /*@ngInject*/
                 _.map(allPeopleInRound, function (people) {
                     var roundValueForPeople = {
                         meta: people.name,
-                        value: people.value * roundValuation / 100
+                        value: people.value * roundValuation / 100,
+                        round : round.name
                     };
                     if (hash.hasOwnProperty(people.name)) {
                         hash[people.name].values.push(roundValueForPeople);
@@ -152,11 +154,11 @@ module.exports = /*@ngInject*/
 
         function doLineChart(selector, byPremoney, labels, series) {
             // Our labels and three data series
-            console.log('Suppp');
             labels = labels || getRoundLabels($scope.data.rounds);
             series = series || getAllRoundSeries($scope.data.rounds, byPremoney);
 
-            console.log('LINE SERIES ', series);
+            console.log('labels ' , labels);
+            console.log('SERIES ' , series);
 
             var data = {
                 labels: labels,
@@ -194,6 +196,7 @@ module.exports = /*@ngInject*/
             // All you need to do is pass your configuration as third parameter to the chart function
             new Chartist.Line(selector, data, options);
         }
+
 
 
         $scope.doPieChart = doPieChart;
