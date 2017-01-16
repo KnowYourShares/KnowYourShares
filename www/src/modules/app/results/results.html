@@ -3,15 +3,8 @@
     <span flex="40">
       <a ui-sref="app.home">KNOWYOURSHARES</a>
     </span>
-        <!--</md-button>-->
-        <!--<md-button ng-click="save()" aria-label="Save" class="md-fab md-raised md-mini">-->
-            <!--<md-icon aria-label="Save"> save</md-icon>-->
-            <!--<md-tooltip md-direction="down">-->
-                <!--SAVE STATUS-->
-            <!--</md-tooltip>-->
-        <!--</md-button>-->
+
         <span flex></span>
-        <!--<i style="vertical-align: middle;" class="material-icons">mode edit</i>-->
         <md-button ng-click="goEdit()" aria-label="Edit" class="md-fab md-raised md-mini">
             <md-icon><i class="material-icons">mode_edit</i></md-icon>
             <md-tooltip md-direction="down">
@@ -22,44 +15,145 @@
 </md-toolbar>
 <div layout="row" layout-xs="column" layout-align="center center">
     <section flex-gt-sm="80" layout="column" md-whiteframe layout-padding="20">
-        <h1>
-            Equity evolution - Pre Money
-        </h1>
-
-        <div id="preMoneyChartLine"></div>
-
-        <h1>
-            Equity evolution - Post Money
-        </h1>
-
-        <div id="postMoneyChartLine"></div>
 
 
-        <h1>
-            Equity evolution - Pre Money
-        </h1>
-
-        <div id="preMoneyChartBar"></div>
-
-        <h1>
-            Equity evolution - Post Money
-        </h1>
-
-        <div id="postMoneyChartBar"></div>
+      <div layout="row" flex="100" layout-align="center center">
+            <div layout="column" flex="70">
 
 
-        <h1>
-            Final equity
-        </h1>
+                <h1>
+                    Equity evolution
+                </h1>
 
-        <h3>Ungrouped</h3>
+                <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                     <md-tab >
+                        <md-tab-label>BAR CHART</md-tab-label>
+                        <md-tab-body>
+                        <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                            <md-tab md-on-select="doBarChart('#preMoneyChartBar',true)">
+                                <md-tab-label>Premoney</md-tab-label>
 
-        <div id="totalPieChartUngrouped"></div>
+                                <md-tab-body>
+                                    <div id="preMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
+                                </md-tab-body>
+                            </md-tab>
+                            <md-tab md-on-select="doBarChart('#preMoneyChartBar',false)">
+                                <md-tab-label>Postmoney</md-tab-label>
+                                <md-tab-body>
+                                    <div id="postMoneyChartBar" class="ct-chart ct-bar ct-golden-section"></div>
+                                </md-tab-body>
+                            </md-tab>
+                        </md-tabs>
 
-        <h3>Grouped</h3>
 
-        <div id="totalPieChartGrouped"></div>
+                        </md-tab-body>
+                    </md-tab>
 
 
+
+                    <md-tab>
+                        <md-tab-label>LINE CHART</md-tab-label>
+
+                        <md-tab-body>
+                <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                    <md-tab md-on-select="doLineChart('#preMoneyChartLine',true)">
+                        <md-tab-label>Premoney</md-tab-label>
+                        <md-tab-body>
+                            <div id="preMoneyChartLine"
+                                 class="ct-chart ct-line ct-perfect-fourth ct-golden-section"></div>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab md-on-select="doLineChart('#preMoneyChartLine',false)">
+                        <md-tab-label>Postmoney</md-tab-label>
+                        <md-tab-body>
+                            <div id="postMoneyChartLine"
+                                 class="ct-chart ct-line  ct-perfect-fourth ct-golden-section"></div>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+
+                        </md-tab-body>
+                    </md-tab>
+
+                </md-tabs>
+
+              <h1>
+                Shares % evolution
+              </h1>
+              <div id="sharesChartLine" class="ct-chart ct-bar ct-golden-section"></div>
+
+
+              <h1>
+                Cap tables
+              </h1>
+              <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                <md-tab>
+                  <md-tab-label>Premoney</md-tab-label>
+                  <md-tab-body>
+                    <div layout="row" >
+                      <div flex="25" class="blue box">Name</div>
+                      <div flex="25" class="blue box">Shares</div>
+                      <div flex="25" class="blue box">Shares Value</div>
+                      <div flex="25" class="blue box">Company Value</div>
+                    </div>
+                    <div layout="row" ng-repeat="c in preMoneyValues">
+                      <div flex="25" >{{c.name}}</div>
+                      <div flex="25" >{{c.shares | number:2}}</div>
+                      <div flex="25" ng-if="c.value">{{c.value | number:2}} k</div>
+                      <div flex="25" ng-if="!c.value">-</div>
+                      <div flex="25" ng-if="c.preMoneyValue">{{c.preMoneyValue | number:2}} k</div>
+                      <div flex="25" ng-if="!c.preMoneyValue">-</div>
+                    </div>
+                  </md-tab-body>
+                </md-tab>
+                <md-tab>
+                  <md-tab-label>Postmoney</md-tab-label>
+                  <md-tab-body>
+                    <div layout="row" >
+                      <div flex="25" class="blue box">Name</div>
+                      <div flex="25" class="blue box">Shares</div>
+                      <div flex="25" class="blue box">Shares Value</div>
+                      <div flex="25" class="blue box">Company Value</div>
+                    </div>
+                    <div layout="row" ng-repeat="c in postMoneyValues">
+                      <div flex="25" >{{c.name}}</div>
+                      <div flex="25" >{{c.shares | number:2}}</div>
+                      <div flex="25" ng-if="c.value">{{c.value | number:2}} k</div>
+                      <div flex="25" ng-if="!c.value">-</div>
+                      <div flex="25" ng-if="c.postMoneyValue">{{c.postMoneyValue | number:2}} k</div>
+                      <div flex="25" ng-if="!c.postMoneyValue">-</div>
+                    </div>
+                  </md-tab-body>
+                </md-tab>
+              </md-tabs>
+
+
+            </div>
+        </div>
+
+
+
+        <div layout="row" flex="100" layout-align="center center">
+            <div layout="column" flex="70"><h1>
+                Final equity
+            </h1>
+                <md-tabs md-dynamic-height md-border-bottom md-autoselect md-center-tabs>
+                    <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',true)">
+                        <md-tab-label>Grouped</md-tab-label>
+                        <md-tab-body>
+                            <md-content>
+                                <div id="totalPieChartGrouped" class="ct-chart ct-pie ct-golden-section"></div>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+                    <md-tab md-on-select="doPieChart('#totalPieChartUngrouped',false)">
+                        <md-tab-label>Ungrouped</md-tab-label>
+                        <md-tab-body>
+                            <div id="totalPieChartUngrouped" class="ct-chart ct-pie ct-golden-section"></div>
+                        </md-tab-body>
+                    </md-tab>
+                </md-tabs>
+            </div>
+        </div>
     </section>
 </div>

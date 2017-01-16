@@ -6,7 +6,8 @@
   </div>
   <div layout="row" ng-repeat="c in values">
     <div flex="33" >{{c.name}}</div>
-    <div flex="33" >{{c.shares}}</div>
-    <div flex="33" >{{c.value}}</div>
+    <div flex="33" >{{c.shares | number:2}}</div>
+    <div flex="33" ng-if="c.value">{{c.value | number:2}} k</div>
+    <div flex="33" ng-if="!c.value">-</div>
   </div>
 </div>

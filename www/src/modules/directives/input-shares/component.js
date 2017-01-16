@@ -10,6 +10,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   ctrl.round.founders = ctrl.round.founders || [];
   ctrl.round.investors = ctrl.round.investors || [];
   ctrl.round.index = ctrl.round.index || 0;
+  ctrl.indexRound = ctrl.indexRound || 0;
   ctrl.newItem = {};
 
   var lastRound;
@@ -20,12 +21,8 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
 
   ctrl.changeTotal = function (item, oldvalue) {
     var total = 0;
-    console.log("totalSumFounders: ", ctrl.round.founders);
-    console.log("totalSumInvestors: ", ctrl.round.investors);
     total += ctrl.round.founders.totalSumByField("value");
     total += ctrl.round.investors.totalSumByField("value");
-    console.log("totalSumFounders2: ", ctrl.round.founders);
-    console.log("totalSumInvestors2: ", ctrl.round.investors);
     if(ctrl.total > 100) {
       item.value = oldvalue;
       ctrl.showErrorMaxShares();
@@ -41,6 +38,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
   };
 
   ctrl.addToList = function() {
+    ctrl.newItem.addInRound = ctrl.indexRound;
     ctrl.entity[ctrl.entity.length] = angular.extend({}, ctrl.newItem);
     ctrl.total += ctrl.newItem.value;
     ctrl.newItem = {};
@@ -131,7 +129,28 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
     );
   };
 
+  ctrl.showErrorIsOldInvestor = function () {
+    $mdDialog.show(
+      $mdDialog.alert()
+        .parent(angular.element(document.querySelector('body')))
+        .clickOutsideToClose(true)
+        .title('Error deleting.')
+        .textContent("Sorry, you can not remove old investors.")
+        .ariaLabel('Removing old investor.')
+        .ok('Got it!')
+    );
+  };
+
   ctrl.removeItem = function(index){
+    if (lastRound && ctrl.type === 'investor') {
+      var nameRemoved = ctrl.entity[index].name;
+      var oldNames = _.pluck(lastRound.investors,'name');
+      if (_.contains(oldNames,nameRemoved)) {
+        ctrl.showErrorIsOldInvestor();
+        return;
+      }
+    }
+
     mixpanel.track("user remove a shareholder");
     console.log('remove round actual', ctrl.round);
     var lastValue = (ctrl.entity[index].value || 0);
@@ -173,7 +192,7 @@ function InputSharesCtrl($mdDialog,roundService,$scope) {
       }
       else if(!isDelete && investorsPrev.length === ctrl.round.investors.length)
       {
-        ctrl.showErrorNewInvestor();
+        //ctrl.showErrorNewInvestor();
       }
       else if (isDelete) {
         var people = ctrl.round.investors.length + ctrl.round.founders.length;
