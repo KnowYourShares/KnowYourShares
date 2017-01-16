@@ -4,6 +4,7 @@
     "globals": {
         "angular": false,
         "mixpanel": false,
-        "_": false
+        "_": false,
+        "Chartist": false
     }
 }

@@ -59,7 +59,7 @@ module.exports = /*@ngInject*/
 
 
     $scope.goToResults = function(){
-      ctrl.save(function(){
+      $scope.save(function(){
         $state.go('app.results.results',$scope.businessKeys);
       });
     };
