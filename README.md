@@ -2,11 +2,11 @@
 Este proyecto nace de la asignatura PAE enseñada en la FIB (Facultat d'informatica de Barcelona).
 
 # Desarrolladores
-Sufian Ben Bouker
-Daniel Domínguez Losa
-Kilian Perea Ruiz
-Marcos Pérez Rubio
-Cristian Vitales Muñóz
+- Sufian Ben Bouker
+- Daniel Domínguez Losa
+- Kilian Perea Ruiz
+- Marcos Pérez Rubio
+- Cristian Vitales Muñóz
 
 # SETUP
 
