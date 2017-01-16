@@ -1,3 +1,8 @@
+<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-if="$ctrl.indexRound != 0">
+  <h3 class="md-subhead"> In order to calculate a round, first introduce the money you want to raise, then how many shares
+    do you want to give to the investor and finally press ADD button.
+  </h3>
+</div>
 <div layout="row" layout-xs="column">
   <div layout="column" flex-gt-sm="33" layout-align="center center" ng-if="$ctrl.indexRound != 0">
     <h3>Pre money</h3>
@@ -20,15 +25,10 @@
       </md-input-container>
   </div>
 </div>
-<div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" ng-if="$ctrl.indexRound != 0">
-  <h3 class="md-subhead"> In order to calculate a round, first input money you want to raise, then how many shares do you want to give to investors, finally press "Calculate Round" button.
-  </h3>
-</div>
 <div layout="row" layout-xs="column" layout-padding layout-margin layout-align="center center" style="padding-left:20px" ng-hide="$ctrl.indexRound != 0">
-  <h3 class="md-subhead"> Doesn't know how to share? Check <a target="_blank" href="http://foundrs.com">Founders</a>
+  <h3 class="md-subhead"> Doesn't know how to distribute your shares? Check <a target="_blank" href="http://foundrs.com">Founders</a>
   </h3>
 </div>
-
 <div layout="row" layout-xs="column" layout-align="space-between start" layout-padding>
   <div flex="40">
     <chart-shares entity="$ctrl.round"></chart-shares>
